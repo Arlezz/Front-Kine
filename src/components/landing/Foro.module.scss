@@ -1,0 +1,49 @@
+.sideForo {
+  grid-area: sidebar;
+  background: white;
+  width: var(--sidebar-width);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box !important;
+  overflow: hidden;
+  padding: 3rem 6rem 2rem 2rem;
+
+
+  .tiitle {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3rem;
+    margin: 0;
+    color: #000000;
+    padding-bottom: 1rem;
+  }
+
+  .sideSubtitle {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 0;
+    color: #000000;
+    padding-bottom: 2rem;
+  }
+
+  .sideForoBox {
+    flex: 1; /* Se expandirá para llenar el espacio disponible */
+    border: 1px solid #E5E5E5;
+    background: #ffffff;
+    overflow-y: auto;
+    margin-bottom: 2rem;
+    border-radius: .5rem;
+  }
+
+
+  @media screen and (max-width: 600px) {
+    .sideForo {
+      //display: none;
+    }
+  }
+}
