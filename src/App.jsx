@@ -17,8 +17,6 @@ export function App() {
     <Router>
       <div className={styles.container}>
         <NavBar/>
-        
-
         <section className={styles.contentContainer}>
           <div className={styles.content}>
             <Tutoriales/>
@@ -26,7 +24,6 @@ export function App() {
             <Juegos/>
           </div>
         </section>
-
         <Foro/>
       </div>
     </Router>
