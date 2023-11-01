@@ -13,7 +13,10 @@
   grid-template-rows: var(--navbar-height) auto;
 
   .content {
-    padding: 3rem 2rem 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    //padding: 3rem 2rem 2rem 5rem;
+    gap: 3rem;
   }
 }
 

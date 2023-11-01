@@ -12,7 +12,8 @@ export function Tutoriales() {
         {
             "title": "Título del Video 1",
             "url": "https://www.youtube.com/watch?v=MDErQ1KTzaI",
-            "description": "Descripción del Video 1"    
+            "description": "Descripción del Video 1",
+            "type": "capsulas" 
         },
         {
             "title": "Título del Video 2",
@@ -22,12 +23,12 @@ export function Tutoriales() {
         {
             "title": "Título del Video 3",
             "url": "https://www.youtube.com/watch?v=0oZ86uJ6A44",
-            "description": "Descripción del Video 3"
+            "description": "DescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción del Video 3 Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción "
         },
         {
             "title": "Título del Video 4",
             "url": "https://www.youtube.com/watch?v=LMLyjVdY4uE",
-            "description": "Descripción del Video 4"
+            "description": "Descripción del Video 4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción4Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4Descripción del Video 4"
         },
         {
             "title": "Título del Video 5",
@@ -147,7 +148,7 @@ export function Tutoriales() {
         {
             "title": "Título del Video 4",
             "url": "https://www.youtube.com/watch?v=LMLyjVdY4uE",
-            "description": "Descripción del Video 4"
+            "description": "Descripción del Video 4Descripción del Video 4"
         },
         {
             "title": "Título del Video 5",
@@ -162,7 +163,8 @@ export function Tutoriales() {
         {
             "title": "Título del Video 7",
             "url": "https://www.youtube.com/watch?v=dyp7YysvggA",
-            "description": "Descripción del Video 7"
+            "description": "Descripción del Video 7",
+            "isType":"tutoriales"
         },
         {
             "title": "Título del Video 8",
@@ -192,11 +194,15 @@ export function Tutoriales() {
     ];
 
     const [selectedVideo, setSelectedVideo] = useState(arrayVideosObject[0]);
-    const [videosToDisplay, setVideosToDisplay] = useState(arrayVideosObject.slice(0, 4));
+    const [videosToDisplay, setVideosToDisplay] = useState(arrayVideosObject.slice(0, 10));
     const [hasMore, setHasMore] = useState(true);
+    const [isDescriptionExpanded, setDescriptionExpanded] = useState(false);
+    const [descriptionHeight, setDescriptionHeight] = useState(null);
 
     const handleThumbnailClick = (video) => {
         setSelectedVideo(video);
+        setDescriptionExpanded(false);
+        setDescriptionHeight(null);
     };
 
     const fetchMoreData = () => {
@@ -207,6 +213,22 @@ export function Tutoriales() {
         setHasMore(false);
         } else {
         setVideosToDisplay(videosToDisplay.concat(newVideosToDisplay));
+        }
+    };
+
+    const toggleDescription = () => {
+        setDescriptionExpanded(!isDescriptionExpanded);
+    
+        if (!isDescriptionExpanded) {
+            setTimeout(() => {
+                const descriptionElement = document.querySelector(`.${styles.tutorialVideoMain}`);    
+                if (descriptionElement) {
+                    const totalHeight = descriptionElement.scrollHeight;
+                    setDescriptionHeight(totalHeight);
+                }
+            }, 10); // Ajusta el tiempo de espera según tus necesidades.
+        } else {
+            setDescriptionHeight(null);
         }
     };
 
@@ -221,7 +243,7 @@ export function Tutoriales() {
                     dataLength={videosToDisplay.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
-                    height={700}
+                    height={descriptionHeight || 700} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
                     loader={<h4>Loading...</h4>}
                 >
                     {videosToDisplay.map((video, index) => (
@@ -237,7 +259,7 @@ export function Tutoriales() {
                                 src={embeddedURLThumbnail(video.url)}
                                 alt="YouTube video thumbnail"
                                 />
-                                <div>{video.title}</div>
+                                <h3 className={styles.miniatureTitle}>{video.title}</h3>
                             </div>
                             <hr />
                         </>
@@ -248,15 +270,34 @@ export function Tutoriales() {
                 <div className={styles.tutorialVideoMain}>
                     {selectedVideo && (
                         <iframe
-                        loading="lazy"
-                        width="560"
-                        height="315"
-                        src={`${embeddedURL(selectedVideo.url)}&autoplay=1;`}
-                        title="YouTube video player"
-                        allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                            loading="lazy"
+                            width="560"
+                            height="315"
+                            src={`${embeddedURL(selectedVideo.url)}&autoplay=0;`}
+                            title="YouTube video player"
+                            allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
                         ></iframe>
                     )}
-                    {selectedVideo && <div className={styles.videoTitle}>{selectedVideo.title}</div>}
+                    {selectedVideo && (
+                        <div>
+                            <h3 className={styles.videoTitle}>
+                                {selectedVideo.title}
+                            </h3>
+                            <div className={styles.videoDescription}>
+                                {isDescriptionExpanded ? selectedVideo.description : selectedVideo.description.slice(0, 200)}
+                                {selectedVideo.description.length > 200 && !isDescriptionExpanded && (
+                                    <span onClick={toggleDescription} className={styles.readMore}>
+                                        ...Mostrar más
+                                    </span>
+                                )}
+                                {selectedVideo.description.length > 200 && isDescriptionExpanded && (
+                                    <span onClick={toggleDescription} className={styles.readLess}>
+                                        Mostrar menos
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
