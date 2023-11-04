@@ -11,6 +11,12 @@
   padding: 3rem 6rem 2rem 2rem;
 
 
+  .foroHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
   .tiitle {
     font-family: "Inter";
     font-style: normal;
@@ -18,7 +24,6 @@
     font-size: 3rem;
     margin: 0;
     color: #000000;
-    padding-bottom: 1rem;
   }
 
   .sideSubtitle {
@@ -31,15 +36,91 @@
     padding-bottom: 2rem;
   }
 
+  .customDropdown {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: transparent;
+    color: #1f86c9; /* Cambia el color del texto del botón */
+    border: 1px solid #1f86c9; /* Cambia el color del borde del botón */
+    border-radius: 0.5rem; /* Agrega bordes redondeados al botón */
+    padding: 0.5rem 1rem; /* Ajusta el espaciado interno del botón */
+    font-weight: 500; /* Cambia el peso de la fuente del botón */
+    font-size: 1.5rem;
+
+    .dropdownButton {
+      font-size: 1.2rem;
+      
+      svg {
+        vertical-align: middle;
+      }
+    }
+
+
+  }
+
+  .dropdownMenu {
+    padding: 1rem;
+      border-radius: 0.6rem;
+  }
+
+  .dropdownItem {
+    font-size: 1.5rem;
+    border-radius: 0.3rem;
+
+    &:hover {
+      //background-color: #ebecec;
+      cursor: pointer;
+    }
+
+    &:focus {
+      color: #000000;
+      background-color: transparent
+    }
+    
+    &:active {
+      color: #000000;
+      background-color: transparent
+    }
+
+    
+    
+  }
+
+  
+  .customDropdown:hover {
+    background-color: rgba(23, 101, 149, 0.226)/* Cambia el color de fondo del botón al pasar el cursor sobre él */
+  }
+  .customLabel {
+    font-size: 16px; /* Cambia el tamaño del texto de las opciones */
+    margin-left: 10px; /* Espaciado izquierdo para separar el checkbox del texto */
+
+    &:hover {
+      cursor: pointer;
+      //background-color: #ebecec;
+    }
+  }
+  
+  .customLabel input[type="checkbox"] {
+    /* Estilos para los checkboxes */
+    margin-right: 5px; /* Espaciado derecho para separar el checkbox del texto */
+  }
+
   .sideForoBox {
     flex: 1; /* Se expandirá para llenar el espacio disponible */
     border: 1px solid #E5E5E5;
     background: #ffffff;
-    overflow-y: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-radius: .5rem;
+    display: flex; /* Agrega esta propiedad para que los elementos internos ocupen todo el espacio */
+    flex-direction: column; /* Asegura que los elementos internos fluyan verticalmente */
   }
 
+  .infinite-scroll-component {
+    flex: 1; /* Hace que InfiniteScroll ocupe todo el espacio vertical disponible en sideForoBox */
+    overflow: auto; /* Si es necesario, agrega desplazamiento vertical */
+  }
 
   @media screen and (max-width: 600px) {
     .sideForo {

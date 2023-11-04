@@ -13,6 +13,14 @@ const searchGame = (gameName) => {
     return get(`/search/game/?query=${gameName}`);
 }
 
+const getPosts = () => {
+    return get("posts");
+}
+
+const getPostsComments = (idPost) => {
+    return get(`posts/${idPost}/comments`);
+}
+
 const uploadComment = (commentText) => {
     return post("/comment/create", {
         commentText
@@ -49,6 +57,8 @@ const GeneralService = {
     dislikeComment,
     
     getLike,
+    getPosts,
+    getPostsComments,
     //isFollowingq
 };
 

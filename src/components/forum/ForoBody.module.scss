@@ -3,13 +3,126 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .mainContent {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
+    flex-direction: column;
 
+    h4 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .infoPost {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        align-items: center;
+        
+        h5 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            color: #1f86c9;
+        }
+
+
+        span {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin: 0;
+            color: #536471;
+        }
+
+        h6 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 0;
+            color: #71767B;
+        }
+
+    }
+
+    p {
+        margin: 0;
+        font-size: 1.4rem;
+    }
+
+    .reactionContent {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        align-items: center;
+        margin-top: 1rem;
+
+        .commentIcon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .5rem;
+
+            svg {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+        
+            &:hover {
+                cursor: pointer;
+            }
+        
+            svg, span {
+                transition: color 0.2s; /* Agrega una transición suave para el cambio de color. */
+            }
+        
+            &:hover svg {
+                color: #1d9bf0;
+            }
+        
+            &:hover span {
+                color: #1d9bf0; /* Cambia el color del <span> al pasar el mouse. */
+            }
+        }
+        
+
+        .heartIcon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .5rem;
+
+            svg {
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        
+            svg, span {
+                transition: color 0.2s; /* Agrega una transición suave para el cambio de color. */
+            }
+        
+            &:hover svg {
+                color: #f4177d;
+            }
+        
+            &:hover span {
+                color: #f4177d; /* Cambia el color del <span> al pasar el mouse. */
+            }
+        }
+    }
 }
 
 .secondaryContent {

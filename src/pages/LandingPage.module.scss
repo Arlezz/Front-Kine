@@ -1,0 +1,21 @@
+.container {
+
+  height: 100vh;
+  width: 100vw;
+
+  display: grid;
+  overflow: hidden;
+
+  grid-template-areas:
+    "navbar navbar"
+    "content sidebar";
+  grid-template-columns: var(--content-width) auto;
+  grid-template-rows: var(--navbar-height) auto;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    //padding: 3rem 2rem 2rem 5rem;
+    gap: 3rem;
+  }
+}

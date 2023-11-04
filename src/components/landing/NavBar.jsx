@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-import { useRef } from 'react';
-
 
 import { Link } from 'react-router-dom'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -75,7 +72,7 @@ export function NavBar(){
                                     <span>Perfil</span>
                                 </div>
                             </Link>
-                            <Dropdown.Divider className={styles.dividerLine} />
+                            <Dropdown.Divider />
                             <Link className={styles.dropdownLink} to="/">
                                 <div className={styles.dropdownItem}>
                                     <FontAwesomeIcon

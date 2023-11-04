@@ -1,6 +1,7 @@
 import { post } from '../utils/httpClient';
 
-const API_URL = "/auth/";
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const register = (userName, userEmail, userRut) => {
     return post(API_URL + "signup", {
@@ -11,7 +12,7 @@ const register = (userName, userEmail, userRut) => {
 };
 
 const login = (userEmail, userPassword) => {
-    return post(API_URL + "signin", {
+    return post("signin", {
             userEmail,
             userPassword
         })

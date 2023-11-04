@@ -1,31 +1,34 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
+import { LandingPage } from "./pages/LandingPage";
+import { Login } from "./pages/Login";
 
-import styles from './App.module.scss';
-import { NavBar } from "./components/landing/NavBar";
-import { Foro } from "./components/landing/Foro";
-
-import {Tutoriales} from './pages/Tutoriales'
-import { Capsulas }  from './pages/Capsulas';
-import { Juegos } from './pages/Juegos';
 
 export function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
 
   return (
     <Router>
-      <div className={styles.container}>
-        <NavBar/>
-        <section className={styles.contentContainer}>
-          <div className={styles.content}>
-            <Tutoriales/>
-            <Capsulas/>
-            <Juegos/>
-          </div>
-        </section>
-        <Foro/>
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <LandingPage /> : <Login setUser={setUser} setCurrentUser={setCurrentUser} handleLogin={handleLogin} />
+          }
+        />
+      </Routes>
     </Router>
   );
 }

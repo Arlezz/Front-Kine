@@ -1,0 +1,317 @@
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: .5rem;
+    padding: 3rem;
+    gap: 2rem;
+
+    .modalHeader {
+        display: flex;
+        flex-direction: column;
+    
+
+        .infoPost {
+            display: flex;
+            flex-direction: row;
+            gap: .5rem;
+            align-items: center;
+            padding-bottom: 1rem;
+            
+            h5 {
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin: 0;
+            }
+        
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                color: #1f86c9;
+            }
+        
+        
+            span {
+                font-size: 1.4rem;
+                font-weight: 400;
+                margin: 0;
+                color: #536471;
+            }
+        
+            h6 {
+                font-size: 1.2rem;
+                font-weight: 400;
+                margin: 0;
+                color: #71767B;
+            }
+        
+        
+            p {
+                margin: 0;
+                font-size: 1.4rem;
+            }   
+        
+        }
+    }
+
+    .separator {
+        color: #E5E5E5;
+        border: 1px solid #E5E5E5;
+        opacity: 1;
+        margin: 0;
+    }
+
+    .modalResponses {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        
+        h3 {
+            font-size: 1.7rem;
+            margin: 0;
+        }
+
+        .scrollContainer{
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #E5E5E5;
+            background: #ffffff;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+        
+            &:hover {
+                cursor: pointer;
+            }
+
+            .textHelper {
+                text-align: center;
+                margin: 0;
+                padding: 1rem;
+                font-weight: 500;
+                font-size: 1.4rem;
+            }
+        
+            .response {
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                
+        
+                .responseHeader {
+                    display: flex;
+                    flex-direction: column;
+        
+                    .infoResponse {
+                        display: flex;
+                        flex-direction: row;
+                        gap: .5rem;
+                        align-items: center;
+                        
+                        h5 {
+                            font-size: 1.4rem;
+                            font-weight: 600;
+                            margin: 0;
+                        }
+                    
+                        svg {
+                            width: 1.2rem;
+                            height: 1.2rem;
+                            color: #1f86c9;
+                        }
+                    
+                    
+                        span {
+                            font-size: 1.4rem;
+                            font-weight: 400;
+                            margin: 0;
+                            color: #536471;
+                        }
+                    
+                        h6 {
+                            font-size: 1.2rem;
+                            font-weight: 400;
+                            margin: 0;
+                            color: #71767B;
+                        }
+                    
+                    
+                        p {
+                            margin: 0;
+                            font-size: 1.4rem;
+                        }   
+                    
+                    }
+                }
+        
+                .reactionContent {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 2rem;
+                    align-items: center;
+                    padding-right: 1rem;
+            
+                    .commentIcon {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: .5rem;
+            
+                        svg {
+                            width: 1.8rem;
+                            height: 1.8rem;
+                        }
+                    
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    
+                        svg, span {
+                            transition: color 0.2s; /* Agrega una transición suave para el cambio de color. */
+                        }
+                    
+                        &:hover svg {
+                            color: #1d9bf0;
+                        }
+                    
+                        &:hover span {
+                            color: #1d9bf0; /* Cambia el color del <span> al pasar el mouse. */
+                        }
+                    }
+                    
+            
+                    .heartIcon {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: .5rem;
+            
+                        svg {
+                            width: 1.8rem;
+                            height: 1.8rem;
+                        }
+            
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    
+                        svg, span {
+                            transition: color 0.2s; /* Agrega una transición suave para el cambio de color. */
+                        }
+                    
+                        &:hover svg {
+                            color: #f4177d;
+                        }
+                    
+                        &:hover span {
+                            color: #f4177d; /* Cambia el color del <span> al pasar el mouse. */
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
+    .inputsFields {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap : 2rem;
+    
+        .inputsFields button {
+            width: 100%;
+            height: 4rem;
+            background-color: #1f86c9;
+            border: none;
+        
+        
+            span {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: white;
+            }
+        }
+    
+        .formContent {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        
+    
+            .formLabel {
+                font-size: 1.7rem;
+                font-weight: 600;
+                color: #000000;
+            }
+
+
+            .tagContainer {
+                display: flex;
+                flex-direction: row;
+
+                .responsedTo{
+                    background-color: #f0f0f0;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                    border-radius: 3rem;
+                    font-size: 1.4rem;
+
+                    span {
+                        font-weight: 600;
+                        margin-right: .5rem;
+                    }
+
+                    svg {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        color: #f4177d;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                
+                }
+            }
+
+            
+    
+            .formInput {
+                width: 100%;
+                height: 4rem;
+                outline: none;
+                border: 1px solid #E5E5E5;
+                border-radius: .5rem;
+                padding: 1rem 1rem;
+                
+                &:focus {
+                    border: 1px solid #2ec5ce;;
+                }
+            }
+    
+            
+            .textArea {
+                height: 10rem;
+            }
+    
+            .errorText {
+                color: #df4545;
+                font-size: 1.2rem;
+                margin-top: 0.2rem;
+                font-weight: 500;
+            }
+        }
+    }
+
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .inputsFields {
+        width: 20rem;
+    }
+}
