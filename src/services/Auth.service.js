@@ -11,15 +11,13 @@ const register = (userName, userEmail, userRut) => {
     });
 };
 
-const login = (userEmail, userPassword) => {
+const login = (email, password) => {
     return post("signin", {
-            userEmail,
-            userPassword
+            email,
+            password
         })
         .then((response) => {
-            if (response.accessToken) {
-                localStorage.setItem("user", JSON.stringify(response));
-            }
+            localStorage.setItem("user", JSON.stringify(response));
             return response;
         });
 };

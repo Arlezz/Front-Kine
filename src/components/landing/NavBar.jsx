@@ -2,6 +2,8 @@
 import { Link } from 'react-router-dom'
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useEffect, useState } from 'react';
+import AuthService from '../../services/Auth.service';
 
 
 import styles from './NavBar.module.scss'
@@ -16,6 +18,17 @@ import {
 
 export function NavBar(){
 
+    const [currentUser, setCurrentUser] = useState({});
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+
+        if (user) {
+            setCurrentUser(user);
+        }
+    }
+    ,[]);
+
     const scrollToSection = (sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
@@ -26,7 +39,7 @@ export function NavBar(){
 
     return (
         <>
-            <nav className={styles.navContainer}>
+            <nav className={`${styles.navContainer} ${styles.fixedNavBar}`}>
                 <div className={styles.left}>
                     <Link to="/">
                             <div className={styles.logoBox}>
@@ -34,27 +47,36 @@ export function NavBar(){
                             </div>
                     </Link>
                     <div>
-                        <Link to="/tutorial" onClick={() => scrollToSection("tutoriales")}>
+                        <Link  onClick={() => scrollToSection("tutoriales")}>
                             <h2 className={styles.textNav}>Tutoriales</h2>
                         </Link> 
                     </div>
                     <div>
-                        <Link to="/capsule" onClick={() => scrollToSection("capsulas")}>
+                        <Link onClick={() => scrollToSection("capsulas")}>
                             <h2 className={styles.textNav}>Capsulas</h2>
                         </Link> 
                     </div>
                     <div>
-                        <Link to="/game" onClick={() => scrollToSection("juegos")}>
+                        <Link  onClick={() => scrollToSection("juegos")}>
                             <h2 className={styles.textNav}>Juegos</h2>
                         </Link> 
                     </div>
+                    {currentUser && currentUser.role && currentUser.role.includes("admin") && (
+                        <div>
+                            <Link to="/admin">
+                                <h2 className={styles.textNav}>Administrador</h2>
+                            </Link> 
+                        </div>
+                    )}
                 </div>
                 <Search/>
                 <div className={styles.right}>
                     <Dropdown as={ButtonGroup}>
                         <div className={styles.dropdownButon}>
-                            <span>
-                                Antony Rodriguez
+                            <span onClick={() => {
+                                console.log(currentUser)
+                            }}>
+                               {currentUser? currentUser.name : <span>usuario</span>}
                             </span>
                             <Dropdown.Toggle id="dropdown-basic">
                                 <FontAwesomeIcon

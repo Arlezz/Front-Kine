@@ -12,7 +12,8 @@
 }
 
 :root {
-    --primary-color: #0ac9c9;
+    --primary-color: #32a1f2;
+    --secondary-color: #1f86c9;
     --navbar-height: 6rem;
     --content-width: 75%;
 }
@@ -65,7 +66,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   
-  -webkit-text-fill-color: white;
+  -webkit-text-fill-color: #000000;
   -webkit-box-shadow: 0 0 0px 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
 }
