@@ -5,7 +5,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { useEffect, useState } from 'react';
 import AuthService from '../../services/Auth.service';
 
-
 import styles from './NavBar.module.scss'
 import { Search } from "../search/Search";
 
@@ -47,17 +46,17 @@ export function NavBar(){
                             </div>
                     </Link>
                     <div>
-                        <Link  onClick={() => scrollToSection("tutoriales")}>
+                        <Link to="/" onClick={() => scrollToSection("tutoriales")}>
                             <h2 className={styles.textNav}>Tutoriales</h2>
                         </Link> 
                     </div>
                     <div>
-                        <Link onClick={() => scrollToSection("capsulas")}>
+                        <Link to="/" onClick={() => scrollToSection("capsulas")}>
                             <h2 className={styles.textNav}>Capsulas</h2>
                         </Link> 
                     </div>
                     <div>
-                        <Link  onClick={() => scrollToSection("juegos")}>
+                        <Link to="/" onClick={() => scrollToSection("juegos")}>
                             <h2 className={styles.textNav}>Juegos</h2>
                         </Link> 
                     </div>
