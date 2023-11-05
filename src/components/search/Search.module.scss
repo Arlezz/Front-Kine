@@ -25,17 +25,17 @@
 
 .searchInput:hover,
 .searchInput:focus {
-    border: 1px solid #5d5d5f;
+    border: 1px solid var(--secondary-color);
 }
 
 .searchInput:focus {
-    border-color: #2ec5ce;
+    border-color: var(--secondary-color);
     box-shadow: inset 0 0 0 1px transparent;
 }
 
 .searchInput:focus-visible {
-    border-color: #2ec5ce;
-    box-shadow: inset 0 0 0 1px #2ec5ce;
+    border-color: var(--secondary-color);
+    box-shadow: inset 0 0 0 1px var(--secondary-color);
 }
 
 .searchButton {

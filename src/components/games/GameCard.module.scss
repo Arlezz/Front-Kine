@@ -1,13 +1,14 @@
 .gameCardContainer {
-    background: #c9e9ff;
+    background: var(--primary-color-game);
+    //background: #c9e9ff;
     padding: 2rem;
     border-radius: 1rem;
     width: 100%;
     overflow-y: auto;
     color: #000000;
     //border: #5ca2eb 1px solid;
-    border: #91d2ff 1px solid;
-    box-shadow: 0 0 1rem 0 #91d2ff;
+    border: var(--secondary-color-game) 1px solid;
+    box-shadow: 0 0 1rem 0 var(--secondary-color-game);
     //box-shadow: -1px -1px 6px 0 #5ca2eb, 4px 4px 16px 2px rgb(92, 162, 235);
 
 

@@ -42,8 +42,8 @@
     align-items: center;
     gap: 1rem;
     background: transparent;
-    color: #1f86c9; /* Cambia el color del texto del botón */
-    border: 1px solid #1f86c9; /* Cambia el color del borde del botón */
+    color: var(--primary-color); /* Cambia el color del texto del botón */
+    border: 1px solid var(--primary-color); /* Cambia el color del borde del botón */
     border-radius: 0.5rem; /* Agrega bordes redondeados al botón */
     padding: 0.5rem 1rem; /* Ajusta el espaciado interno del botón */
     font-weight: 500; /* Cambia el peso de la fuente del botón */
