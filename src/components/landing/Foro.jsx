@@ -12,9 +12,20 @@ import { ForoPostModal } from '../forum/ForoPostModal';
 
 import GeneralService from '../../services/General.service';
 import { Spinner } from '../Spinner';
+import AuthService from '../../services/Auth.service';
 
 
 export function Foro() {
+
+    const [currentUser, setCurrentUser] = useState({});
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            setCurrentUser(user);
+        }
+    }, []);
+
 
     
 
@@ -56,10 +67,10 @@ export function Foro() {
     }, []);
     
 
-    if (!isLoading) {
+    /*if (!isLoading) {
         console.log("posts ",posts);
         console.log("postsToDisplay ",PostsToDisplay);
-    }
+    }*/
     
 
     const fetchMoreData = () => {
@@ -127,8 +138,8 @@ export function Foro() {
                     ))}
                 </InfiniteScroll>
             </div>
-            <ForoResponseButton handleShow={handleShow}/>
-            <ForoPostModal show={show} handleShow={handleShow} setForoToDisplay={setPostsToDisplay}/>
+            <ForoResponseButton handleShow={handleShow} />
+            <ForoPostModal show={show} handleShow={handleShow} currentUser={currentUser} setForoToDisplay={setPostsToDisplay}/>
 
         </aside>
     );

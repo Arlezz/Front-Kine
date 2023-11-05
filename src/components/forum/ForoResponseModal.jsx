@@ -17,6 +17,8 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import GeneralService from "../../services/General.service";
 import { Empty } from "../Empty";
+import { convertURLsToLinks } from '../../utils/parser';
+
 
 export function ForoResponseModal({ show, handleShow, post }) {
   //const responsesPost = post.responses;
@@ -85,7 +87,7 @@ export function ForoResponseModal({ show, handleShow, post }) {
               <span> ·</span>
               <h6>Publicado el {post.date} </h6>
             </div>
-            <p>{post.content}</p>
+            <p>{convertURLsToLinks(post.content)}</p>
           </div>
           <hr className={styles.separator} />
           {/*<hr className={styles.separator}/> */}

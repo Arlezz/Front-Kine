@@ -46,12 +46,18 @@
             }
         
         
-            p {
-                margin: 0;
-                font-size: 1.4rem;
-            }   
+              
         
         }
+
+        p {
+            margin: 0;
+            font-size: 1.6rem;
+
+            a {
+                color: #1f86c9;
+            }
+        } 
     }
 
     .separator {

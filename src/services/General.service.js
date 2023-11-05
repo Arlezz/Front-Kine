@@ -21,9 +21,13 @@ const getPostsComments = (idPost) => {
     return get(`posts/${idPost}/comments`);
 }
 
-const uploadComment = (commentText) => {
-    return post("/comment/create", {
-        commentText
+const uploadPost = (email,title,content) => {
+    return post("posts", {
+        email,
+        title,
+        content
+    }).then((response) => {
+        return response;
     });
 }
 
@@ -52,7 +56,7 @@ const GeneralService = {
     searchCapsule,
     searchGame,
 
-    uploadComment,
+    uploadPost,
     likeComment,
     dislikeComment,
     

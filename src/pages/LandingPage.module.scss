@@ -1,15 +1,13 @@
 .container {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 
   display: grid;
   overflow: hidden;
 
-  grid-template-areas:
-    "navbar navbar"
-    "content sidebar";
+  grid-template-areas: "content sidebar";
   grid-template-columns: var(--content-width) auto;
-  grid-template-rows: var(--navbar-height) auto;
+  //grid-template-rows: var(--navbar-height) auto;
 
   .contentContainer {
     overflow-y: auto;

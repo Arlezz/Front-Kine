@@ -75,6 +75,15 @@
       }
     }
 
+    .errorSession {
+      display: flex;
+      justify-content: center;
+      color: #df4545;
+      font-size: 1.2rem;
+      margin-top: 0.2rem;
+      font-weight: 500;
+    }
+
     .forgotContainer {
       display: flex;
       justify-content: center;

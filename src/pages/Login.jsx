@@ -1,15 +1,23 @@
 import AuthService from "../services/Auth.service";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./Login.module.scss";
+import { useState } from "react";
 
 export function Login({ handleLogin, handleForgotPass }) {
+
+  const [sessionError, setSessionError] = useState(false);
+  const [textSesionError, setTextSesionError] = useState("");
+
+
   const handleSession = (values) => {
     AuthService.login(values.email, values.password)
       .then(() => {
         handleLogin();
       })
       .catch((error) => {
-        console.log("Datos incorrectos");
+        setSessionError(true);
+        setTextSesionError(error.response.data.message);
+        //console.log(error.response.data.message);
       });
   };
 
@@ -82,6 +90,12 @@ export function Login({ handleLogin, handleForgotPass }) {
               className={styles.errorText}
             />
           </div>
+
+          {sessionError && (
+            <div className={styles.errorSession}>
+              {textSesionError}
+            </div>
+          )}
 
           <div className={styles.forgotContainer}>
             <a className={styles.forgotPassword} onClick={handleForgotPass}>

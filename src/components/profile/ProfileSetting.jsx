@@ -2,8 +2,10 @@ import React from "react";
 
 export function ProfileSetting(){
     return (
-        <div>
+        <div >
             <h1>ProfileSetting</h1>
+
+            
         </div>
     )
 }

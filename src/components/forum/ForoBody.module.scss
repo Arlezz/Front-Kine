@@ -4,9 +4,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    &:hover {
-        cursor: pointer;
-    }
+   
 }
 
 .mainContent {
@@ -57,6 +55,11 @@
     p {
         margin: 0;
         font-size: 1.4rem;
+
+        a {
+            color: #1f86c9;
+            text-decoration: none;
+        }
     }
 
     .reactionContent {

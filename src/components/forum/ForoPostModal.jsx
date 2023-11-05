@@ -6,28 +6,22 @@ import styles from './ForoPostModal.module.scss';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ForoResponseButton } from '../forum/ForoResponseButton';
 import { foroPost } from "../../utils/data"; 
+import GeneralService from '../../services/General.service';
 
-let i = 0;
 
-
-export function ForoPostModal({show, handleShow, setForoToDisplay}){
+export function ForoPostModal({show, handleShow, setForoToDisplay, currentUser}){
 
     const handlePost = (values) => {
-        const newPost = {
-            email:"autor1@gmail.com",
-            author: "Autor "+(i+1),
-            date: new Date().toLocaleDateString(),
-            title: values.title,
-            comment: values.content,
-            likes: 0,
-            responses: []
+
+        if(currentUser){
+            console.log(currentUser.email);
+            console.log(values.title);
+            console.log(values.content);
+            GeneralService.uploadPost(currentUser.email, values.title, values.content);
         }
 
-        foroPost.unshift(newPost);
-
-        setForoToDisplay(foroPost.slice(0, 10));
+        //setForoToDisplay(foroPost.slice(0, 10));
         handleShow();
-        i++;
     }
 
 return (

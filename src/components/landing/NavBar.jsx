@@ -25,8 +25,13 @@ export function NavBar(){
         if (user) {
             setCurrentUser(user);
         }
-    }
-    ,[]);
+    },[]);
+
+    const handleLogout = () => {
+        window.location.reload();
+        AuthService.logout();
+    };
+
 
     const scrollToSection = (sectionId) => {
         const section = document.getElementById(sectionId);
@@ -95,7 +100,9 @@ export function NavBar(){
                             </Link>
                             <Dropdown.Divider />
                             <Link className={styles.dropdownLink} to="/">
-                                <div className={styles.dropdownItem}>
+                                <div className={styles.dropdownItem} onClick={()=> {
+                                    handleLogout();
+                                }}>
                                     <FontAwesomeIcon
                                         icon={faRightFromBracket}
                                         className={styles.dropdownOptionIcon}

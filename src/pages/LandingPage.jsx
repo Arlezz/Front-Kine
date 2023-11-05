@@ -12,17 +12,16 @@ import { useEffect } from "react";
 import AuthService from "../services/Auth.service";
 
 export function LandingPage() {
-    return (
-      <div className={styles.container}>
-        <section className={styles.contentContainer}>
-          <div className={styles.content}>
-            <Tutoriales />
-            <Capsulas />
-            <Juegos />
-          </div>
-        </section>
-        <Foro className={styles.Foro} />
-      </div>
-    );
-  }
-  
+  return (
+    <div className={styles.container}>
+      <section className={styles.contentContainer}>
+        <div className={styles.content}>
+          <Tutoriales />
+          <Capsulas />
+          <Juegos />
+        </div>
+      </section>
+      <Foro className={styles.Foro} />
+    </div>
+  );
+}
