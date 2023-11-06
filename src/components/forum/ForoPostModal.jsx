@@ -9,19 +9,17 @@ import { foroPost } from "../../utils/data";
 import GeneralService from '../../services/General.service';
 
 
-export function ForoPostModal({show, handleShow, setForoToDisplay, currentUser}){
+export function ForoPostModal({show, handleShow, currentUser, fetchData, setPage,setNewPost}){
 
     const handlePost = (values) => {
-
         if(currentUser){
-            console.log(currentUser.email);
-            console.log(values.title);
-            console.log(values.content);
-            GeneralService.uploadPost(currentUser.email, values.title, values.content);
-        }
-
-        //setForoToDisplay(foroPost.slice(0, 10));
-        handleShow();
+            GeneralService.uploadPost(currentUser.email, values.title, values.content)
+            .then((response) => {
+                //fetchData("date","desc",1);
+                setNewPost(response);
+                handleShow();
+            })
+        } 
     }
 
 return (

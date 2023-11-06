@@ -82,7 +82,7 @@ export function ForoResponseModal({ show, handleShow, post }) {
           <div className={styles.modalHeader}>
             <h2 className={styles.tiitle}>{post.title}</h2>
             <div className={styles.infoPost}>
-              <h5>{post.name}</h5>
+              <h5>{post.user? post.user.name : null}</h5>
               <FontAwesomeIcon icon={faUser} />
               <span> ·</span>
               <h6>Publicado el {post.date} </h6>

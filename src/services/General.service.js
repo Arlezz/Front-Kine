@@ -13,8 +13,8 @@ const searchGame = (gameName) => {
     return get(`/search/game/?query=${gameName}`);
 }
 
-const getPosts = () => {
-    return get("posts");
+const getPosts = (type,order,pageNumber,batch) => {
+    return get(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}`);
 }
 
 const getPostsComments = (idPost) => {

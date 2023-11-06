@@ -2,7 +2,7 @@
 export const arrayVideosObject = [
     {
         "title": "Título del Video 1",
-        "url": "https://www.youtube.com/watch?v=MDErQ1KTzaI",
+        "url": "https://www.youtube.com/watch?v=x8fYQnXRKrU",
         "description": "Descripción del Video 1",
         "type": "capsulas" 
     },
@@ -38,7 +38,7 @@ export const arrayVideosObject = [
     },
     {
         "title": "Título del Video 8",
-        "url": "https://www.youtube.com/watch?v=1bqT5jC02IE",
+        "url": "https://www.youtube.com/watch?v=3eMmmj3roOs",
         "description": "Descripción del Video 8"
     },
     {
@@ -48,7 +48,7 @@ export const arrayVideosObject = [
     },
     {
         "title": "Título del Video 10",
-        "url": "https://www.youtube.com/watch?v=Kd_YulTXx-Q",
+        "url": "https://www.youtube.com/watch?v=YmaLdu9LKg0",
         "description": "Descripción del Video 10"
     },
     {

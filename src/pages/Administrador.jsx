@@ -21,28 +21,22 @@ export function Administrador() {
       >
         <Tab eventKey="profile" title="Administrar Usuarios">
           <div>
-            asdasd
+            Acá se podran visualizar los Alumnos
           </div>
         </Tab>
         <Tab eventKey="identity" title="Administrar Profesores">
           <div>
-            asdqwe
-          </div>
-          <div>
-            tretre
+            Acá se podrán visualizar los Profesores
           </div>
         </Tab>
         <Tab eventKey="security" title="Administrar Multimedia">
           <div>
-            uytyty
+            Acá se podrán administrar los videos
           </div>
         </Tab>
         <Tab eventKey="stream" title="Historial de modificaciones">
           <div>
-            tyutyu
-          </div>
-          <div>
-            ityuy
+            Acá se podrán visualizar los cambios realizados (Admin)
           </div>
         </Tab>
       </Tabs>

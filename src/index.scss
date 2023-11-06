@@ -54,6 +54,16 @@ a {
 }
 
 
+.dropdown-item.active, .dropdown-item:active {
+    color: #000000;
+    background-color: #ebecec ;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: var(--bs-dropdown-link-hover-color);
+}
+
+
 
 img {
     max-width: 100%;
