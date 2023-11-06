@@ -13,6 +13,7 @@ import { ForoPostModal } from '../forum/ForoPostModal';
 import GeneralService from '../../services/General.service';
 import { Spinner } from '../Spinner';
 import AuthService from '../../services/Auth.service';
+import { Empty } from '../Empty';
 
 
 export function Foro() {
@@ -33,6 +34,7 @@ export function Foro() {
     const [selectedOrder, setSelectedOrder] = useState('desc');
     const [activeIndex, setActiveIndex] = useState(null);
     const [newPost, setNewPost] = useState(null);	
+    const [noResponses, setNoResponses] = useState(false); // Si no hay respuestas, se muestra un mensaje
 
     const items = ["Actual", "Antiguo", "Más Likes", "Menos Likes", "Más Comentarios", "Menos Comentarios"];
     const icons = [faCalendar, faCalendar, faThumbsUp, faThumbsUp, faComment, faComment];
@@ -47,15 +49,17 @@ export function Foro() {
 
     const fetchData = (type, order, page) => {
         setIsLoading(true);
-        console.log("pagina ",page);
         GeneralService.getPosts(type, order, page, 6)
             .then((data) => {
-                //console.log("tamaño de post antiguo",posts.length);
+                if (data.posts.length === 0) {
+                    setNoResponses(true);
+                }else{
+                    setNoResponses(false);
+                }
+
                 setPosts(prevPosts => prevPosts.concat(data.posts));
-                //console.log("tamaño de post nuevo",posts.length);
                 setHasMore(data.currentPage < data.totalPages);
                 setIsLoading(false);
-                //setNewPost(false);
             })
             .catch((error) => {
                 console.error(error);
@@ -68,10 +72,7 @@ export function Foro() {
     };
 
     useEffect(() => {
-        loadInitialData();
-        console.log("newPost ",newPost);
-        console.log("pposst ",posts.length);
-        
+        loadInitialData();        
     }, [page, selectedFilter, selectedOrder]);
 
 
@@ -148,6 +149,9 @@ export function Foro() {
                 <h3 className={styles.sideSubtitle}>Escribe cualquier duda o consulta que tengas</h3>
             </div>
             <div className={styles.sideForoBox}>
+            {noResponses ? (
+              <Empty /> // Render the "empty" component when there are no responses
+            ) : (
                 <InfiniteScroll
                     dataLength={posts.length}
                     next={() => setPage((prevPage) => prevPage + 1)}
@@ -162,6 +166,7 @@ export function Foro() {
                         <ForoBody key={index} post={post} index={index} currentUser={currentUser} />
                     ))}
                 </InfiniteScroll>
+            )}
             </div>
             <ForoResponseButton handleShow={handleShow} />
             <ForoPostModal setNewPost={setNewPost} show={show} handleShow={handleShow} fetchData={fetchData} currentUser={currentUser} />
