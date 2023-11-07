@@ -19,6 +19,6 @@ export function ForoResponseButton({handleShow, isSubmitting, submit, text}) {
   }, [text]);
   
   return(
-      <button type={submit} className={styles.postButton} disabled={isSubmitting} onClick={handleShow}>{textButton}<FontAwesomeIcon  icon={faInbox} /></button>
+      <button type={submit} className={styles.postButton}  onClick={handleShow}>{textButton}<FontAwesomeIcon  icon={faInbox} /></button>
   );
 }

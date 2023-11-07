@@ -12,7 +12,9 @@ export function Login({ handleLogin, handleForgotPass }) {
   const handleSession = (values) => {
     AuthService.login(values.email, values.password)
       .then(() => {
+        //window.location.reload(false);
         handleLogin();
+        
       })
       .catch((error) => {
         setSessionError(true);

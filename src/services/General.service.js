@@ -18,8 +18,12 @@ const getPosts = (type,order,pageNumber,batch) => {
 }
 
 const getPostsComments = (idPost) => {
-    return get(`posts/${idPost}/comments`);
+    return get(`posts/${idPost}/comments`)
+    .then((response) => {
+        return response;
+    });
 }
+
 
 const uploadPost = (email,title,content) => {
     return post("posts", {
@@ -31,25 +35,67 @@ const uploadPost = (email,title,content) => {
     });
 }
 
-const likeComment = (userName) => {
-    return post("/comment/like", {
-        userName
+const uploadComment = (postId,email,content) => {
+    return post("comments", {
+        postId,
+        email,
+        content
+    }).then((response) => {
+        return response;
     });
 }
 
-const dislikeComment = (userName) => {
-    return post("/comment/dislike", {
-        userName
+const likePosts = (postId,email) => {
+    return post("posts/like", {
+        postId,
+        email
+    }).then((response) => {
+        return response;
     });
 }
 
-const getLike = (page) => {
-    return get(`/comment/like?page=${page}`);
+const likeComments = (commentId,email) => {
+    return post("comments/like", {
+        commentId,
+        email
+    }).then((response) => {
+        return response;
+    });
 }
 
-/*const isFollowing = (streamerName) => {
-    return get(`/stream/following/${streamerName}`);
-}*/
+const dislikePosts = (postId,email) => {
+    return post("posts/dislike", {
+        postId,
+        email
+    }).then((response) => {
+        return response;
+    });
+}
+
+const dislikeComments = (commentId,email) => {
+    return post("comments/dislike", {
+        commentId,
+        email
+    }).then((response) => {
+        return response;
+    });
+}
+
+
+const hasLikedPost = (postId,email) => {
+    return get(`posts/${postId}/hasLiked?email=${email}`).then((response) => {
+        return response;
+    });
+}
+
+const hasLikedComments = (commentId,email) => {
+    return get(`comments/${commentId}/hasLiked?email=${email}`).then((response) => {
+        return response;
+    });
+}
+
+
+
 
 const GeneralService = {
     searchTutorial,
@@ -57,13 +103,16 @@ const GeneralService = {
     searchGame,
 
     uploadPost,
-    likeComment,
-    dislikeComment,
+    uploadComment,
+    likePosts,
+    likeComments,
+    dislikePosts,
+    dislikeComments,
     
-    getLike,
+    hasLikedPost,
+    hasLikedComments,
     getPosts,
     getPostsComments,
-    //isFollowingq
 };
 
 export default GeneralService;

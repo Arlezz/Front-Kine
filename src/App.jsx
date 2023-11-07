@@ -32,12 +32,10 @@ export function App() {
     } else {
       setIsLoading(false);
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    console.log("LOGGED IN");
-    console.log("CURRENT USER : ", AuthService.getCurrentUser());
   };
 
   if (isLoading) {

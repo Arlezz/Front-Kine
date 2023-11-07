@@ -13,14 +13,26 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faXmark,
+  faUserGear,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
 
 import GeneralService from "../../services/General.service";
 import { Empty } from "../Empty";
-import { convertURLsToLinks } from '../../utils/parser';
+import { convertURLsToLinks } from "../../utils/parser";
+import { CommentBody } from "./CommentBody";
 
 
-export function ForoResponseModal({ show, handleShow, post }) {
+export function ForoResponseModal({
+  show,
+  handleShow,
+  post,
+  currentUser,
+  setPostComments,
+}) {
   //const responsesPost = post.responses;
   const [responses, setResponses] = useState([]);
   const [ResponseToDisplay, setResponseToDisplay] = useState([]);
@@ -29,26 +41,16 @@ export function ForoResponseModal({ show, handleShow, post }) {
   const [hasResponsed, setHasResponsed] = useState(false);
   const [responsed, setResponsed] = useState({});
   const noResponses = ResponseToDisplay.length === 0 && !isLoading;
+  const [changes, setChanges] = useState(false);
+  const [like, setLike] = useState(false);
+
 
   useEffect(() => {
     if (show) {
       // Define una función para realizar la carga de datos
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const response = await GeneralService.getPostsComments(post._id);
-          setResponses(response);
-          setResponseToDisplay(response.slice(0, 4));
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
       fetchData();
     }
-  }, [show, post._id]);
+  }, [show, post._id, changes]);
 
   const fetchMoreData = () => {
     const visibleResponse = ResponseToDisplay.length;
@@ -64,15 +66,48 @@ export function ForoResponseModal({ show, handleShow, post }) {
     }
   };
 
-  /*const handleResponse = (values) => {
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GeneralService.getPostsComments(post._id);
+      setResponses(response);
+      setResponseToDisplay(response.slice(0, 4));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-        handleShow();
-    
-    }*/
+  const handleResponse = (values, resetForm) => {
+    console.log(values);
+
+    if(!hasResponsed){
+      GeneralService.uploadComment(post._id, currentUser.email, values.response)
+      .then((data) => {
+        setChanges(!changes);
+        setHasResponsed(false);
+        setHasMore(true);
+        setResponseToDisplay([]);
+        setResponsed({});
+        setPostComments((prevComments) => prevComments + 1);
+        resetForm();
+        console.log("RESPUESTA ENVIADA al post ", post._id);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+      return;
+    }
+    console.log("RESPONDIENDO A ",responsed.user.name);
+    resetForm();
+    setHasResponsed(!hasResponsed);
+  };
 
   const handleClose = () => {
     setHasMore(true);
     handleShow();
+    setHasResponsed(false);
   };
 
   return (
@@ -80,9 +115,15 @@ export function ForoResponseModal({ show, handleShow, post }) {
       <Modal show={show} onHide={handleClose}>
         <div className={styles.modalContainer}>
           <div className={styles.modalHeader}>
+            <div className={styles.closeButtonContainer}>
+              <div className={styles.closeButton} onClick={handleClose}>
+                <FontAwesomeIcon icon={faXmark} />
+              </div>
+            </div>
+
             <h2 className={styles.tiitle}>{post.title}</h2>
             <div className={styles.infoPost}>
-              <h5>{post.user? post.user.name : null}</h5>
+              <h5>{post.user ? post.user.name : null}</h5>
               <FontAwesomeIcon icon={faUser} />
               <span> ·</span>
               <h6>Publicado el {post.date} </h6>
@@ -94,7 +135,9 @@ export function ForoResponseModal({ show, handleShow, post }) {
           <div className={styles.modalResponses}>
             <h3>Respuestas</h3>
             {noResponses ? (
-              <Empty /> // Render the "empty" component when there are no responses
+              <div className={styles.EmptyContainer}>
+                <Empty />
+              </div>
             ) : (
               <div className={styles.scrollContainer}>
                 <InfiniteScroll
@@ -109,37 +152,7 @@ export function ForoResponseModal({ show, handleShow, post }) {
                 >
                   {ResponseToDisplay.map((response, index) => (
                     <div key={index}>
-                      <div className={styles.response}>
-                        <div className={styles.responseHeader}>
-                          <div className={styles.infoResponse}>
-                            <h5>{response.name}</h5>
-                            <FontAwesomeIcon icon={faUser} />
-                            <span> ·</span>
-                            <h6>Publicado el {response.date} </h6>
-                          </div>
-                          <span>{response.content}</span>
-                        </div>
-
-                        <div className={styles.reactionContent}>
-                          <div
-                            className={styles.commentIcon}
-                            onClick={() => {
-                              console.log("Respondiendo a ", response.name);
-                              setHasResponsed(true);
-                              setResponsed(response);
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faPaperPlane} />
-                          </div>
-                          <div className={styles.heartIcon}>
-                            <FontAwesomeIcon
-                              className={styles.heartIcon}
-                              icon={faHeart}
-                            />
-                            <span>{response.likes}</span>
-                          </div>
-                        </div>
-                      </div>
+                      <CommentBody response={response} currentUser={currentUser} setHasResponsed={setHasResponsed} setResponsed={setResponsed}/>
                       <hr className={styles.separator} />
                     </div>
                   ))}
@@ -150,7 +163,6 @@ export function ForoResponseModal({ show, handleShow, post }) {
 
           <Formik
             initialValues={{
-              title: "",
               response: "",
             }}
             validate={(values) => {
@@ -165,18 +177,18 @@ export function ForoResponseModal({ show, handleShow, post }) {
 
               return errors;
             }}
-            onSubmit={(values) => {
-              //handleResponse(values);
+            onSubmit={(values, { resetForm }) => {
+              handleResponse(values, resetForm);
             }}
           >
-            {({ isSubmitting }) => (
+            {({ resetForm }) => (
               <Form className={styles.inputsFields}>
                 <div className={styles.formContent}>
                   <span className={styles.formLabel}>Publica tu respuesta</span>
                   {hasResponsed ? (
                     <div className={styles.tagContainer}>
                       <div className={styles.responsedTo}>
-                        <span>Respondiendo a {responsed.name}</span>
+                        <span>Respondiendo a {responsed.user.name}</span>
                         <FontAwesomeIcon
                           icon={faCircleXmark}
                           onClick={() => {
@@ -202,11 +214,7 @@ export function ForoResponseModal({ show, handleShow, post }) {
                   />
                 </div>
 
-                <ForoResponseButton
-                  submit={"submit"}
-                  isSubmitting={isSubmitting}
-                  text={"Responder"}
-                />
+                <ForoResponseButton submit={"submit"} text={"Responder"} />
               </Form>
             )}
           </Formik>
