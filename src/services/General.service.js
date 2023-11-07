@@ -89,7 +89,7 @@ const hasLikedPost = (postId,email) => {
 }
 
 const hasLikedComments = (commentId,email) => {
-    return get(`posts/${commentId}/hasLiked?email=${email}`).then((response) => {
+    return get(`comments/${commentId}/hasLiked?email=${email}`).then((response) => {
         return response;
     });
 }

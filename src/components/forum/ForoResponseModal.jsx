@@ -25,6 +25,7 @@ import { Empty } from "../Empty";
 import { convertURLsToLinks } from "../../utils/parser";
 import { CommentBody } from "./CommentBody";
 
+
 export function ForoResponseModal({
   show,
   handleShow,
@@ -81,24 +82,32 @@ export function ForoResponseModal({
   const handleResponse = (values, resetForm) => {
     console.log(values);
 
-    GeneralService.uploadComment(post._id, currentUser.email, values.response)
+    if(!hasResponsed){
+      GeneralService.uploadComment(post._id, currentUser.email, values.response)
       .then((data) => {
-        console.log(data);
         setChanges(!changes);
         setHasResponsed(false);
+        setHasMore(true);
         setResponseToDisplay([]);
         setResponsed({});
         setPostComments((prevComments) => prevComments + 1);
         resetForm();
+        console.log("RESPUESTA ENVIADA al post ", post._id);
       })
       .catch((error) => {
         console.log(error.response.data.message);
       });
+      return;
+    }
+    console.log("RESPONDIENDO A ",responsed.user.name);
+    resetForm();
+    setHasResponsed(!hasResponsed);
   };
 
   const handleClose = () => {
     setHasMore(true);
     handleShow();
+    setHasResponsed(false);
   };
 
   return (

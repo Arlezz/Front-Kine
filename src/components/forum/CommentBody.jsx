@@ -14,6 +14,8 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useEffect } from "react";
 import GeneralService from "../../services/General.service";
+import { convertURLsToLinks } from '../../utils/parser';
+
 
 export function CommentBody({ response, currentUser, setHasResponsed, setResponsed}) {
 
@@ -23,11 +25,11 @@ export function CommentBody({ response, currentUser, setHasResponsed, setRespons
 
 
     useEffect(() => {
-      console.log("RESPONSE ",response);
-      console.log("CURRENT USER ",currentUser);
+      //console.log("RESPONSE ",response);
+      //console.log("CURRENT USER ",currentUser);
         GeneralService.hasLikedComments(response._id,currentUser.email)
         .then((data) => {
-          console.log("HAS LIKED ",data.hasLiked);
+          //console.log("HAS LIKED ",data.hasLiked);
             setLike(data.hasLiked);
         })
         .catch((error) => {
@@ -97,7 +99,7 @@ export function CommentBody({ response, currentUser, setHasResponsed, setRespons
           <span> ·</span>
           <h6>Publicado el {response.date} </h6>
         </div>
-        <span>{response.content}</span>
+        <span>{convertURLsToLinks(response.content)}</span>
       </div>
 
       <div className={styles.reactionContent}>
@@ -106,7 +108,7 @@ export function CommentBody({ response, currentUser, setHasResponsed, setRespons
             <div
               className={styles.commentIcon}
               onClick={() => {
-                console.log("Respondiendo a ", response.name);
+                //console.log("Respondiendo a ", response.user.name);
                 setHasResponsed(true);
                 setResponsed(response);
               }}

@@ -48,7 +48,7 @@ export function NavBar(){
                 <div className={styles.left}>
                     <Link to="/">
                             <div className={styles.logoBox}>
-                                <h1 className={styles.index}>KineHub</h1>
+                                <h1 className={styles.index}>Kineverso</h1>
                             </div>
                     </Link>
                     <div>
