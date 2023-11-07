@@ -133,6 +133,7 @@ export function Foro() {
 
                             {items.map((item, index) => (
                                 <Dropdown.Item
+                                    key={index}
                                     ref={(el) => (ref.current[index] = el)}
                                     className={`${styles.dropdownItem} ${index === activeIndex ? 'active' : ''}`}
                                     onClick={() => {

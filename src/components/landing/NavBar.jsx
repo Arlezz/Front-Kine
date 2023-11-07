@@ -21,6 +21,7 @@ export function NavBar(){
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
+        console.log("EL USUARIO ES ",user);
 
         if (user) {
             setCurrentUser(user);
