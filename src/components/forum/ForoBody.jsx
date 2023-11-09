@@ -4,9 +4,12 @@ import styles from './ForoBody.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faUser, faUserTie, faUserGear } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { ForoResponseModal } from "../forum/ForoResponseModal";
 import { convertURLsToLinks } from '../../utils/parser';
 import GeneralService from '../../services/General.service';
+import useDebounce from "../../components/useDebounce";
+
 
 export function ForoBody({ post, index, currentUser}) {
   const [show, setShow] = useState(false);
@@ -26,28 +29,46 @@ export function ForoBody({ post, index, currentUser}) {
     .catch((error) => {
       console.log(error.response.data.message);
     });
-  },[]);
+  },[]);  
+
+  const debouncedClick = useDebounce((e) => {
+    handleLike(e);
+  }, 300);
 
   const handleLike = () => {
-    setLike(!like);
+    if (!like) {
+      likePost();
+    } else {
+      dislikePost();
+    }
+  }
+
+  const likePost = () => {
     GeneralService.likePosts(post._id,currentUser.email)
     .then((data) => {
       setPostLikes(prevLikes => prevLikes + 1);
+      setLike(true);
     })
     .catch((error) => {
       console.log(error.response.data.message);
-      GeneralService.dislikePosts(post._id,currentUser.email);
-      setPostLikes(prevLikes => prevLikes - 1);
     }); 
+  }
+
+  const dislikePost = () => {
+    GeneralService.dislikePosts(post._id,currentUser.email)
+    .then((data) => {
+      setPostLikes(prevLikes => prevLikes - 1);
+      setLike(false);
+    })
+    .catch((error) => {
+      console.log(error.response.data.message);
+    });
   }
 
   return (
     <div key={index}>
       <div id="foroBody" className={styles.bodyContainer}>
-        <div className={styles.mainContent} onClick={() => {
-          //console.log(post);
-          //handleShow();
-        }}>
+        <div className={styles.mainContent} onClick={handleShow}>
           <h4>{post.title}</h4>
           <div className={styles.infoPost}>
             <h5>
@@ -69,13 +90,18 @@ export function ForoBody({ post, index, currentUser}) {
             <span> ·</span>
             <h6>Publicado el {post.date} </h6>
           </div>
-          <p>{convertURLsToLinks(post.content)}</p> 
+          <div className={styles.contentContainer}>
+            <p onClick={(e => e.stopPropagation())}>{convertURLsToLinks(post.content)}</p> 
+          </div>
           <div className={styles.reactionContent} >
             <div className={styles.commentIcon} onClick={handleShow}>
-              <FontAwesomeIcon icon={faComment} />
+              <FontAwesomeIcon icon={faPaperPlane} />
               <span>{postComments}</span>
             </div>
-            <div className={`${styles.heartIcon} ${like ? styles.heartCliked : ''}`} onClick={handleLike}>
+            <div className={`${styles.heartIcon} ${like ? styles.heartCliked : ''}`} onClick={(e) => {
+                e.stopPropagation();
+                debouncedClick()
+              }}>
               <FontAwesomeIcon className={styles.heartIcon} icon={faHeart} />
               <span>{postLikes}</span>
             </div>

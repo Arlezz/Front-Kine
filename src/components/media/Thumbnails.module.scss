@@ -4,6 +4,11 @@
     flex-direction: column;
     gap: 1rem;
 
+    &:hover {
+        background-color: var(--component-color-hover-alt);
+        cursor: pointer;
+    }
+
     img {
         border-radius: 1rem;
         width: 100%;
@@ -21,12 +26,9 @@
 
 .miniatureGrid {
     border: .1rem solid #E5E5E5;
+    height: 100%;
 }
 
-.thumbnail:hover {
-    background-color: #E5E5E5;
-    cursor: pointer;
-}
 
 hr {
     border: .1rem solid #E5E5E5;

@@ -3,54 +3,70 @@ import { useState } from "react";
 import styles from "./CommentBody.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faUser,
-    faUserGear,
-    faUserTie,
-  } from "@fortawesome/free-solid-svg-icons";
+  faUser,
+  faUserGear,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
 
-import {
-    faHeart,
-    faPaperPlane,
-} from "@fortawesome/free-regular-svg-icons";
+import { faHeart, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { useEffect } from "react";
 import GeneralService from "../../services/General.service";
-import { convertURLsToLinks } from '../../utils/parser';
+import { convertURLsToLinks } from "../../utils/parser";
+import useDebounce from "../../components/useDebounce";
 
+export function CommentBody({
+  response,
+  currentUser,
+  setHasResponsed,
+  setResponsed,
+}) {
+  const [like, setLike] = useState(false);
+  const [commentLikes, setCommentLikes] = useState(response.likes);
 
-export function CommentBody({ response, currentUser, setHasResponsed, setResponsed}) {
-
-    const [like, setLike] = useState(false);
-    const [commentLikes, setCommentLikes] = useState(response.likes);
-    //const [commentComments, setPostComments] = useState(response.comments);
-
-
-    useEffect(() => {
-      //console.log("RESPONSE ",response);
-      //console.log("CURRENT USER ",currentUser);
-        GeneralService.hasLikedComments(response._id,currentUser.email)
-        .then((data) => {
-          //console.log("HAS LIKED ",data.hasLiked);
-            setLike(data.hasLiked);
-        })
-        .catch((error) => {
-            console.log(error.response.data.message);
-        });
-    },[]);
-
-
-    const handleLike = () => {
-      setLike(!like);
-      GeneralService.likeComments(response._id,currentUser.email)
+  useEffect(() => {
+    GeneralService.hasLikedComments(response._id, currentUser.email)
       .then((data) => {
-        setCommentLikes(prevLikes => prevLikes + 1);
+        setCommentLikes(response.likes);
+        setLike(data.hasLiked);
       })
       .catch((error) => {
         console.log(error.response.data.message);
-        GeneralService.dislikeComments(response._id,currentUser.email);
-        setCommentLikes(prevLikes => prevLikes - 1);
-      }); 
-    }
+      });
+  }, []);
 
+  const handleLike = () => {
+    if (!like) {
+      likeComent();
+    } else {
+      dislikeComent();
+    }
+  };
+
+  const debouncedClick = useDebounce(() => {
+    handleLike();
+  }, 300);
+
+  const likeComent = () => {
+    GeneralService.likeComments(response._id, currentUser.email)
+      .then((data) => {
+        setCommentLikes((prevLikes) => prevLikes + 1);
+        setLike(true);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  };
+
+  const dislikeComent = () => {
+    GeneralService.dislikeComments(response._id, currentUser.email)
+      .then((data) => {
+        setCommentLikes((prevLikes) => prevLikes - 1);
+        setLike(false);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
+  };
 
   return (
     <div className={styles.response}>
@@ -99,7 +115,14 @@ export function CommentBody({ response, currentUser, setHasResponsed, setRespons
           <span> ·</span>
           <h6>Publicado el {response.date} </h6>
         </div>
-        <span>{convertURLsToLinks(response.content)}</span>
+        <span>
+          {response.response.length > 0 ? (
+            <a>{"@" + response.response[0].name} </a>
+          ) : (
+            ""
+          )}
+          {convertURLsToLinks(response.content)}
+        </span>
       </div>
 
       <div className={styles.reactionContent}>
@@ -115,11 +138,13 @@ export function CommentBody({ response, currentUser, setHasResponsed, setRespons
             >
               <FontAwesomeIcon icon={faPaperPlane} />
             </div>
-            <div className={`${styles.heartIcon} ${like ? styles.heartCliked : ''}`} onClick={handleLike}>
-              <FontAwesomeIcon
-                className={styles.heartIcon}
-                icon={faHeart}
-              />
+            <div
+              className={`${styles.heartIcon} ${
+                like ? styles.heartCliked : ""
+              }`}
+              onClick={debouncedClick}
+            >
+              <FontAwesomeIcon className={styles.heartIcon} icon={faHeart} />
               <span>{commentLikes}</span>
             </div>
           </>

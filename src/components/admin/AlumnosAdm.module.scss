@@ -1,0 +1,23 @@
+.actions {
+    display: flex;
+    
+
+    .edit {
+        background-color: #fff;
+        color: #000;
+        border: 0;
+        padding: .5rem 1rem;
+        margin-right: 1rem;
+        border-radius: .5rem;
+        cursor: pointer;
+    }
+
+    .delete {
+        background-color: #fff;
+        color: #000;
+        border: 0;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+        cursor: pointer;
+    }
+  }

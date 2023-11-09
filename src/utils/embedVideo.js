@@ -5,5 +5,5 @@ export function embeddedURL(url) {
 export function embeddedURLThumbnail(url) {
     url = url.replace("www", "img");
     url = url.replace("watch?v=", "vi/");
-    return url+"/maxresdefault.jpg";
+    return url+"/mqdefault.jpg";
 }

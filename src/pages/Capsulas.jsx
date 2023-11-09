@@ -6,23 +6,37 @@ import { MainVideoCard } from "../components/media/MainVideoCard";
 import { Thumbnails } from "../components/media/Thumbnails";
 
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import GeneralService from "../services/General.service";
+import { useEffect } from "react";
+import { Spinner } from "../components/Spinner";
 
 export function Capsulas() {
 
 
-    const [selectedVideo, setSelectedVideo] = useState(arrayVideosObject[0]);
-    const [videosToDisplay, setVideosToDisplay] = useState(arrayVideosObject.slice(0, 20));
+    const [capsules, setCapsules] = useState([]); // [{}
+    const [selectedVideo, setSelectedVideo] = useState(capsules[0]);
+    const [videosToDisplay, setVideosToDisplay] = useState(capsules.slice(0, 10));
     const [hasMore, setHasMore] = useState(true);
     const [isDescriptionExpanded, setDescriptionExpanded] = useState(false);
     const [descriptionHeight, setDescriptionHeight] = useState(null);
-
 
     const handleThumbnailClick = (video) => {
         setSelectedVideo(video);
         setDescriptionExpanded(false); // Resetear a estado no expandido al cambiar el video
         setDescriptionHeight(null);
     };
+
+    useEffect(() => {
+        GeneralService.getCapsules().
+        then((data) => {            
+            setCapsules(data);
+            setSelectedVideo(data[0]);
+            setVideosToDisplay(data.slice(0, 10));
+            if (data.length < 10) {
+                setHasMore(false);
+            }
+        })
+    }, []);
 
     const toggleDescription = () => {
         setDescriptionExpanded(!isDescriptionExpanded);
@@ -43,8 +57,9 @@ export function Capsulas() {
 
     const fetchMoreData = () => {
         const visibleVideos = videosToDisplay.length;
-        const newVideosToDisplay = arrayVideosObject.slice(visibleVideos, visibleVideos + 2);
-
+        const newVideosToDisplay = capsules.slice(visibleVideos, visibleVideos + 2);
+        console.log(newVideosToDisplay);
+        
         if (newVideosToDisplay.length === 0) {
             setHasMore(false);
         } else {
@@ -60,7 +75,6 @@ export function Capsulas() {
             <div className={styles.capsulaBody}>
                 <div className={styles.capsulaVideoMain}>
                     <MainVideoCard video={selectedVideo} isDescriptionExpanded={isDescriptionExpanded} toggleDescription={toggleDescription}/>
-
                 </div>
                 <div className={styles.capsulaVideosRight}>
                     <InfiniteScroll
@@ -68,10 +82,12 @@ export function Capsulas() {
                         next={fetchMoreData}
                         hasMore={hasMore}
                         height={descriptionHeight || 700} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
-                        loader={<h4>Loading...</h4>}
+                        loader={<Spinner/>}
+                        endMessage={<h4 className={styles.noMoreCapsules}>No hay mas capsulas</h4>}
                     >
                         <div className={styles.thumbnailGrid}>
                             {videosToDisplay.map((video, index) => (
+                                //console.log(video),
                                 <Thumbnails key={index} video={video} handleThumbnailClick={handleThumbnailClick} index={index} grid="true"/>
                             ))}
                         </div>

@@ -1,5 +1,6 @@
 .gameCardContainer {
     background: var(--primary-color-game);
+    text-decoration: none;
     //background: #c9e9ff;
     padding: 2rem;
     border-radius: 1rem;
@@ -46,6 +47,6 @@
 }
 
 .gameCardContainer:hover {
-    background-color: #91d2ff;
+    background-color: #91c4ff;
     cursor: pointer;
 }

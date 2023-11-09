@@ -25,7 +25,7 @@ export function Login({ handleLogin, handleForgotPass }) {
 
   return (
     <div className={styles.loginContent}>
-      <h1 className={styles.pageTitle}>Kine Hub</h1>
+      <h1 className={styles.pageTitle}>Kineverso</h1>
 
       <Formik
         initialValues={{

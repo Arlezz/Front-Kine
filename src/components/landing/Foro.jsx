@@ -36,7 +36,7 @@ export function Foro() {
     const [newPost, setNewPost] = useState(null);	
     const [noResponses, setNoResponses] = useState(false); // Si no hay respuestas, se muestra un mensaje
 
-    const items = ["Actual", "Antiguo", "Más Likes", "Menos Likes", "Más Comentarios", "Menos Comentarios"];
+    const items = ["Reciente", "Antiguo", "Más Likes", "Menos Likes", "Más Comentarios", "Menos Comentarios"];
     const icons = [faCalendar, faCalendar, faThumbsUp, faThumbsUp, faComment, faComment];
     const filters = ["date", "date", "likes", "likes", "comments", "comments"];
     const orders = ["desc", "asc", "desc", "asc", "desc", "asc"];

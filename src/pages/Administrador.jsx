@@ -4,6 +4,10 @@ import styles from "./Administrador.module.scss";
 
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { AlumnosAdm } from "../components/admin/AlumnosAdm";
+import { ProfesoresAdm } from "../components/admin/ProfesoresAdm";
+import { MultimediaAdm } from "../components/admin/MultimediaAdm";
+import { Historial } from "../components/admin/Historial";
 
 
 export function Administrador() {
@@ -18,92 +22,29 @@ export function Administrador() {
         activeKey={key}
         onSelect={(k) => setKey(k)}
         className=""
+        transition={false}
       >
         <Tab eventKey="profile" title="Administrar Usuarios">
           <div>
-            Acá se podran visualizar los Alumnos
+            <AlumnosAdm/>
           </div>
         </Tab>
         <Tab eventKey="identity" title="Administrar Profesores">
           <div>
-            Acá se podrán visualizar los Profesores
+            <ProfesoresAdm/>
           </div>
         </Tab>
         <Tab eventKey="security" title="Administrar Multimedia">
           <div>
-            Acá se podrán administrar los videos
+            <MultimediaAdm/>
           </div>
         </Tab>
         <Tab eventKey="stream" title="Historial de modificaciones">
           <div>
-            Acá se podrán visualizar los cambios realizados (Admin)
+            <Historial/>
           </div>
         </Tab>
       </Tabs>
-      {/*
-      
-      
-      <h1 className={styles.pageTitle}>Administrador</h1>
-      <div className={styles.administradorContainer}>
-        <div className={styles.administradorLeft}>
-          <h2 className={styles.administradorLeftTitle}>Usuarios</h2>
-          <div className={styles.administradorLeftContainer}>
-            <div className={styles.administradorLeftCard}>
-              <h3 className={styles.administradorLeftCardTitle}>Usuarios</h3>
-              <span className={styles.administradorLeftCardText}>
-                Administre los usuarios de la plataforma
-              </span>
-              <button className={styles.administradorLeftCardButton}>
-                Administrar
-              </button>
-            </div>
-            <div className={styles.administradorLeftCard}>
-              <h3 className={styles.administradorLeftCardTitle}>
-                Administradores
-              </h3>
-              <span className={styles.administradorLeftCardText}>
-                Administre los administradores de la plataforma
-              </span>
-              <button className={styles.administradorLeftCardButton}>
-                Administrar
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className={styles.administradorRight}>
-          <h2 className={styles.administradorRightTitle}>Contenido</h2>
-          <div className={styles.administradorRightContainer}>
-            <div className={styles.administradorRightCard}>
-              <h3 className={styles.administradorRightCardTitle}>Tutoriales</h3>
-              <span className={styles.administradorRightCardText}>
-                Administre los tutoriales de la plataforma
-              </span>
-              <button className={styles.administradorRightCardButton}>
-                Administrar
-              </button>
-            </div>
-            <div className={styles.administradorRightCard}>
-              <h3 className={styles.administradorRightCardTitle}>Capsulas</h3>
-              <span className={styles.administradorRightCardText}>
-                Administre las capsulas de la plataforma
-              </span>
-              <button className={styles.administradorRightCardButton}>
-                Administrar
-              </button>
-            </div>
-            <div className={styles.administradorRightCard}>
-              <h3 className={styles.administradorRightCardTitle}>Juegos</h3>
-              <span className={styles.administradorRightCardText}>
-                Administre los juegos de la plataforma
-              </span>
-              <button className={styles.administradorRightCardButton}>
-                Administrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      */}
     </div>
   );
 }

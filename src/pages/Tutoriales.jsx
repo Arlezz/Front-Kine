@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from './Tutoriales.module.scss';
-import { arrayVideosObject } from "../utils/data";
+import { tutorials } from "../utils/data";
 import { MainVideoCard } from "../components/media/MainVideoCard";
 
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Thumbnails } from "../components/media/Thumbnails";
+import GeneralService from "../services/General.service";
 
 
 export function Tutoriales() {
 
 
-    const [selectedVideo, setSelectedVideo] = useState(arrayVideosObject[0]);
-    const [videosToDisplay, setVideosToDisplay] = useState(arrayVideosObject.slice(0, 10));
+
+    const [tutorials, setTutorials] = useState([]); // [{}
+    const [selectedVideo, setSelectedVideo] = useState(tutorials[0]);
+    const [videosToDisplay, setVideosToDisplay] = useState(tutorials.slice(0, 10));
     const [hasMore, setHasMore] = useState(true);
     const [isDescriptionExpanded, setDescriptionExpanded] = useState(false);
     const [descriptionHeight, setDescriptionHeight] = useState(null);
@@ -24,9 +27,21 @@ export function Tutoriales() {
         setDescriptionHeight(null);
     };
 
+    useEffect(() => {
+        GeneralService.getTutorials().
+        then((data) => {
+            setTutorials(data);
+            setSelectedVideo(data[0]);
+            setVideosToDisplay(data.slice(0, 10));
+            if (data.length < 10) {
+                setHasMore(false);
+            }
+        })
+    }, []);
+
     const fetchMoreData = () => {
         const visibleVideos = videosToDisplay.length;
-        const newVideosToDisplay = arrayVideosObject.slice(visibleVideos, visibleVideos + 1);
+        const newVideosToDisplay = tutorials.slice(visibleVideos, visibleVideos + 1);
 
         if (newVideosToDisplay.length === 0) {
         setHasMore(false);
@@ -64,6 +79,11 @@ export function Tutoriales() {
                     hasMore={hasMore}
                     height={descriptionHeight || 700} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
                     loader={<h4>Loading...</h4>}
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                        <b>No hay tutoriales para mostrar</b>
+                        </p>
+                    }
                 >
                     {videosToDisplay.map((video, index) => (
                         <div key={index}>

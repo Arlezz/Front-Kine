@@ -13,6 +13,19 @@ const searchGame = (gameName) => {
     return get(`/search/game/?query=${gameName}`);
 }
 
+const getTutorials = () => {
+    return get("tutorials");
+}
+
+const getCapsules = () => {
+    return get("capsules");
+}
+
+const getGames = () => {
+    return get("games");
+}
+
+
 const getPosts = (type,order,pageNumber,batch) => {
     return get(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}`);
 }
@@ -35,8 +48,18 @@ const uploadPost = (email,title,content) => {
     });
 }
 
-const uploadComment = (postId,email,content) => {
-    return post("comments", {
+const uploadComment = (postId,email,content,inResponse) => {
+    return post(`comments`, {
+        postId,
+        email,
+        content
+    }).then((response) => {
+        return response;
+    });
+}
+
+const responseComment = (postId,email,content,inResponse) => {
+    return post(`comments?inResponse=${inResponse}`, {
         postId,
         email,
         content
@@ -94,6 +117,13 @@ const hasLikedComments = (commentId,email) => {
     });
 }
 
+const getAlumnos = () => {
+    return get("users/roles/estudiante");
+}
+
+const getProfesores = () => {
+    return get("users/roles/profesor");
+}
 
 
 
@@ -102,8 +132,17 @@ const GeneralService = {
     searchCapsule,
     searchGame,
 
+    getTutorials,
+    getCapsules,
+    getGames,
+    getAlumnos,
+    getProfesores,
+    getPosts,
+    getPostsComments,
+
     uploadPost,
     uploadComment,
+    responseComment,
     likePosts,
     likeComments,
     dislikePosts,
@@ -111,8 +150,7 @@ const GeneralService = {
     
     hasLikedPost,
     hasLikedComments,
-    getPosts,
-    getPostsComments,
+    
 };
 
 export default GeneralService;

@@ -9,7 +9,6 @@ export function get(url) {
 }
 
 export function post(url, data) {
-    console.log(API + url);
     return axios.post(API + url, data)
         .then(response => response.data);
 }

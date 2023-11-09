@@ -66,17 +66,21 @@ export function ForoResponseModal({
     }
   };
 
-  const fetchData = async () => {
+  const fetchData = () => {
     setIsLoading(true);
-    try {
-      const response = await GeneralService.getPostsComments(post._id);
-      setResponses(response);
-      setResponseToDisplay(response.slice(0, 4));
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    setResponseToDisplay([]);
+    GeneralService.getPostsComments(post._id)
+      .then((response) => {
+        setResponses(response);
+        setResponseToDisplay(response.slice(0, 4))
+      }
+      )
+      .catch((error) => {
+        console.log(error.response.data.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const handleResponse = (values, resetForm) => {
@@ -100,8 +104,18 @@ export function ForoResponseModal({
       return;
     }
     console.log("RESPONDIENDO A ",responsed.user.name);
-    resetForm();
-    setHasResponsed(!hasResponsed);
+    GeneralService.responseComment(post._id, currentUser.email, values.response, responsed._id)
+    .then((data) => {
+      setChanges(!changes);
+      setHasResponsed(false);
+      setHasMore(true);
+      setResponseToDisplay([]);
+      setResponsed({});
+      //setPostComments((prevComments) => prevComments + 1);
+      resetForm();
+      console.log("RESPUESTA ENVIADA al comentario ", responsed._id);
+    }
+    );
   };
 
   const handleClose = () => {

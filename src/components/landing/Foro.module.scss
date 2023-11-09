@@ -39,12 +39,7 @@
       font-size: 1.5rem;
   
       &:hover {
-        background-color: rgba(
-          23,
-          101,
-          149,
-          0.226
-        ); /* Cambia el color de fondo del botón al pasar el cursor sobre él */
+        background-color: var(--filter-color-hover) //rgba(0, 157, 255, 0.226); /* Cambia el color de fondo del botón al pasar el cursor sobre él */
       }
   
       .dropdownButton {
@@ -63,7 +58,7 @@
         align-items: center; // Centra verticalmente el contenido
     
         &:hover {
-          cursor: pointer;
+          //cursor: pointer;
           background-color: #ebecec; // Cambia el fondo al hacer hover
         }
 

@@ -24,6 +24,11 @@
         overflow-y: auto;
         width: 40%;
 
+        .noMoreCapsules {
+          text-align: center;
+          margin: 0;
+          padding: 2rem;
+        }
 
         .thumbnailGrid {
           display: grid;
