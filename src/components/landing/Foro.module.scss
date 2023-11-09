@@ -1,20 +1,22 @@
 .sideForo {
   grid-area: sidebar;
   background: white;
-  //width: var(--sidebar-width);
   height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
   box-sizing: border-box !important;
   overflow: hidden;
-  padding: 3rem 6rem 2rem 2rem;
+  padding: 3rem 2rem;
+
+  @media (min-width: 768px) {
+    padding: 3rem 6rem 2rem 2rem; // Restaura el padding original en pantallas más grandes
+  }
 
   .foroHeader {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-
 
     .tiitle {
       font-family: "Inter";
@@ -31,60 +33,58 @@
       align-items: center;
       gap: 1rem;
       background: transparent;
-      color: var(--primary-color); /* Cambia el color del texto del botón */
-      border: 1px solid var(--primary-color); /* Cambia el color del borde del botón */
-      border-radius: 0.5rem; /* Agrega bordes redondeados al botón */
-      padding: 0.5rem 1rem; /* Ajusta el espaciado interno del botón */
-      font-weight: 500; /* Cambia el peso de la fuente del botón */
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
       font-size: 1.5rem;
-  
+
       &:hover {
-        background-color: var(--filter-color-hover) //rgba(0, 157, 255, 0.226); /* Cambia el color de fondo del botón al pasar el cursor sobre él */
+        background-color: rgba(
+          23,
+          101,
+          149,
+          0.226
+        ); /* Cambia el color de fondo del botón al pasar el cursor sobre él */
       }
-  
+
       .dropdownButton {
         font-size: 1.2rem;
       }
     }
-  
+
     .dropdownMenu {
       padding: 1rem;
       border-radius: 0.6rem;
-    
+
       .dropdownItem {
         font-size: 1.5rem;
         border-radius: 0.3rem;
         display: flex;
-        align-items: center; // Centra verticalmente el contenido
-    
+        align-items: center;
+
         &:hover {
-          //cursor: pointer;
+          cursor: pointer;
           background-color: #ebecec; // Cambia el fondo al hacer hover
         }
 
-        
-
-
-    
         .customLabel {
           font-size: 16px;
-          margin-left: 0.5rem; // Agrega espacio entre el icono y el texto
+          margin-left: 0.5rem;
         }
-    
+
         .icon {
-          font-size: 1.2rem; // Ajusta el tamaño de los íconos
-          margin-right: 0.5rem; // Agrega espacio a la derecha del ícono
+          font-size: 1.2rem;
+          margin-right: 0.5rem;
         }
       }
 
       .selectedOption {
-        background-color: #ebecec; // Color de fondo para la opción seleccionada
-        color: #000000; // Color de texto para la opción seleccionada
+        background-color: #ebecec;
+        color: #000000;
       }
-      
     }
-    
-
   }
 
   .sideSubtitle {
@@ -94,30 +94,34 @@
     font-size: 1.5rem;
     margin: 0;
     color: #000000;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+    min-height: 2rem; /* Establece una altura mínima para evitar que los elementos se desplacen hacia abajo */
   }
 
-  
-
+  @media (max-width: 768px) {
+    .sideSubtitle {
+      font-size: 1.2rem;
+    }
+  }
 
   .sideForoBox {
-    flex: 1; /* Se expandirá para llenar el espacio disponible */
+    flex: 1;
     border: 1px solid #e5e5e5;
     background: #ffffff;
     margin-bottom: 1rem;
     border-radius: 0.5rem;
-    display: flex; /* Agrega esta propiedad para que los elementos internos ocupen todo el espacio */
-    flex-direction: column; /* Asegura que los elementos internos fluyan verticalmente */
+    display: flex;
+    flex-direction: column;
+
+    .textHelper {
+      text-align: center;
+      font-weight: 600;
+      padding: 2rem;
+    }
   }
 
   .infinite-scroll-component {
-    flex: 1; /* Hace que InfiniteScroll ocupe todo el espacio vertical disponible en sideForoBox */
-    overflow: auto; /* Si es necesario, agrega desplazamiento vertical */
-  }
-
-  @media screen and (max-width: 600px) {
-    .sideForo {
-      //display: none;
-    }
+    flex: 1;
+    overflow: auto;
   }
 }
