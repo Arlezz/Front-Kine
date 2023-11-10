@@ -21,7 +21,7 @@
     --component-color-hover-alt: #e5e5e585;
     --reaction-message-color: #1d9bf0;
     --reaction-heart-color: #f4177d;
-    --navbar-height: 6rem;
+    --navbar-height: 7rem;
     --content-width: 75%;
 }
 
@@ -105,15 +105,66 @@ select:-webkit-autofill:focus {
 }
 
 
-/*.modal-content { 
-    border-radius: 0;
-    width: auto;
+.modal-content { 
+    border: 0;
+
+    .modal-header {
+        border: 0;
+
+        .h4 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000000;
+        
+        }
+    }
+
+    .modal-body {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #000000;
+    }
+    
+    .modal-footer {
+        border: 0;
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: 0;
+            border-radius: 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: var(--secondary-color);
+            }
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: 0;
+            border-radius: 0.5rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: #ff4d64;
+            }
+        }
+
+    }
 }
 
 .modal-dialog{
-    display: flex;
-    justify-content: center;
-}*/
+    //display: flex;
+    //justify-content: center;
+}
 
 
 

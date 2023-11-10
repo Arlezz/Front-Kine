@@ -16,6 +16,7 @@
     "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
+    "react-bootstrap-confirmation": "^1.0.4",
     "react-bootstrap-multiselect": "^2.4.1",
     "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",

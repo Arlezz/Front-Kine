@@ -4,9 +4,9 @@ import styles from "./Administrador.module.scss";
 
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { AlumnosAdm } from "../components/admin/AlumnosAdm";
-import { ProfesoresAdm } from "../components/admin/ProfesoresAdm";
-import { MultimediaAdm } from "../components/admin/MultimediaAdm";
+import { AlumnosAdm } from "../components/admin/Alumnos/AlumnosAdm";
+import { ProfesoresAdm } from "../components/admin/Profesores/ProfesoresAdm";
+import { MultimediaAdm } from "../components/admin/Multimedia/MultimediaAdm";
 import { Historial } from "../components/admin/Historial";
 
 

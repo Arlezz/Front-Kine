@@ -95,7 +95,7 @@ export function ForoBody({ post, index, currentUser}) {
           </div>
           <div className={styles.reactionContent} >
             <div className={styles.commentIcon} onClick={handleShow}>
-              <FontAwesomeIcon icon={faPaperPlane} />
+              <FontAwesomeIcon icon={faComment} />
               <span>{postComments}</span>
             </div>
             <div className={`${styles.heartIcon} ${like ? styles.heartCliked : ''}`} onClick={(e) => {

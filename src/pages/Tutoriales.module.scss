@@ -12,7 +12,7 @@
     .tutorialBody {
       display: flex;
       flex-direction: row;
-      border: .2rem solid #E5E5E5;
+      //border: .2rem solid #E5E5E5;
       border-radius: 1rem;
       box-shadow: 0 0 1rem 0 #E5E5E5;
       background: #ffffff;
@@ -20,7 +20,7 @@
       .tutorialVideosLeft {
         display: flex;
         flex-direction: column;
-        border-right: .2rem solid #E5E5E5;
+        border-right: .1rem solid #E5E5E5;
         overflow-y: auto;
       }
   

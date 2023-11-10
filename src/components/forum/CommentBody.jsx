@@ -23,7 +23,9 @@ export function CommentBody({
   const [like, setLike] = useState(false);
   const [commentLikes, setCommentLikes] = useState(response.likes);
 
+  
   useEffect(() => {
+    
     GeneralService.hasLikedComments(response._id, currentUser.email)
       .then((data) => {
         setCommentLikes(response.likes);
@@ -72,7 +74,7 @@ export function CommentBody({
     <div className={styles.response}>
       <div className={styles.responseHeader}>
         <div className={styles.infoResponse}>
-          <h5>{response.user ? response.user.name : ""}</h5>
+          <h5>{response.user ? response.user.name : "Undefined"}</h5>
           <div className={styles.icon}>
             {response.user && (
               <div className={styles.iconContainer}>
@@ -109,11 +111,26 @@ export function CommentBody({
                     icon={faUserTie}
                   />
                 )}
+                
+
+              </div>
+            )}
+            {!response.user && (
+              <div className={styles.iconContainer}>
+                <FontAwesomeIcon
+                  style={{
+                    color: "#777777",
+                    width: "1.4rem",
+                    height: "1.4rem",
+                  }}
+                  className={styles.professorIcon}
+                  icon={faUser}
+                />
               </div>
             )}
           </div>
           <span> ·</span>
-          <h6>Publicado el {response.date} </h6>
+          <h6>Publicado el {response ? response.date : "Undefined"} </h6>
         </div>
         <span>
           {response.response.length > 0 ? (
@@ -126,7 +143,7 @@ export function CommentBody({
       </div>
 
       <div className={styles.reactionContent}>
-        {response.user.email !== currentUser.email && (
+        {response.user?.email && response.user.email !== currentUser.email && (
           <>
             <div
               className={styles.commentIcon}

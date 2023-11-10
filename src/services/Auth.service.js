@@ -3,14 +3,6 @@ import { post } from '../utils/httpClient';
 const API_URL = process.env.REACT_APP_API_URL;
 
 
-const register = (userName, userEmail, userRut) => {
-    return post(API_URL + "signup", {
-        userName,
-        userEmail,
-        userRut
-    });
-};
-
 const login = (email, password) => {
     return post("signin", {
             email,
@@ -21,6 +13,18 @@ const login = (email, password) => {
             return response;
         });
 };
+
+const register = (email, name, role) => {
+    return post("signup", {
+            email,
+            name,
+            role
+        })
+        .then((response) => {
+            return response;
+        });
+};
+
 
 const recovery = (email) => {
     return post(API_URL + "recover", {

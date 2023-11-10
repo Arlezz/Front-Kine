@@ -48,8 +48,8 @@ export function NavBar(){
                 <div className={styles.left}>
                     <Link to="/">
                             <div className={styles.logoBox}>
-                                <h1 className={styles.index}>Kineverso</h1>
-                                <span>Red de aprendizaje estudiantil</span>
+                                <h1 className={styles.index}>KINEVERSO</h1>
+                                <span>Red de aprendizaje digital kinesiologia ULS</span>
                             </div>
                     </Link>
                     <div>

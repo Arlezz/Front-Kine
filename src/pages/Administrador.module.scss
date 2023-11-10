@@ -1,5 +1,7 @@
 .administradorContent {
   padding: 3rem 10rem;
+  max-height: 100%;
+  overflow-y: auto;
 
   .tittle {
     font-family: "Inter";
