@@ -1,25 +1,24 @@
 import { useEffect, useState, useMemo } from "react";
 
-import styles from "./TutorialesAdm.module.scss";
+import styles from "./CapsulasAdm.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { confirm } from "react-bootstrap-confirmation";
 import GeneralService from "../../../../services/General.service";
 import { TableDatas } from "../../../TableDatas";
-import { TutorialesAddModal } from "./TutorialesAddModal";
+import { CapsulasAddModal } from "./CapsulasAddModal";
 
-export function TutorialesAdm() {
+export function CapsulasAdm() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [updateTutorial, setUpdateTutorial] = useState(false);
-  const [addTutorial, setAddTutorial] = useState(false);
-  const [showNuevoTutorialModal, setShowNuevoTutorialModal] = useState(false);
+  const [updateCapsula, setUpdateCapsula] = useState(false);
+  const [addCapsula, setAddCapsula] = useState(false);
+  const [showNuevaCapsulaModal, setShowNuevoCapsulaModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
 
-
-  const handleAddTutorialModal = () => {
-    setShowNuevoTutorialModal(!showNuevoTutorialModal);
+  const handleAddCapsulalModal = () => {
+    setShowNuevoCapsulaModal(!showNuevaCapsulaModal);
   };
 
   const handleCellClick = (row) => {
@@ -27,17 +26,18 @@ export function TutorialesAdm() {
   };
 
   const onUpdateTutorial = () => {
-    setUpdateTutorial(!updateTutorial);
+    setUpdateCapsula(!updateCapsula);
   };
 
-  const onAddTutorial = () => {
-    setAddTutorial(!addTutorial);
+  const onAddCapsula = () => {
+    setAddCapsula(!addCapsula);
   };
 
 
   useEffect(() => {
-    GeneralService.getTutorials()
+    GeneralService.getCapsules()
       .then((res) => {
+        console.log(res);
         setData(res);
       })
       .catch((err) => {
@@ -46,10 +46,10 @@ export function TutorialesAdm() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [updateTutorial, addTutorial]);
+  }, [updateCapsula, addCapsula]);
 
-  const deleteTutorial = (tutorialId) => {
-    GeneralService.deleteTutorial(tutorialId)
+  const deleteCapsule = (capsuleId) => {
+    GeneralService.deleteCapsule(capsuleId)
       .then((res) => {
         console.log(res);
         onUpdateTutorial();
@@ -60,7 +60,7 @@ export function TutorialesAdm() {
   };
 
   const AlertButton = async (row) => {
-    const result = await confirm("Está seguro de eliminar el Tutorial?", {
+    const result = await confirm("Está seguro de eliminar la Capsula?", {
       title: "Confirmación",
       okButtonStyle: "danger",
       cancelButtonStyle: "primary",
@@ -69,7 +69,7 @@ export function TutorialesAdm() {
     });
 
     if (result) {
-      deleteTutorial(row._id);
+      deleteCapsule(row._id);
       return;
     }
     return;
@@ -109,14 +109,12 @@ export function TutorialesAdm() {
       name: "Dueño",
       selector: (row) => row.user.name,
       sortable: true,
-      //maxWidth: "500px",
       wrap: true,
     },
     {
       name: "Rol",
       selector: (row) => row.user.role,
       sortable: true,
-      //maxWidth: "500px",
       wrap: true,
     },
     {
@@ -140,15 +138,15 @@ export function TutorialesAdm() {
 
   const addAlumno = useMemo(() => {
     return (
-      <button className={styles.add} onClick={handleAddTutorialModal}>
-        <span>Agregar Tutorial</span>
+      <button className={styles.add} onClick={handleAddCapsulalModal}>
+        <span>Agregar Capsula</span>
       </button>
     );
   }, []);
 
   return (
     <>
-      <h2>Mis Tutoriales</h2>
+      <h2>Mis Capsulas</h2>
       <TableDatas
         data={data}
         isLoading={isLoading}
@@ -156,7 +154,7 @@ export function TutorialesAdm() {
         actions={addAlumno}
       />
 
-      <TutorialesAddModal show={showNuevoTutorialModal} handleShow={handleAddTutorialModal} onAddTutorial={onAddTutorial} />
+      <CapsulasAddModal show={showNuevaCapsulaModal} handleShow={handleAddCapsulalModal} onAddCapsula={onAddCapsula} />
     </>
   );
 }

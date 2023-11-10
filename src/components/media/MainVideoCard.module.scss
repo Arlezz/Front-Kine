@@ -19,6 +19,17 @@ iframe {
     overflow-wrap: break-word; /* Permite que las palabras largas se dividan si superan el ancho del contenedor */
     max-width: 100%; /* Establece un ancho máximo */
     word-wrap: break-word;  /* Agrega barras de desplazamiento si el contenido supera el ancho */
+    white-space: pre-line;
+
+    a {
+        color: #1E90FF;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    
 
     .videoDescription:hover {
     background: #000;

@@ -5,6 +5,8 @@ import Tabs from "react-bootstrap/Tabs";
 
 import styles from './MultimediaAdm.module.scss';
 import { TutorialesAdm } from "./Tutoriales/TutorialesAdm";
+import { CapsulasAdm } from "./Capsulas/CapsulasAdm";
+import { JuegosAdm } from "./Juegos/JuegosAdm";
 
 
 export function MultimediaAdm() {
@@ -27,12 +29,12 @@ export function MultimediaAdm() {
           </Tab>
           <Tab eventKey="capsulas" title="Administrar Capsulas">
             <div>
-              capsulas
+              <CapsulasAdm/>
             </div>
           </Tab>
           <Tab eventKey="juegos" title="Administrar juegos">
             <div>
-              juegos
+              <JuegosAdm/>
             </div>
           </Tab>
         </Tabs>

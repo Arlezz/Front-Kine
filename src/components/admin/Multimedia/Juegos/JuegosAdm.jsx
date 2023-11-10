@@ -1,42 +1,41 @@
-import { useEffect, useState, useMemo } from "react";
+// JuegosAdm.jsx
 
-import styles from "./TutorialesAdm.module.scss";
-
+import React, { useEffect, useState, useMemo } from "react";
+import styles from "./JuegosAdm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { confirm } from "react-bootstrap-confirmation";
 import GeneralService from "../../../../services/General.service";
 import { TableDatas } from "../../../TableDatas";
-import { TutorialesAddModal } from "./TutorialesAddModal";
+import { JuegosAddModal } from "./JuegosAddModal";
 
-export function TutorialesAdm() {
+export function JuegosAdm() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [updateTutorial, setUpdateTutorial] = useState(false);
-  const [addTutorial, setAddTutorial] = useState(false);
-  const [showNuevoTutorialModal, setShowNuevoTutorialModal] = useState(false);
+  const [updateJuego, setUpdateJuego] = useState(false);
+  const [addJuego, setAddJuego] = useState(false);
+  const [showNuevoJuegoModal, setShowNuevoJuegoModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
 
-
-  const handleAddTutorialModal = () => {
-    setShowNuevoTutorialModal(!showNuevoTutorialModal);
+  const handleAddJuegoModal = () => {
+    setShowNuevoJuegoModal(!showNuevoJuegoModal);
   };
 
   const handleCellClick = (row) => {
     window.open(row.url, "_blank");
   };
 
-  const onUpdateTutorial = () => {
-    setUpdateTutorial(!updateTutorial);
+  const onUpdateJuego = () => {
+    setUpdateJuego(!updateJuego);
   };
 
-  const onAddTutorial = () => {
-    setAddTutorial(!addTutorial);
+  const onAddJuego = () => {
+    setAddJuego(!addJuego);
   };
 
 
   useEffect(() => {
-    GeneralService.getTutorials()
+    GeneralService.getGames()
       .then((res) => {
         setData(res);
       })
@@ -46,13 +45,13 @@ export function TutorialesAdm() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [updateTutorial, addTutorial]);
+  }, [updateJuego, addJuego]);
 
-  const deleteTutorial = (tutorialId) => {
-    GeneralService.deleteTutorial(tutorialId)
+  const deleteGame = (juegoId) => {
+    GeneralService.deleteGame (juegoId)
       .then((res) => {
         console.log(res);
-        onUpdateTutorial();
+        onUpdateJuego();
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +59,7 @@ export function TutorialesAdm() {
   };
 
   const AlertButton = async (row) => {
-    const result = await confirm("Está seguro de eliminar el Tutorial?", {
+    const result = await confirm("¿Está seguro de eliminar el Juego?", {
       title: "Confirmación",
       okButtonStyle: "danger",
       cancelButtonStyle: "primary",
@@ -69,7 +68,7 @@ export function TutorialesAdm() {
     });
 
     if (result) {
-      deleteTutorial(row._id);
+      deleteGame(row._id);
       return;
     }
     return;
@@ -83,20 +82,20 @@ export function TutorialesAdm() {
       wrap: true,
     },
     {
-      name: "Descripcion",
+      name: "Descripción",
       selector: (row) => row.description,
       sortable: true,
       maxWidth: "500px",
     },
     {
-      name: "Url",
+      name: "URL",
       selector: (row) => (
         <div
           onClick={() => handleCellClick(row)}
-          onMouseEnter={() => setHoveredRow(row._id)}
+          onMouseEnter={() => setHoveredRow(row.id)}
           onMouseLeave={() => setHoveredRow(null)}
           style={{
-            color: hoveredRow === row._id ? "#2e81e4" : "#000",
+            color: hoveredRow === row.id ? "#2e81e4" : "#000",
           }}
         >
           {row.url}
@@ -109,19 +108,17 @@ export function TutorialesAdm() {
       name: "Dueño",
       selector: (row) => row.user.name,
       sortable: true,
-      //maxWidth: "500px",
       wrap: true,
     },
     {
       name: "Rol",
       selector: (row) => row.user.role,
       sortable: true,
-      //maxWidth: "500px",
       wrap: true,
     },
     {
       name: "Acciones",
-      selector: (row) => row._id,
+      selector: (row) => row.id,
       center: true,
       cell: (row) => (
         <div className={styles.actions}>
@@ -138,25 +135,29 @@ export function TutorialesAdm() {
     },
   ];
 
-  const addAlumno = useMemo(() => {
+  const addJuegoButton = useMemo(() => {
     return (
-      <button className={styles.add} onClick={handleAddTutorialModal}>
-        <span>Agregar Tutorial</span>
+      <button className={styles.add} onClick={handleAddJuegoModal}>
+        <span>Agregar Juego</span>
       </button>
     );
   }, []);
 
   return (
     <>
-      <h2>Mis Tutoriales</h2>
+      <h2>Mis Juegos</h2>
       <TableDatas
         data={data}
         isLoading={isLoading}
         columns={columns}
-        actions={addAlumno}
+        actions={addJuegoButton}
       />
 
-      <TutorialesAddModal show={showNuevoTutorialModal} handleShow={handleAddTutorialModal} onAddTutorial={onAddTutorial} />
+      <JuegosAddModal
+        show={showNuevoJuegoModal}
+        handleShow={handleAddJuegoModal}
+        onAddJuego={onAddJuego}
+      />
     </>
   );
 }

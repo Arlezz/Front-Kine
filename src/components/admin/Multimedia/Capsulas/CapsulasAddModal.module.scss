@@ -1,0 +1,111 @@
+/* CapsulasAddModal.module.scss */
+
+.nuevaCapsulaModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 3rem;
+}
+
+.closeButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  .closeButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+    border: solid 1px #f4177d;
+    border-radius: 0.5rem;
+    padding: 0.1rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      color: #f4177d;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.modalEditTitle {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 2rem;
+}
+
+.inputsFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.inputsFields button {
+  height: 4rem;
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.formLabel {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+.formInput {
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 4rem;
+  outline: none;
+  border: 1px solid #E5E5E5;
+  border-radius: 0.5rem;
+  padding: 1rem 1rem;
+
+  &:focus {
+    border: 1px solid #2ec5ce;
+  }
+}
+
+.editUserButton {
+  width: 100%;
+  height: 4rem;
+  background: var(--primary-color);
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--secondary-color);
+  }
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.errorText {
+  color: #df4545;
+  font-size: 1.2rem;
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  /* Agrega estilos específicos para pantallas más pequeñas si es necesario */
+}

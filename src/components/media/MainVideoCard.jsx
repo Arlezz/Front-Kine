@@ -1,4 +1,5 @@
 import { embeddedURL} from "../../utils/embedVideo";
+import { convertURLsToLinks } from "../../utils/parser";
 
 import styles from './MainVideoCard.module.scss';
 
@@ -23,7 +24,7 @@ export function MainVideoCard( { video, isDescriptionExpanded, toggleDescription
                         {video.title}
                     </h3>
                     <div className={styles.videoDescription}>
-                        {isDescriptionExpanded ? video.description : video.description.slice(0, 200)}
+                        {isDescriptionExpanded ? convertURLsToLinks(video.description) : convertURLsToLinks(video.description.slice(0, 200))}
                         {video.description.length > 200 && !isDescriptionExpanded && (
                             <span onClick={toggleDescription} className={styles.readMore}>
                                 ...Mostrar más

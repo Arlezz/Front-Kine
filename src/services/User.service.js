@@ -9,6 +9,17 @@ const updateUserName = (email,name) => {
     });
 }
 
+const updateUserPassword = (email,oldPassword,password) => {
+    return put(`users/${email}`,{
+        oldPassword,
+        password
+    }).then((response) => {
+        return response;
+    });
+
+
+}
+
 const deleteUser = (email) => {
     return del(`users/${email}`)
     .then((response) => {
@@ -19,6 +30,7 @@ const deleteUser = (email) => {
 
 const UserService = {
     updateUserName,
+    updateUserPassword,
     deleteUser
 };
 

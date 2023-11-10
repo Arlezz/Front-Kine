@@ -1,4 +1,4 @@
-import { get, post } from '../utils/httpClient';
+import { get, post, del } from '../utils/httpClient';
 
 
 const searchTutorial = (tutorialName) => {
@@ -17,12 +17,24 @@ const getTutorials = () => {
     return get("tutorials");
 }
 
+const deleteTutorial = (id) => {
+    return del(`tutorials/${id}`);
+}
+
 const getCapsules = () => {
     return get("capsules");
 }
 
+const deleteCapsule = (id) => {
+    return del(`capsules/${id}`);
+}
+
 const getGames = () => {
     return get("games");
+}
+
+const deleteGame = (id) => {
+    return del(`games/${id}`);
 }
 
 
@@ -125,6 +137,35 @@ const getProfesores = () => {
     return get("users/roles/profesor");
 }
 
+const uploadTutorials = (email,url) => {
+    return post("tutorials", {
+        email,
+        url,
+    }).then((response) => {
+        return response;
+    });
+}
+
+const uploadCapsules = (email,url) => {
+    return post("capsules", {
+        email,
+        url,
+    }).then((response) => {
+        return response;
+    });
+}
+
+const uploadGames = (email,url,title,description) => {
+    return post("games", {
+        email,
+        url,
+        title,
+        description
+    }).then((response) => {
+        return response;
+    });
+}
+
 
 
 const GeneralService = {
@@ -132,6 +173,9 @@ const GeneralService = {
     searchCapsule,
     searchGame,
 
+    uploadTutorials,
+    uploadCapsules,
+    uploadGames,
     getTutorials,
     getCapsules,
     getGames,
@@ -139,6 +183,10 @@ const GeneralService = {
     getProfesores,
     getPosts,
     getPostsComments,
+
+    deleteTutorial,
+    deleteCapsule,
+    deleteGame,
 
     uploadPost,
     uploadComment,

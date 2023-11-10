@@ -49,7 +49,6 @@ export function App() {
   return (
     <Router>
       {isLoggedIn && <NavBar />}
-      {/* Renderiza NavBar solo si el usuario está autenticado */}
       <div className={isLoggedIn ? styles.appContainer : null}>
         <Routes>
           <Route

@@ -5,7 +5,7 @@ import styles from './AlumnosAdm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { AlumnosEditModal } from './AlumnosEditModal'; // Importa el componente de edición
-import {alert, confirm} from 'react-bootstrap-confirmation';
+import { confirm } from 'react-bootstrap-confirmation';
 import { AlumnosAddModal } from './AlumnosAddModal';
 import UserService from '../../../services/User.service';
 
@@ -74,14 +74,12 @@ export function AlumnosAdm() {
             name: 'Nombre',
             selector: (row) => row.name,
             sortable: true,
-            center: true,
 
         },
         {
             name: 'Correo',
             selector: (row) => row.email,
             sortable: true,
-            center: true,
 
         },
         {
@@ -93,7 +91,7 @@ export function AlumnosAdm() {
         {
             name: 'Acciones',
             selector: (row) => row._id,
-            right: true,
+            center: true,
             cell: (row) => (
                 <div className={styles.actions}>
                     <button

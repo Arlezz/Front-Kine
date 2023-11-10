@@ -1,3 +1,168 @@
+// En tu archivo ProfileSetting.module.scss
+
 .profileContainer {
-    padding: 3rem 10rem;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 3rem;
+  border-radius: 8px;
+  background-color: #fff;
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  .profileInfoItem {
+    margin-bottom: 15px;
+
+    .profileInfoLabel {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .profileInfoText {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  }
+}
+
+.profileResetPassword {
+  margin-top: 20px;
+
+  .resetPasswordButton {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+}
+
+// Estilos para el formulario de cambio de contraseña
+.passwordForm {
+  display: flex;
+  flex-direction: column;
+
+  .changePasswordForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+
+    .changePasswordInputContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .formLabel {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #000000;
+      }
+
+      .changePasswordInput {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: 0.3s;
+
+        &:focus {
+          border: 1px solid var(--primary-color);
+        }
+      }
+
+      .errorText {
+        color: #df4545;
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+        font-weight: 500;
+      }
+    }
+
+    .forgotContainer {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .changePasswordword {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #777;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        color: var(--primary-color);
+
+        &:hover {
+          color: var(--secondary-color);
+        }
+      }
+    }
+
+    .buttonSection {
+        display: flex;
+        gap: 2rem;
+    
+        .cancelButton {
+          background-color: #f41b1b;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+    
+          &:hover {
+            background-color: #fc8080;
+          }
+        }
+    
+        button {
+          margin-top: 15px;
+          background-color: var(--primary-color);
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+    
+          &:hover {
+            background-color: var(--secondary-color);
+          }
+        }
+      }
+  }
+
+  
+}
+
+// Agrega estilos responsivos según sea necesario
+@media (max-width: 768px) {
+  .profileContainer {
+    max-width: 100%;
+  }
+
+  .profileInfo {
+    grid-template-columns: 1fr;
+  }
 }
