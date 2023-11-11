@@ -7,7 +7,7 @@ import Tabs from "react-bootstrap/Tabs";
 import { AlumnosAdm } from "../components/admin/Alumnos/AlumnosAdm";
 import { ProfesoresAdm } from "../components/admin/Profesores/ProfesoresAdm";
 import { MultimediaAdm } from "../components/admin/Multimedia/MultimediaAdm";
-import { Historial } from "../components/admin/Historial";
+import { Historial } from "../components/admin/Historial/HistorialAdm";
 
 
 export function Administrador() {

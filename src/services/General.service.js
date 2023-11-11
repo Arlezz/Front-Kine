@@ -166,6 +166,9 @@ const uploadGames = (email,url,title,description) => {
     });
 }
 
+const getHistorial = () => {
+    return get("history");
+}
 
 
 const GeneralService = {
@@ -183,6 +186,7 @@ const GeneralService = {
     getProfesores,
     getPosts,
     getPostsComments,
+    getHistorial,
 
     deleteTutorial,
     deleteCapsule,

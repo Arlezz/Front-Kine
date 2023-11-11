@@ -1,0 +1,131 @@
+/* HistorialAdm.module.scss */
+
+/* ... Otros estilos ... */
+
+/* Estilos para el contenido del modal */
+
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.5rem;
+    padding: 2rem 3rem 3rem 3rem;
+  }
+
+.closeButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  .closeButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+    border: solid 1px #f4177d;
+    border-radius: 0.5rem;
+    padding: 0.1rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      color: #f4177d;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.modal-body {
+  font-size: 1.6rem; /* Ajusta el tamaño de la fuente según sea necesario */
+}
+
+/* Estilos adicionales para el contenido del modal */
+.referenceDetails {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+    padding-bottom: 2rem;
+  }
+
+  label {
+    font-size: 1.6rem; /* Ajusta el tamaño de la fuente para las etiquetas */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 1rem; /* Ajustado para hacerlo más grande */
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    font-size: 1.6rem; /* Ajusta el tamaño de la fuente para los campos de entrada y áreas de texto */
+    color: #333;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+  }
+
+  .buttonCloseDetails {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1.6rem; /* Ajusta el tamaño de la fuente para los botones */
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--secondary-color);
+    }
+  }
+}
+
+/* ... Otros estilos ... */
+
+/* Estilos adicionales para botones de acción en la tabla, si es necesario */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+
+  .view,
+  .delete {
+    color: #fff;
+    border: none;
+    //padding: 1rem 2rem; /* Ajustado para hacerlo más grande */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 2.2rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .view {
+    background-color: #ffa800;
+
+    &:hover {
+      background-color: #ffc04d;
+    }
+  }
+
+  .delete {
+    background-color: #ff391b;
+
+    &:hover {
+      background-color: #ff654d;
+    }
+  }
+}
