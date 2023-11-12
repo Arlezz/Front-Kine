@@ -127,6 +127,24 @@ export function NavBar({ toggleForoVisibility, foroVisible }) {
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Divider />
+                <div className={styles.foroLink}>
+                  <Dropdown.Item
+                    as={Link}
+                    className={styles.dropdownLink}
+                    onClick={toggleForoVisibility}
+                    to="/"
+                  >
+                    <div className={styles.dropdownItem}>
+                      <FontAwesomeIcon
+                        icon={faComments}
+                        className={styles.dropdownOptionIcon}
+                      />
+                      <span>Foro</span>
+                    </div>
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                </div>
+                
                 {currentUser &&
                   currentUser.role &&
                   currentUser.role.includes("admin") && (
@@ -142,21 +160,6 @@ export function NavBar({ toggleForoVisibility, foroVisible }) {
                             className={styles.dropdownOptionIcon}
                           />
                           <span>Adminmistrador</span>
-                        </div>
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item
-                        as={Link}
-                        className={styles.dropdownLink}
-                        onClick={toggleForoVisibility}
-                        to="/"
-                      >
-                        <div className={styles.dropdownItem}>
-                          <FontAwesomeIcon
-                            icon={faComments}
-                            className={styles.dropdownOptionIcon}
-                          />
-                          <span>Foro</span>
                         </div>
                       </Dropdown.Item>
                       <Dropdown.Divider />

@@ -116,7 +116,6 @@
         border-radius: 0.6rem;
         z-index: 3; // Asegura que esté por encima de otros elementos
 
-
         .dropdownAdmin {
           display: none;
         }
@@ -140,6 +139,11 @@
               background-color: #ebecec; // Cambia el fondo al hacer hover
             }
           }
+
+          
+        }
+        .foroLink {
+          display: none;
         }
       }
     }
@@ -150,7 +154,7 @@
   .navContainer {
     padding: 0rem 4rem;
     .left {
-      gap: 0;
+      gap: 1rem;
 
       .linkMain {
         .logoBox {
@@ -242,7 +246,11 @@
           .dropdownAdmin {
             display: contents;
           }
+          .foroLink {
+            display: contents;
+          }
         }
+        
       }
     }
   }
@@ -290,14 +298,12 @@
           margin: 0;
 
           .index {
-            font-size: 2rem;
+            font-size: 3rem;
           }
 
           .slogan {
             text-align: center;
-            font-size: 0.8rem;
-            text-wrap: wrap;
-            white-space: normal;
+            font-size: 1rem;
           }
         }
       }
@@ -313,6 +319,12 @@
         .dropdownButon {
           span {
             display: none;
+          }
+
+          button {
+            svg {
+              height: 3rem !important;
+            }
           }
         }
       }

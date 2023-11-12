@@ -8,7 +8,7 @@ import { TableDatas } from "../../TableDatas";
 import { Modal, Button } from "react-bootstrap";
 import GeneralService from "../../../services/General.service";
 
-export function Historial() {
+export function Historial({updateTutorial, updateCapsula, updateJuego}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +26,7 @@ export function Historial() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [updateTutorial, updateCapsula, updateJuego]);
 
   /*const AlertButton = async (row) => {
     const result = await confirm("¿Está seguro de eliminar este registro?", {
@@ -107,7 +107,7 @@ export function Historial() {
   return (
     <>
       <h2>Historial</h2>
-      <TableDatas data={data} isLoading={isLoading} columns={columns} />
+      <TableDatas data={data} isLoading={isLoading} columns={columns} defaultSortField={2} />
 
       {/* Modal para mostrar la información de la referencia */}
 

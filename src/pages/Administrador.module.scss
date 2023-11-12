@@ -33,3 +33,45 @@
     }    
   }
 }
+
+
+@media screen and (max-width: 1440px) {
+
+}
+
+@media screen and (max-width: 1366px) {
+  .administradorContent {
+    padding: 3rem 5rem;
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+  
+  .administradorContent {
+    ul {
+      li {
+        padding-right: 3rem;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .administradorContent {
+    padding: 2rem 2rem;
+    ul {
+      li {
+        padding-right: 2rem;
+
+        button { 
+          border: solid 0.1rem var(--primary-color) !important;
+          padding: .8rem;
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+  }
+}

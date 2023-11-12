@@ -8,11 +8,15 @@ import { confirm } from "react-bootstrap-confirmation";
 import GeneralService from "../../../../services/General.service";
 import { TableDatas } from "../../../TableDatas";
 import { CapsulasAddModal } from "./CapsulasAddModal";
+import AuthService from "../../../../services/Auth.service";
 
-export function CapsulasAdm() {
+export function CapsulasAdm({
+  updateCapsula,
+  onUpdateCapsula
+}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [updateCapsula, setUpdateCapsula] = useState(false);
+  //const [updateCapsula, setUpdateCapsula] = useState(false);
   const [addCapsula, setAddCapsula] = useState(false);
   const [showNuevaCapsulaModal, setShowNuevoCapsulaModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -25,12 +29,10 @@ export function CapsulasAdm() {
     window.open(row.url, "_blank");
   };
 
-  const onUpdateTutorial = () => {
-    setUpdateCapsula(!updateCapsula);
-  };
 
   const onAddCapsula = () => {
     setAddCapsula(!addCapsula);
+    onUpdateCapsula()
   };
 
 
@@ -49,10 +51,12 @@ export function CapsulasAdm() {
   }, [updateCapsula, addCapsula]);
 
   const deleteCapsule = (capsuleId) => {
-    GeneralService.deleteCapsule(capsuleId)
+    const user = AuthService.getCurrentUser();
+
+    GeneralService.deleteCapsule(capsuleId, user.email)
       .then((res) => {
-        console.log(res);
-        onUpdateTutorial();
+        console.log("TAMARE ",res);
+        onUpdateCapsula();
       })
       .catch((err) => {
         console.log(err);

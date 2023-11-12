@@ -12,7 +12,24 @@ import { Historial } from "../components/admin/Historial/HistorialAdm";
 
 
 export function Administrador({setForoVisible}) {
-    const [key, setKey] = useState("profile");
+    const [key, setKey] = useState("alumnos");
+
+    const [updateTutorial, setUpdateTutorial] = useState(false);
+    const [updateJuego, setUpdateJuego] = useState(false);
+    const [updateCapsula, setUpdateCapsula] = useState(false);
+
+
+    const onUpdateTutorial = () => {
+        setUpdateTutorial(!updateTutorial);
+    }
+
+    const onUpdateJuego = () => {
+        setUpdateJuego(!updateJuego);
+    }
+
+    const onUpdateCapsula = () => {
+        setUpdateCapsula(!updateCapsula);
+    }
 
     useEffect(() => {
 
@@ -30,24 +47,35 @@ export function Administrador({setForoVisible}) {
         className=""
         transition={false}
       >
-        <Tab eventKey="profile" title="Administrar Usuarios">
+        <Tab eventKey="alumnos" title="Administrar Alumnos">
           <div>
             <AlumnosAdm/>
           </div>
         </Tab>
-        <Tab eventKey="identity" title="Administrar Profesores">
+        <Tab eventKey="profesores" title="Administrar Profesores">
           <div>
             <ProfesoresAdm/>
           </div>
         </Tab>
-        <Tab eventKey="security" title="Administrar Multimedia">
+        <Tab eventKey="multimedia" title="Administrar Multimedia">
           <div>
-            <MultimediaAdm/>
+            <MultimediaAdm 
+            updateTutorial={updateTutorial} 
+            onUpdateTutorial={onUpdateTutorial}
+            updateJuego={updateJuego}
+            onUpdateJuego={onUpdateJuego}
+            updateCapsula={updateCapsula}
+            onUpdateCapsula={onUpdateCapsula}
+            />
           </div>
         </Tab>
-        <Tab eventKey="stream" title="Historial de modificaciones">
+        <Tab eventKey="historial" title="Historial de modificaciones">
           <div>
-            <Historial/>
+            <Historial 
+            updateTutorial={updateTutorial}
+            updateJuego={updateJuego}
+            updateCapsula={updateCapsula}
+            />
           </div>
         </Tab>
       </Tabs>

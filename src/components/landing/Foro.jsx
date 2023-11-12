@@ -16,7 +16,7 @@ import AuthService from '../../services/Auth.service';
 import { Empty } from '../Empty';
 
 
-export function Foro() {
+export function Foro({ toggleForoVisibility }) {
     const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
         const user = AuthService.getCurrentUser();
@@ -117,7 +117,13 @@ export function Foro() {
     return (
         <aside className={styles.sideForo}>
             <div className={styles.sideForoHeader}>
+                <div className={styles.closeButtonContainer}>
+                    <button className={styles.closeButton} onClick={toggleForoVisibility}>
+                        Volver
+                    </button>
+                </div>
                 <div className={styles.foroHeader}>
+                    
                     <h2 className={styles.tiitle}>Foro</h2>
                     <Dropdown 
                     autoClose="outside" 
@@ -149,7 +155,7 @@ export function Foro() {
                 </div>
                 <h3 className={styles.sideSubtitle}>Escribe cualquier duda o consulta que tengas</h3>
             </div>
-            <div className={styles.sideForoBox}>
+            <div id='foroBox' className={styles.sideForoBox}>
             {noResponses ? (
               <Empty /> // Render the "empty" component when there are no responses
             ) : (

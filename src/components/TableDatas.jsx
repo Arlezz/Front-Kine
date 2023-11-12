@@ -4,7 +4,7 @@ import styles from './TableDatas.module.scss';
 import { Spinner } from '../components/Spinner';
 
 
-export function TableDatas({ columns, data, isLoading, actions }) {
+export function TableDatas({ columns, data, isLoading, actions, defaultSortField }) {
     
     
 
@@ -18,7 +18,8 @@ export function TableDatas({ columns, data, isLoading, actions }) {
             responsive
             progressPending={isLoading}
             progressComponent={<Spinner />}
-            defaultSortFieldId={1} 
+            defaultSortFieldId={defaultSortField? defaultSortField : 1  } 
+            defaultSortAsc={false}
             actions={actions} 
         />
     )

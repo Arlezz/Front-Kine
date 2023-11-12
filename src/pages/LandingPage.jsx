@@ -24,7 +24,7 @@ export function LandingPage({ foroVisible, toggleForoVisibility }) {
         </div>
       </section>
       <div className={`${styles.foroSection} ${foroVisible ? styles.foroVisible : ""}`}>
-        <Foro className={styles.foro} />
+        <Foro toggleForoVisibility={toggleForoVisibility} className={styles.foro} />
       </div>
     </div>
   );

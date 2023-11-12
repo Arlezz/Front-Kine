@@ -9,11 +9,30 @@
   overflow: hidden;
   padding: 3rem 2rem;
   
+  .sideForoHeader {
+    .closeButtonContainer {
+      display: none;
+      padding-bottom: 2rem;
+
+    
+      .closeButton {
+        background: var(--primary-color);
+        border: none;
+        border-radius: 0.5rem;
+        outline: none;
+        color: #fff;
+        padding: .5rem 1rem;
+        cursor: pointer;
+      }
+    }
+  }
 
   .foroHeader {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
+
+  
 
     .tiitle {
       font-family: "Inter";
@@ -60,6 +79,7 @@
         border-radius: 0.3rem;
         display: flex;
         align-items: center;
+        padding: .4rem;
 
         &:hover {
           cursor: pointer;
@@ -74,6 +94,7 @@
         .icon {
           font-size: 1.2rem;
           margin-right: 0.5rem;
+          padding-left: .5rem;
         }
       }
 
@@ -136,10 +157,20 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .sideForo{
+    .sideForoHeader {
+      .closeButtonContainer {
+        display: flex;
+      }
+    }
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   
   .sideForo {
-    padding: 3rem 2rem; // Restaura el padding original en pantallas más grandes
+    padding: 2rem 2rem; // Restaura el padding original en pantallas más grandes
   }
 }

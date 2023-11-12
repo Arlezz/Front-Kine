@@ -8,11 +8,15 @@ import { confirm } from "react-bootstrap-confirmation";
 import GeneralService from "../../../../services/General.service";
 import { TableDatas } from "../../../TableDatas";
 import { JuegosAddModal } from "./JuegosAddModal";
+import AuthService from "../../../../services/Auth.service";
 
-export function JuegosAdm() {
+export function JuegosAdm({
+  updateJuego,
+  onUpdateJuego
+}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [updateJuego, setUpdateJuego] = useState(false);
+  //const [updateJuego, setUpdateJuego] = useState(false);
   const [addJuego, setAddJuego] = useState(false);
   const [showNuevoJuegoModal, setShowNuevoJuegoModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
@@ -25,12 +29,10 @@ export function JuegosAdm() {
     window.open(row.url, "_blank");
   };
 
-  const onUpdateJuego = () => {
-    setUpdateJuego(!updateJuego);
-  };
 
   const onAddJuego = () => {
     setAddJuego(!addJuego);
+    onUpdateJuego()
   };
 
 
@@ -48,7 +50,9 @@ export function JuegosAdm() {
   }, [updateJuego, addJuego]);
 
   const deleteGame = (juegoId) => {
-    GeneralService.deleteGame (juegoId)
+    const user = AuthService.getCurrentUser();
+
+    GeneralService.deleteGame (juegoId,user.email)
       .then((res) => {
         console.log(res);
         onUpdateJuego();

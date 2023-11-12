@@ -8,15 +8,19 @@ import { confirm } from "react-bootstrap-confirmation";
 import GeneralService from "../../../../services/General.service";
 import { TableDatas } from "../../../TableDatas";
 import { TutorialesAddModal } from "./TutorialesAddModal";
+import AuthService from "../../../../services/Auth.service";
 
-export function TutorialesAdm() {
+export function TutorialesAdm({
+  updateTutorial,
+  onUpdateTutorial
+
+}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [updateTutorial, setUpdateTutorial] = useState(false);
+  //const [updateTutorial, setUpdateTutorial] = useState(false);
   const [addTutorial, setAddTutorial] = useState(false);
   const [showNuevoTutorialModal, setShowNuevoTutorialModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
-
 
   const handleAddTutorialModal = () => {
     setShowNuevoTutorialModal(!showNuevoTutorialModal);
@@ -26,12 +30,10 @@ export function TutorialesAdm() {
     window.open(row.url, "_blank");
   };
 
-  const onUpdateTutorial = () => {
-    setUpdateTutorial(!updateTutorial);
-  };
 
   const onAddTutorial = () => {
     setAddTutorial(!addTutorial);
+    onUpdateTutorial()
   };
 
 
@@ -49,7 +51,10 @@ export function TutorialesAdm() {
   }, [updateTutorial, addTutorial]);
 
   const deleteTutorial = (tutorialId) => {
-    GeneralService.deleteTutorial(tutorialId)
+
+    const user = AuthService.getCurrentUser();
+
+    GeneralService.deleteTutorial(tutorialId, user.email)
       .then((res) => {
         console.log(res);
         onUpdateTutorial();

@@ -17,24 +17,24 @@ const getTutorials = () => {
     return get("tutorials");
 }
 
-const deleteTutorial = (id) => {
-    return del(`tutorials/${id}`);
+const deleteTutorial = (id,email) => {
+    return del(`tutorials/${id}/${email}`);
 }
 
 const getCapsules = () => {
     return get("capsules");
 }
 
-const deleteCapsule = (id) => {
-    return del(`capsules/${id}`);
+const deleteCapsule = (id,email) => {
+    return del(`capsules/${id}/${email}`);
 }
 
 const getGames = () => {
     return get("games");
 }
 
-const deleteGame = (id) => {
-    return del(`games/${id}`);
+const deleteGame = (id,email) => {
+    return del(`games/${id}/${email}`);
 }
 
 
@@ -170,10 +170,15 @@ const getHistorial = () => {
     return get("history");
 }
 
+const searchContent = (contentName) => {
+    return get(`browse?q=${contentName}`);
+}
+
 
 const GeneralService = {
     searchTutorial,
     searchCapsule,
+    searchContent,
     searchGame,
 
     uploadTutorials,

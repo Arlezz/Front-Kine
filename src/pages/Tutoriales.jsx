@@ -91,7 +91,7 @@ export function Tutoriales() {
                 >
                     <div className={styles.scrollHorizontal}>
                         {videosToDisplay.map((video, index) => (
-                            <div className={styles.thumbailContainer} key={index}>
+                            <div id={video._id}  className={styles.thumbailContainer} key={index}>
                                 <Thumbnails  video={video} handleThumbnailClick={handleThumbnailClick} index={index}/>
                                 <hr />
                             </div>

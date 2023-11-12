@@ -18,8 +18,8 @@ export function Login({ handleLogin, handleForgotPass }) {
       })
       .catch((error) => {
         setSessionError(true);
-        setTextSesionError(error);
-        //console.log(error.response.data.message);
+        setTextSesionError(error.response.data.message);
+        console.log(error.response.data.message);
       });
   };
 
