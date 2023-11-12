@@ -6,48 +6,51 @@
   height: var(--navbar-height);
 }
 .navContainer {
-    //grid-area: navbar;
+  //grid-area: navbar;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary-color);
+  padding: 0 6rem;
+  gap: 5rem;
+
+  .left {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: var(--primary-color);
-    padding: 0 6rem;
-    gap: 5rem;
-  
-    .left, .right {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-    }
-  
-    .right {
-      margin-right: 0;
-    }
-  
-    .logoBox {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      //gap: 1rem;
-      margin-right: 2rem;
+    gap: 3rem;
 
-      h1 {
-        font-family: "Inter";
-        font-weight: 700;
-        font-size: 3rem;
-        color: #fff;
-        margin: 0;
-      }
+    .linkMain {
+      text-decoration: none;
 
-      span {
-        font-family: "Inter";
-        font-size: 1.2rem;
-        white-space: nowrap; // Evita que el texto se divida en múltiples líneas
-        //overflow: hidden;   // Recorta el texto si no cabe en el contenedor
-        //text-overflow: ellipsis; // Opcional: muestra "..." cuando el texto se recorta
+      .logoBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        //gap: 1rem;
+        margin-right: 2rem;
+
+        .index {
+          font-family: "Inter";
+          font-weight: 700;
+          font-size: 3rem;
+          color: #fff;
+          margin: 0;
+
+          @media screen and (max-width: 768px) {
+            font-size: 2rem; // Ajusta el tamaño de la fuente para resoluciones menores a 768px
+          }
+        }
+
+        span {
+          font-family: "Inter";
+          font-size: 1.2rem;
+          white-space: nowrap; // Evita que el texto se divida en múltiples líneas
+          //overflow: hidden;   // Recorta el texto si no cabe en el contenedor
+          //text-overflow: ellipsis; // Opcional: muestra "..." cuando el texto se recorta
+        }
       }
     }
-  
+
     a {
       text-decoration: none;
 
@@ -55,111 +58,307 @@
         font-family: "Inter";
         font-weight: 500;
         font-size: 2rem;
-        padding: .5rem;
-        border-radius: .5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
         margin: 0;
         color: #fff;
-    
+
         &:hover {
           background: var(--secondary-color);
         }
       }
     }
+  }
 
-    
-  
-    .dropdownButon {
+  .rigthMQ {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .right {
+      margin-right: 0;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      color: #fff;
-  
-      button {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        background: transparent !important;
-        display: flex;
-        align-items: center;
-      }
-  
-      span {
-        font-family: "Inter";
-        font-weight: 500;
-        font-size: 2rem;
-        padding: .5rem;
-        //font-size: 1.2vw;
-        text-wrap: nowrap;
-      }
-  
-      .dropdownIcon {
-        height: 2rem;
-      }
-    }
-  
-    .dropdownOptions {
-      padding: 1rem;
-      background-color: #ffff;
-      border-radius: 0.6rem;
-    }
-  
-    .dropdownLink {
-      color: #000;
-      
-      .dropdownItem {
+      gap: 3rem;
+
+      .dropdownButon {
         display: flex;
         align-items: center;
         gap: 1rem;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        font-size: 1.5rem;
-        border-radius: 0.3rem;
-        white-space: nowrap; /* Evita que el texto se rompa y ocupe el ancho completo */
-        width: 100%; /* Ocupa el ancho completo del contenedor */
-        
-        &:hover {
-          //cursor: pointer;
-          background-color: #ebecec; // Cambia el fondo al hacer hover
+        color: #fff;
+
+        button {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent !important;
+          display: flex;
+          align-items: center;
+        }
+
+        span {
+          font-family: "Inter";
+          font-weight: 500;
+          font-size: 2rem;
+          padding: 0.5rem;
+          //font-size: 1.2vw;
+          text-wrap: nowrap;
+        }
+
+        .dropdownIcon {
+          height: 2rem;
+        }
+      }
+
+      .dropdownOptions {
+        padding: 1rem;
+        background-color: #ffff;
+        border-radius: 0.6rem;
+        z-index: 3; // Asegura que esté por encima de otros elementos
+
+
+        .dropdownAdmin {
+          display: none;
+        }
+
+        .dropdownLink {
+          color: #000;
+          text-decoration: none;
+
+          .dropdownItem {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 0.3rem;
+            white-space: nowrap; /* Evita que el texto se rompa y ocupe el ancho completo */
+            width: 100%; /* Ocupa el ancho completo del contenedor */
+
+            &:hover {
+              background-color: #ebecec; // Cambia el fondo al hacer hover
+            }
+          }
         }
       }
     }
-  
-    
-  
-    @media screen and (max-width: 500px), screen and (max-width: 700px) {
-      .navContainer {
-        justify-content: space-around;
-        gap: 0;
+  }
+}
+
+@media screen and (max-width: 1680px) {
+  .navContainer {
+    padding: 0rem 4rem;
+    .left {
+      gap: 0;
+
+      .linkMain {
+        .logoBox {
+          .index {
+            font-size: 3rem;
+          }
+          .slogan {
+            text-align: center;
+            font-size: 0.8rem;
+          }
+        }
       }
-  
-      .textNav {
+
+      .linkContent {
+        font-size: 1rem;
+
+        .textNav {
+          font-size: 2rem;
+        }
+      }
+    }
+    .rigthMQ {
+      gap: 2rem;
+      justify-content: space-between;
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .navContainer {
+    padding: 2rem;
+    .left {
+      gap: 1rem;
+
+      .linkMain {
+        .logoBox {
+          .index {
+            font-size: 3rem;
+          }
+          .slogan {
+            text-align: center;
+            font-size: 0.8rem;
+          }
+        }
+      }
+
+      .linkContent {
+        font-size: 1rem;
+
+        .textNav {
+          font-size: 2rem;
+        }
+      }
+    }
+    .rigthMQ {
+      gap: 2rem;
+      justify-content: space-between;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .navContainer {
+    padding: 0rem 2rem;
+    .left {
+      gap: 0;
+
+      .linkMain {
+        .logoBox {
+          .index {
+            font-size: 3rem;
+          }
+
+          .slogan {
+            text-align: center;
+            font-size: 1rem;
+          }
+        }
+      }
+      .linkContent {
         display: none;
       }
-  
-      .left {
-        gap: 0;
-        margin: 0;
-      }
-  
+    }
+    .rigthMQ {
+      gap: 2rem;
+      justify-content: space-between;
       .right {
-        margin-right: 0;
-      }
-    }
-  
-    @media screen and (max-width: 850px) {
-      .userName, .uStream {
-        display: none;
-      }
-    }
-  
-    @media screen and (max-width: 1000px) {
-      .loginText {
-        display: none;
-      }
-  
-      .loginIcon {
-        display: block;
+        .dropdownOptions {
+          .dropdownAdmin {
+            display: contents;
+          }
+        }
       }
     }
   }
-  
+}
+
+@media screen and (max-width: 768px) {
+  .navContainer {
+    padding: 0rem 2rem;
+    gap: 1rem;
+    .left {
+      gap: 0;
+      .linkMain {
+        .logoBox {
+          .index {
+            font-size: 3rem;
+          }
+          .slogan {
+            text-align: center;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .linkContent {
+        display: none;
+      }
+    }
+    .rigthMQ {
+      justify-content: flex-end;
+      gap: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .navContainer {
+    padding: 0rem 2rem;
+    gap: 3rem;
+
+    .left {
+      display: inline;
+
+      .linkMain {
+        .logoBox {
+          margin: 0;
+
+          .index {
+            font-size: 2rem;
+          }
+
+          .slogan {
+            text-align: center;
+            font-size: 0.8rem;
+            text-wrap: wrap;
+            white-space: normal;
+          }
+        }
+      }
+
+      .linkContent {
+        display: none;
+      }
+    }
+    .rigthMQ {
+      justify-content: flex-end;
+      gap: 2rem;
+      .right {
+        .dropdownButon {
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navContainer {
+    padding: 0rem 2rem;
+    gap: 3rem;
+
+    .left {
+      display: inline;
+
+      .linkMain {
+        .logoBox {
+          margin: 0;
+
+          .index {
+            font-size: 2rem;
+          }
+
+          .slogan {
+            text-align: center;
+            font-size: 0.8rem;
+            text-wrap: wrap;
+            white-space: normal;
+          }
+        }
+      }
+
+      .linkContent {
+        display: none;
+      }
+    }
+    .rigthMQ {
+      justify-content: flex-end;
+      gap: 2rem;
+      .right {
+        .dropdownButon {
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,122 +1,187 @@
-
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from "react-router-dom";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useEffect, useState } from 'react';
-import AuthService from '../../services/Auth.service';
+import Dropdown from "react-bootstrap/Dropdown";
+import { useEffect, useState } from "react";
+import AuthService from "../../services/Auth.service";
 
-import styles from './NavBar.module.scss'
+import styles from "./NavBar.module.scss";
 import { Search } from "../search/Search";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faBars,
-    faGear,
-    faRightFromBracket,
+  faBars,
+  faComments,
+  faGears,
+  faAddressCard,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
-export function NavBar(){
+export function NavBar({ toggleForoVisibility, foroVisible }) {
+  const [currentUser, setCurrentUser] = useState({});
 
-    const [currentUser, setCurrentUser] = useState({});
+ 
 
-    useEffect(() => {
-        const user = AuthService.getCurrentUser();
-        console.log("EL USUARIO ES ",user);
+  const closeForo = () => {
+    if (foroVisible) {
+      toggleForoVisibility();
+    }
+  };
 
-        if (user) {
-            setCurrentUser(user);
-        }
-    },[]);
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    console.log("EL USUARIO ES ", user);
 
-    const handleLogout = () => {
-        window.location.reload();
-        AuthService.logout();
-    };
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
 
+  const handleLogout = () => {
+    window.location.reload();
+    AuthService.logout();
+  };
 
-    const scrollToSection = (sectionId) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-
-    return (
-        <>
-            <nav className={`${styles.navContainer} ${styles.fixedNavBar}`}>
-                <div className={styles.left}>
-                    <Link to="/">
-                            <div className={styles.logoBox}>
-                                <h1 className={styles.index}>KINEVERSO</h1>
-                                <span>Red de aprendizaje digital kinesiologia ULS</span>
-                            </div>
-                    </Link>
-                    <div>
-                        <Link to="/" onClick={() => scrollToSection("tutoriales")}>
-                            <h2 className={styles.textNav}>Tutoriales</h2>
-                        </Link> 
-                    </div>
-                    <div>
-                        <Link to="/" onClick={() => scrollToSection("capsulas")}>
-                            <h2 className={styles.textNav}>Capsulas</h2>
-                        </Link> 
-                    </div>
-                    <div>
-                        <Link to="/" onClick={() => scrollToSection("juegos")}>
-                            <h2 className={styles.textNav}>Juegos</h2>
-                        </Link> 
-                    </div>
-                    {currentUser && currentUser.role && currentUser.role.includes("admin") && (
-                        <div>
-                            <Link to="/admin">
-                                <h2 className={styles.textNav}>Administrador</h2>
-                            </Link> 
+  return (
+    <>
+      <nav className={`${styles.navContainer} ${styles.fixedNavBar}`}>
+        <div className={styles.left}>
+          <Link className={styles.linkMain} to="/" onClick={closeForo}>
+            <div className={styles.logoBox}>
+              <h1 className={styles.index}>KINEVERSO</h1>
+              <span className={styles.slogan}>
+                Red de aprendizaje digital kinesiologia ULS
+              </span>
+            </div>
+          </Link>
+          <div>
+            <Link
+              className={styles.linkContent}
+              to="/"
+              onClick={() => scrollToSection("tutoriales")}
+            >
+              <h2 className={styles.textNav}>Tutoriales</h2>
+            </Link>
+          </div>
+          <div>
+            <Link
+              className={styles.linkContent}
+              to="/"
+              onClick={() => scrollToSection("capsulas")}
+            >
+              <h2 className={styles.textNav}>Capsulas</h2>
+            </Link>
+          </div>
+          <div>
+            <Link
+              className={styles.linkContent}
+              to="/"
+              onClick={() => scrollToSection("juegos")}
+            >
+              <h2 className={styles.textNav}>Juegos</h2>
+            </Link>
+          </div>
+          {currentUser &&
+            currentUser.role &&
+            currentUser.role.includes("admin") && (
+              <div>
+                <Link className={styles.linkContent} to="/admin">
+                  <h2 className={styles.textNav}>Administrador</h2>
+                </Link>
+              </div>
+            )}
+        </div>
+        <div className={styles.rigthMQ}>
+          <Search className={styles.buscador} />
+          <div className={styles.right}>
+            <Dropdown as={ButtonGroup}>
+              <div className={styles.dropdownButon}>
+                <span>
+                  {currentUser ? currentUser.name : <span>usuario</span>}
+                </span>
+                <Dropdown.Toggle>
+                  <FontAwesomeIcon
+                    icon={faBars}
+                    className={styles.dropdownIcon}
+                  />
+                </Dropdown.Toggle>
+              </div>
+              <Dropdown.Menu className={styles.dropdownOptions}>
+                <Dropdown.Item
+                  as={Link}
+                  to="/profile"
+                  className={styles.dropdownLink}
+                >
+                  <div className={styles.dropdownItem}>
+                    <FontAwesomeIcon
+                      icon={faAddressCard}
+                      className={styles.dropdownOptionIcon}
+                    />
+                    <span>Perfil</span>
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                {currentUser &&
+                  currentUser.role &&
+                  currentUser.role.includes("admin") && (
+                    <div className={styles.dropdownAdmin}>
+                      <Dropdown.Item
+                        as={Link}
+                        className={styles.dropdownLink}
+                        to="/admin"
+                      >
+                        <div className={styles.dropdownItem}>
+                          <FontAwesomeIcon
+                            icon={faGears}
+                            className={styles.dropdownOptionIcon}
+                          />
+                          <span>Adminmistrador</span>
                         </div>
-                    )}
-                </div>
-                <Search/>
-                <div className={styles.right}>
-                    <Dropdown as={ButtonGroup}>
-                        <div className={styles.dropdownButon}>
-                            <span onClick={() => {
-                                console.log(currentUser)
-                            }}>
-                               {currentUser? currentUser.name : <span>usuario</span>}
-                            </span>
-                            <Dropdown.Toggle id="dropdown-basic">
-                                <FontAwesomeIcon
-                                    icon={faBars}
-                                    className={styles.dropdownIcon}/>
-                            </Dropdown.Toggle>
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item
+                        as={Link}
+                        className={styles.dropdownLink}
+                        onClick={toggleForoVisibility}
+                        to="/"
+                      >
+                        <div className={styles.dropdownItem}>
+                          <FontAwesomeIcon
+                            icon={faComments}
+                            className={styles.dropdownOptionIcon}
+                          />
+                          <span>Foro</span>
                         </div>
-                        <Dropdown.Menu className={styles.dropdownOptions}>
-                            <Link className={styles.dropdownLink} to="/profile">
-                                <div className={styles.dropdownItem}>
-                                    <FontAwesomeIcon
-                                        icon={faGear}
-                                        className={styles.dropdownOptionIcon}
-                                    />
-                                    <span>Perfil</span>
-                                </div>
-                            </Link>
-                            <Dropdown.Divider />
-                            <Link className={styles.dropdownLink} to="/">
-                                <div className={styles.dropdownItem} onClick={()=> {
-                                    handleLogout();
-                                }}>
-                                    <FontAwesomeIcon
-                                        icon={faRightFromBracket}
-                                        className={styles.dropdownOptionIcon}
-                                    />
-                                    <span>Cerrar Sesión</span>
-                                </div>
-                            </Link>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                      </Dropdown.Item>
+                      <Dropdown.Divider />
+                    </div>
+                  )}
 
-                </div>
-            </nav>
-        </>
-    )
-} 
+                <Dropdown.Item as={Link} className={styles.dropdownLink}>
+                  <div
+                    className={styles.dropdownItem}
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faRightFromBracket}
+                      className={styles.dropdownOptionIcon}
+                    />
+                    <span>Cerrar Sesión</span>
+                  </div>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+}

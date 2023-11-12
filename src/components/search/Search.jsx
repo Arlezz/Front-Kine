@@ -6,7 +6,7 @@ import { FaSearch } from 'react-icons/fa';
 export function Search() {
     return (
         <>
-            <form className={styles.searchContainer}>
+            <div className={styles.searchContainer}>
                 <input 
                     id='search'
                     className={styles.searchInput} 
@@ -18,10 +18,10 @@ export function Search() {
                 />
                 <button 
                     className={styles.searchButton}
-                    type='submit'>
+                    >
                     <FaSearch className={styles.icon} />
                 </button>
-            </form>
+            </div>
         </>
     )
 }

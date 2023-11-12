@@ -20,6 +20,18 @@ export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [foroVisible, setForoVisible] = useState(false);
+
+  const toggleForoVisibility = () => {
+    setForoVisible(!foroVisible);
+  };
+
+
+  /*useEffect(() => {
+    if(foroVisible) {
+      setForoVisible(false)
+    }
+  }, []);*/
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -48,14 +60,14 @@ export function App() {
 
   return (
     <Router>
-      {isLoggedIn && <NavBar />}
+      {isLoggedIn && <NavBar toggleForoVisibility={toggleForoVisibility} foroVisible={foroVisible}/>}
       <div className={isLoggedIn ? styles.appContainer : null}>
         <Routes>
           <Route
             path="/"
             element={
               isLoggedIn ? (
-                <LandingPage />
+                <LandingPage setForoVisible={setForoVisible} foroVisible={foroVisible} toggleForoVisibility={toggleForoVisibility}/>
               ) : (
                 <Credentials handleLogin={handleLogin} />
               )
@@ -65,14 +77,14 @@ export function App() {
             path="/admin"
             element={
               isLoggedIn && isAdmin ? (
-                <Administrador />
+                <Administrador setForoVisible={setForoVisible}/>
               ) : (
                 <Navigate to="/" replace />
               )
             }
           />
 
-          <Route path="/profile" element={<ProfileSetting />} />
+          <Route path="/profile" element={<ProfileSetting setForoVisible={setForoVisible}/>} />
         </Routes>
       </div>
     </Router>

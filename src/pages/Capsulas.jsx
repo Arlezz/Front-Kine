@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import styles from './Capsulas.module.scss';
-import { arrayVideosObject } from "../utils/data";
 import { MainVideoCard } from "../components/media/MainVideoCard";
 import { Thumbnails } from "../components/media/Thumbnails";
 
@@ -27,8 +26,8 @@ export function Capsulas() {
     };
 
     useEffect(() => {
-        GeneralService.getCapsules().
-        then((data) => {            
+        GeneralService.getCapsules()
+        .then((data) => {            
             setCapsules(data);
             setSelectedVideo(data[0]);
             setVideosToDisplay(data.slice(0, 10));
@@ -83,11 +82,14 @@ export function Capsulas() {
                         hasMore={hasMore}
                         height={descriptionHeight || 700} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
                         loader={<Spinner/>}
-                        endMessage={<h4 className={styles.noMoreCapsules}>No hay mas capsulas</h4>}
+                        endMessage={<div className={styles.noMoreTextContainer}>
+                                        <p style={{ textAlign: 'center' }}>
+                                            <b>No hay Capsulas para mostrar</b>
+                                        </p>
+                                    </div>}
                     >
                         <div className={styles.thumbnailGrid}>
                             {videosToDisplay.map((video, index) => (
-                                //console.log(video),
                                 <Thumbnails key={index} video={video} handleThumbnailClick={handleThumbnailClick} index={index} grid="true"/>
                             ))}
                         </div>

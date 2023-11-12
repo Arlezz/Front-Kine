@@ -20,6 +20,7 @@
     text-indent: 0.5rem;
     outline: none;
     font-size: 1.5rem;
+    padding-right: 4rem;
     transition: border 0.3s; /* Agrega una transición para la animación de bordes */
 }
 
@@ -57,9 +58,10 @@
     color: #5B5B5B;
 }
 
-@media screen and (max-width: 1000px) {
+
+@media screen and (max-width: 900px) {
     .searchInput {
-        width: 20rem; /* Ajusta el ancho para dispositivos más pequeños */
+        width: 25rem; /* Ajusta el ancho para dispositivos más pequeños */
     }
 }
 
@@ -75,9 +77,15 @@
     }
 }
 
+@media screen and (max-width: 520px) {
+    .searchInput {
+        width: 20rem;
+    }
+}
+
 @media screen and (max-width: 480px) {
     .searchInput {
-        width: 15rem;
+        width: 16rem;
     }
 }
 

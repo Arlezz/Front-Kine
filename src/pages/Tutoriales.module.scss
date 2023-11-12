@@ -1,38 +1,102 @@
 .tutorialContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 3rem 2rem 2rem 5rem;
-  
-    .tittle h2 {
-      font-size: 3rem;
-      font-weight: 600;
-    }
-  
-    .tutorialBody {
-      display: flex;
-      flex-direction: row;
-      //border: .2rem solid #E5E5E5;
-      border-radius: 1rem;
-      box-shadow: 0 0 1rem 0 #E5E5E5;
-      background: #ffffff;
-  
-      .tutorialVideosLeft {
-        display: flex;
-        flex-direction: column;
-        border-right: .1rem solid #E5E5E5;
-        overflow-y: auto;
-      }
-  
-      .tutorialVideoMain {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        width: 80%;
-        padding: 2rem;
-        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado grande */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 3rem 2rem 2rem 5rem;
 
+  .tittle h2 {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  .tutorialBody {
+    display: flex;
+    flex-direction: row;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem 0 #e5e5e5;
+    background: #ffffff;
+
+    .tutorialVideosLeft {
+      display: flex;
+      flex-direction: column;
+      border-right: 0.1rem solid #e5e5e5;
+      overflow-y: auto;
+
+      .noMoreTextContainer{
+        display: flex ;
+        justify-content: center ;
+        align-items: center ;
+        padding: 2rem;
+      }
+    }
+    
+
+    .tutorialVideoMain {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 80%;
+      padding: 2rem;
+      overflow-y: auto;
+      min-height: 0; /* Ensure the min-height is set to 0 to allow it to shrink */
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tutorialContainer {
+    padding: 3rem;
+    .tutorialBody {
+      flex-direction: column-reverse;
+
+      .tutorialVideosLeft {
+
+        .scrollHorizontal {
+          display: flex;
+          flex-direction: row;
+
+          .thumbailContainer {
+            border-right: solid 0.1rem #e5e5e5;
+          }
+
+          hr {
+            display: none;
+          }
+        }        
+      }
+
+      .tutorialVideoMain {
+        width: 100%;
+        min-height: 65rem; /* Set a minimum height for the container */
+        border-bottom: solid 0.1rem #e5e5e5;
       }
     }
   }
-  
+}
+
+@media screen and (max-width: 630px) {
+  .tutorialContainer {
+    .tutorialBody {
+      flex-direction: column-reverse;
+
+      .tutorialVideoMain {
+        width: 100%;
+        min-height: 57rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tutorialContainer {
+    padding: 1rem;
+    .tutorialBody {
+      flex-direction: column-reverse;
+
+      .tutorialVideoMain {
+        width: 100%;
+        min-height: 52rem;
+      }
+    }
+  }
+}

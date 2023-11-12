@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./Administrador.module.scss";
+
 
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -10,9 +11,14 @@ import { MultimediaAdm } from "../components/admin/Multimedia/MultimediaAdm";
 import { Historial } from "../components/admin/Historial/HistorialAdm";
 
 
-export function Administrador() {
+export function Administrador({setForoVisible}) {
     const [key, setKey] = useState("profile");
 
+    useEffect(() => {
+
+        setForoVisible(false)
+    
+    }, [])
 
   return (
     <div className={styles.administradorContent}>

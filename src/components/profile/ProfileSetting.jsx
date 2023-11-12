@@ -6,13 +6,15 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Spinner } from "../Spinner";
 import UserService from "../../services/User.service";
 
-export function ProfileSetting() {
+export function ProfileSetting({setForoVisible}) {
   const [user, setUser] = useState({});
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
   useEffect(() => {
+    setForoVisible(false);
     const currentUser = AuthService.getCurrentUser();
     if (currentUser) {
       setUser(currentUser);

@@ -8,10 +8,7 @@
   box-sizing: border-box !important;
   overflow: hidden;
   padding: 3rem 2rem;
-
-  @media (min-width: 768px) {
-    padding: 3rem 6rem 2rem 2rem; // Restaura el padding original en pantallas más grandes
-  }
+  
 
   .foroHeader {
     display: flex;
@@ -123,5 +120,26 @@
   .infinite-scroll-component {
     flex: 1;
     overflow: auto;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .sideForo {
+    padding: 2rem;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  
+  .sideForo {
+    padding: 2rem; // Restaura el padding original en pantallas más grandes
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  
+  .sideForo {
+    padding: 3rem; // Restaura el padding original en pantallas más grandes
   }
 }

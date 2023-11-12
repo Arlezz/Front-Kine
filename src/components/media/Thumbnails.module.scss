@@ -2,6 +2,8 @@
     display: flex;
     padding: 2rem;
     flex-direction: column;
+    position: relative;
+    max-width: 30rem;
     
     gap: 1rem;
 
@@ -13,8 +15,9 @@
     img {
         border-radius: 1rem;
         width: 100%;
-        max-height: 15rem; /* Ajusta la altura de las miniaturas según tus preferencias */
-        height: auto;
+        //max-height: 15rem; /* Ajusta la altura de las miniaturas según tus preferencias */
+        //height: auto;
+        height: 100%;
         pointer-events: none!important; /*add this it*/
     }
 
@@ -38,3 +41,11 @@ hr {
     margin: 0;
     opacity: 1;
 }
+
+
+@media screen and (max-width: 768px) {
+    .thumbnail {
+        width: 300px;
+        border-bottom: 0;
+    }
+  }

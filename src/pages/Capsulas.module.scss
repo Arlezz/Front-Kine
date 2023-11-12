@@ -61,6 +61,13 @@
           background-color: #E5E5E5;
           cursor: pointer;
         }
+
+        .noMoreTextContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 2rem;
+        }
       }
 
       .capsulaVideoMain {
@@ -119,3 +126,81 @@
       
     }
   }
+
+  @media screen and (max-width: 768px) {
+    .capsulaContainer {
+      padding: 3rem;
+      .capsulaBody {
+        flex-direction: column;
+  
+        .capsulaVideosRight {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          
+
+          .thumbnailGrid{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            //align-items: center;
+            //gap: 1rem;  
+          }      
+        }
+  
+        .capsulaVideoMain {
+          width: 100%;
+          min-height: 65rem; /* Set a minimum height for the container */
+          border-bottom: solid 0.1rem #e5e5e5;
+        }
+      }
+    }
+  }
+
+  
+@media screen and (max-width: 630px) {
+  .capsulaContainer {
+    .capsulaBody {
+      flex-direction: column;
+
+      .capsulaVideoMain {
+        width: 100%;
+        min-height: 57rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .capsulaContainer {
+    .capsulaBody {
+      flex-direction: column;
+
+      .capsulaVideoMain {
+        iframe {
+          height: 25rem;
+        }
+      }
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .capsulaContainer {
+    padding: 1rem;
+    .capsulaBody {
+      flex-direction: column;
+
+      .capsulaVideoMain {
+        width: 100%;
+        min-height: 52rem;
+
+        iframe {
+          height: 20rem;
+        }
+      }
+    }
+  }
+}

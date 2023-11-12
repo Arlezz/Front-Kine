@@ -52,3 +52,22 @@ iframe {
         cursor: pointer;
     }
 }
+
+
+@media screen and (max-width: 540px) {
+    iframe{
+        height: 25rem;
+    }
+  }
+
+@media screen and (max-width: 480px) {
+    iframe{
+        height: 25rem;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    iframe{
+        height: 20rem;
+    }
+  }

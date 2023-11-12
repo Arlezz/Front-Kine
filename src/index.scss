@@ -45,7 +45,7 @@ body {
     background-color: white;
     color: #000;
     font-size: 1.6rem;
-    overflow: hidden;
+    //overflow: hidden;
 }
 
 code {
@@ -58,7 +58,9 @@ a {
     margin: 0;
 }
 
-
+.dropdown-item {
+    padding: 0;
+}
 .dropdown-item.active, .dropdown-item:active {
     color: #000000;
     background-color: #ebecec ;
@@ -67,6 +69,32 @@ a {
 .dropdown-item:focus, .dropdown-item:hover {
     color: var(--bs-dropdown-link-hover-color);
     
+}
+
+
+@media screen and (max-width: 768px) {
+    
+    .Tutoriales_tutorialVideosLeft__ZtN7V{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                display: flex;
+                height: fit-content !important;
+            }
+        }
+    }
+
+    .Capsulas_capsulaVideosRight__ve5Z3{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                display: flex;
+                height: fit-content !important;
+            }
+        }
+    
+    }
+
+
+
 }
 
 

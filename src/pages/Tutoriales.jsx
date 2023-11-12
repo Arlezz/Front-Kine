@@ -77,20 +77,27 @@ export function Tutoriales() {
                     dataLength={videosToDisplay.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
+                    inverse
                     height={descriptionHeight || 700} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
                     loader={<h4>Loading...</h4>}
                     endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                        <b>No hay tutoriales para mostrar</b>
-                        </p>
+                        <div className={styles.noMoreTextContainer}>
+                            <p style={{ textAlign: 'center' }}>
+                                <b>No hay tutoriales para mostrar</b>
+                            </p>
+                        </div>
+                        
                     }
                 >
-                    {videosToDisplay.map((video, index) => (
-                        <div key={index}>
-                            <Thumbnails  video={video} handleThumbnailClick={handleThumbnailClick} index={index}/>
-                            <hr />
-                        </div>
-                    ))}
+                    <div className={styles.scrollHorizontal}>
+                        {videosToDisplay.map((video, index) => (
+                            <div className={styles.thumbailContainer} key={index}>
+                                <Thumbnails  video={video} handleThumbnailClick={handleThumbnailClick} index={index}/>
+                                <hr />
+                            </div>
+                        ))}
+                    </div>
+                    
                 </InfiniteScroll>
                 </div>
                 <div className={styles.tutorialVideoMain}>

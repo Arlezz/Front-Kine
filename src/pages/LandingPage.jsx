@@ -11,7 +11,9 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import AuthService from "../services/Auth.service";
 
-export function LandingPage() {
+export function LandingPage({ foroVisible, toggleForoVisibility }) {
+
+
   return (
     <div className={styles.container}>
       <section className={styles.contentContainer}>
@@ -21,7 +23,9 @@ export function LandingPage() {
           <Juegos />
         </div>
       </section>
-      <Foro className={styles.Foro} />
+      <div className={`${styles.foroSection} ${foroVisible ? styles.foroVisible : ""}`}>
+        <Foro className={styles.foro} />
+      </div>
     </div>
   );
 }
