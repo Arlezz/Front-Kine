@@ -41,7 +41,7 @@ export function Juegos(){
                 <h2>Juegos</h2>
             </div>
 
-            <div className={styles.juegosBody}>
+            <div id="juegosBody" className={styles.juegosBody}>
                 <InfiniteScroll
                     dataLength={gamesToDisplay.length}
                     next={fetchMoreData}

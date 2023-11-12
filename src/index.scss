@@ -74,7 +74,7 @@ a {
 
 @media screen and (max-width: 768px) {
     
-    .Tutoriales_tutorialVideosLeft__ZtN7V{
+    #videoLeft{
         .infinite-scroll-component__outerdiv{
             .infinite-scroll-component {
                 display: flex;
@@ -83,7 +83,7 @@ a {
         }
     }
 
-    .Capsulas_capsulaVideosRight__ve5Z3{
+    #videoRight{
         .infinite-scroll-component__outerdiv{
             .infinite-scroll-component {
                 display: flex;
@@ -94,7 +94,7 @@ a {
 }
 
 @media screen and (max-width: 480px) {
-    .Juegos_juegosBody__wT+vk {
+    #juegosBody {
         .infinite-scroll-component__outerdiv{
             .infinite-scroll-component {
                 display: flex;

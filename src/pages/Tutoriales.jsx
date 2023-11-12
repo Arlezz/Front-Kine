@@ -72,7 +72,7 @@ export function Tutoriales() {
                 <h2>Tutoriales</h2>
             </div>
             <div className={styles.tutorialBody}>
-                <div className={styles.tutorialVideosLeft}>
+                <div id="videoLeft" className={styles.tutorialVideosLeft}>
                 <InfiniteScroll
                     dataLength={videosToDisplay.length}
                     next={fetchMoreData}

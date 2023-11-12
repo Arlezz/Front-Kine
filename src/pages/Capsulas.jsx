@@ -75,7 +75,7 @@ export function Capsulas() {
                 <div className={styles.capsulaVideoMain}>
                     <MainVideoCard video={selectedVideo} isDescriptionExpanded={isDescriptionExpanded} toggleDescription={toggleDescription}/>
                 </div>
-                <div className={styles.capsulaVideosRight}>
+                <div id="videoRight" className={styles.capsulaVideosRight}>
                     <InfiniteScroll
                         dataLength={videosToDisplay.length}
                         next={fetchMoreData}
