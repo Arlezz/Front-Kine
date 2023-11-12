@@ -102,6 +102,20 @@ a {
         }
     }
 
+    #responsePost{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                height: calc(100vh - 55rem) !important;
+            }
+        }
+    }
+
+    #emptyCont{
+        height: calc(100vh - 55rem) !important;
+    }
+
+    
+
     
 }
 
@@ -122,6 +136,18 @@ a {
             }
         }
     
+    }
+
+    #responsePost{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                height: calc(100vh - 45rem) !important;
+            }
+        }
+    }
+
+    #emptyCont{
+        height: calc(100vh - 45rem) !important;
     }
 }
     

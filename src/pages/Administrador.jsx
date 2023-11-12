@@ -57,6 +57,11 @@ export function Administrador({setForoVisible}) {
             <ProfesoresAdm/>
           </div>
         </Tab>
+        <Tab eventKey="foro" title="Administrar Foro">
+          <div>
+            POST
+          </div>
+        </Tab>
         <Tab eventKey="multimedia" title="Administrar Multimedia">
           <div>
             <MultimediaAdm 

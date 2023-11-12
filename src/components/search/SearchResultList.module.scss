@@ -1,0 +1,25 @@
+.searchResultList {
+  //display: none;
+  position: absolute;
+  top: 105%; // Coloca el SearchResultsList justo debajo de la barra de búsqueda
+  left: 0;
+  width: 100%; // O el ancho que desees
+  background-color: #fff; // O cualquier otro color de fondo que desees
+  //border: 1px solid #ccc; // O cualquier estilo de borde que desees
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // O cualquier sombra que desees
+  z-index: 1000; // Asegúrate de que SearchResultsList esté por encima de otros elementos
+  border-radius: 1.2rem;
+  //padding: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+
+@media screen and (max-width: 768px) {
+  .searchResultList{
+    position: initial;
+    box-shadow: none;
+    max-height: none;
+  }
+
+}

@@ -156,24 +156,24 @@ export function Foro({ toggleForoVisibility }) {
                 <h3 className={styles.sideSubtitle}>Escribe cualquier duda o consulta que tengas</h3>
             </div>
             <div id='foroBox' className={styles.sideForoBox}>
-            {noResponses ? (
-              <Empty /> // Render the "empty" component when there are no responses
-            ) : (
-                <InfiniteScroll
-                    dataLength={posts.length}
-                    next={() => setPage((prevPage) => prevPage + 1)}
-                    hasMore={hasMore}
-                    height="calc(100vh - 25rem)"
-                    loader={<Spinner />}
-                    endMessage={
-                        <p className={styles.textHelper}>- Ya haz visto todo -</p>
-                    }
-                >
-                    {posts.map((post, index) => (
-                        <ForoBody key={index} post={post} index={index} currentUser={currentUser} />
-                    ))}
-                </InfiniteScroll>
-            )}
+                {noResponses ? (
+                <Empty /> // Render the "empty" component when there are no responses
+                ) : (
+                    <InfiniteScroll
+                        dataLength={posts.length}
+                        next={() => setPage((prevPage) => prevPage + 1)}
+                        hasMore={hasMore}
+                        height="calc(100vh - 25rem)"
+                        loader={<Spinner />}
+                        endMessage={
+                            <p className={styles.textHelper}>- Ya haz visto todo -</p>
+                        }
+                    >
+                        {posts.map((post, index) => (
+                            <ForoBody key={index} post={post} index={index} currentUser={currentUser} />
+                        ))}
+                    </InfiniteScroll>
+                )}
             </div>
             <ForoResponseButton handleShow={handleShow} />
             <ForoPostModal setNewPost={setNewPost} show={show} handleShow={handleShow} fetchData={fetchData} currentUser={currentUser} />

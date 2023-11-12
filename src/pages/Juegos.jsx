@@ -58,7 +58,7 @@ export function Juegos(){
                 >
                     <div className={styles.juegosCardGrid}>
                         {gamesToDisplay.map((game, index) => (
-                                <GameCard key={index} game={game}/> 
+                                <GameCard id={game._id} key={index} game={game}/> 
                         ))}
                     </div>
                 </InfiniteScroll>

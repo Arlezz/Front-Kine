@@ -1,0 +1,113 @@
+::placeholder {
+    color: #5B5B5B;
+}
+
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.searchMinRes {
+    display: none;
+}
+
+.searchInput {
+    width: 40rem; /* Aumenta el ancho del cuadro de búsqueda */
+    padding: 1rem;
+    border-radius: 1.2rem;
+    font-family: 'Inter';
+    font-weight: 500;
+    color: #000;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    text-indent: 0.5rem;
+    outline: none;
+    font-size: 1.5rem;
+    padding-right: 4rem;
+    transition: border 0.3s; /* Agrega una transición para la animación de bordes */
+}
+
+.searchInput:hover,
+.searchInput:focus {
+    border: 1px solid var(--secondary-color);
+}
+
+.searchInput:focus {
+    border-color: var(--secondary-color);
+    box-shadow: inset 0 0 0 1px transparent;
+}
+
+.searchInput:focus-visible {
+    border-color: var(--secondary-color);
+    box-shadow: inset 0 0 0 1px var(--secondary-color);
+}
+
+.searchButton {
+    position: absolute;
+    top: 50%; /* Centra verticalmente el botón en relación al contenedor padre */
+    transform: translateY(-50%); /* Ajusta la posición vertical */
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1.8rem;
+}
+
+
+.searchButton .icon {
+    color: #5B5B5B;
+}
+
+
+@media screen and (max-width: 900px) {
+    .searchInput {
+        width: 25rem; /* Ajusta el ancho para dispositivos más pequeños */
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .searchMinRes {
+        display: block;
+    }
+
+    .searchMaxRes {
+       display: none;
+    }
+
+    .searchInput {
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .searchInput {
+        width: 25rem;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .searchInput {
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .searchInput {
+        width: 16rem;
+    }
+}
+
+/*@media screen and (max-width: 300px) {
+
+   
+
+    .searchInput {
+        width: 10rem;
+    }
+}*/

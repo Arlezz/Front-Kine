@@ -149,11 +149,11 @@ export function ForoResponseModal({
           <div className={styles.modalResponses}>
             <h3>Respuestas</h3>
             {noResponses ? (
-              <div className={styles.EmptyContainer}>
+              <div id="emptyCont" className={styles.EmptyContainer}>
                 <Empty />
               </div>
             ) : (
-              <div className={styles.scrollContainer}>
+              <div id="responsePost" className={styles.scrollContainer}>
                 <InfiniteScroll
                   dataLength={ResponseToDisplay.length}
                   next={fetchMoreData}

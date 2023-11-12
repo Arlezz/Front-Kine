@@ -374,3 +374,39 @@
     }
   }
 }
+
+@media screen and (max-width: 380px) {
+  .navContainer {
+    padding: 0rem 2rem;
+    gap: 3rem;
+
+    .left {
+      display: inline;
+
+      .linkMain {
+        .logoBox {
+          margin: 0;
+
+          .index { 
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .linkContent {
+        display: none;
+      }
+    }
+    .rigthMQ {
+      justify-content: flex-end;
+      gap: 2rem;
+      .right {
+        .dropdownButon {
+          span {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

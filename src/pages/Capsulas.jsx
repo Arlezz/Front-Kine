@@ -90,7 +90,7 @@ export function Capsulas() {
                     >
                         <div className={styles.thumbnailGrid}>
                             {videosToDisplay.map((video, index) => (
-                                <Thumbnails key={index} video={video} handleThumbnailClick={handleThumbnailClick} index={index} grid="true"/>
+                                <Thumbnails id={video._id}  key={index} video={video} handleThumbnailClick={handleThumbnailClick} index={index} grid="true"/>
                             ))}
                         </div>
                     </InfiniteScroll>
