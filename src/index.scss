@@ -90,13 +90,20 @@ a {
                 height: fit-content !important;
             }
         }
-    
     }
-
-
-
 }
 
+@media screen and (max-width: 480px) {
+    .Juegos_juegosBody__wT+vk {
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                display: flex;
+                height: fit-content !important;
+            }
+        }
+    }
+}
+    
 
 
 img {

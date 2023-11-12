@@ -26,3 +26,33 @@
       
     }
 }
+
+
+@media screen and (max-width: 768px) {
+
+  .juegosContainer {
+    padding: 2rem;
+    .juegosBody{
+      .juegosCardGrid{
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+      }
+    }
+  }
+    
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+  .juegosContainer {
+    .juegosBody{
+      .juegosCardGrid{
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+}
