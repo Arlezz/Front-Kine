@@ -23,6 +23,13 @@
         margin: 0; /* Establece el margen en 0 */
         padding: 1rem; /* Establece el relleno en 0 */
       }
+
+      .noMoreTextContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
       
     }
 }
@@ -33,6 +40,7 @@
   .juegosContainer {
     padding: 2rem;
     .juegosBody{
+      overflow-y: auto;
       .juegosCardGrid{
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(1, 1fr);
@@ -49,6 +57,10 @@
 @media screen and (max-width: 480px) {
   .juegosContainer {
     .juegosBody{
+      display: flex;
+      flex-direction: row;
+
+
       .juegosCardGrid{
         display: flex;
         flex-direction: row;

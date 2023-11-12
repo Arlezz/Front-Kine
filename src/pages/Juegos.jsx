@@ -49,9 +49,11 @@ export function Juegos(){
                     height={400} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
                     loader={<h4>Loading...</h4>}
                     endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                        <b>No hay juegos para mostrar</b>
-                        </p>
+                        <div className={styles.noMoreTextContainer}>
+                            <p style={{ textAlign: 'center' }}>
+                                <b>No hay Juegos para mostrar</b>
+                            </p>
+                        </div>
                     }
                 >
                     <div className={styles.juegosCardGrid}>
