@@ -103,7 +103,6 @@ export function ForoResponseModal({
       });
       return;
     }
-    console.log("RESPONDIENDO A ",responsed.user.name);
     GeneralService.responseComment(post._id, currentUser.email, values.response, responsed._id)
     .then((data) => {
       setChanges(!changes);
@@ -166,7 +165,7 @@ export function ForoResponseModal({
                 >
                   {ResponseToDisplay.map((response, index) => (
                     <div key={index}>
-                      <CommentBody response={response} currentUser={currentUser} setHasResponsed={setHasResponsed} setResponsed={setResponsed}/>
+                      <CommentBody post={post._id} response={response} currentUser={currentUser} setHasResponsed={setHasResponsed} setResponsed={setResponsed}/>
                       <hr className={styles.separator} />
                     </div>
                   ))}

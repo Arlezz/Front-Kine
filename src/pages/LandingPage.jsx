@@ -11,8 +11,14 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import AuthService from "../services/Auth.service";
 
-export function LandingPage({ foroVisible, toggleForoVisibility }) {
-
+export function LandingPage({toggleSearchVisibility, setToggleSearchVisibility, foroVisible, toggleForoVisibility }) {
+  useEffect(() => {
+    console.log("asdasd");
+    if(!toggleSearchVisibility){
+      setToggleSearchVisibility(true);
+    }
+  
+  }, []);
 
   return (
     <div className={styles.container}>

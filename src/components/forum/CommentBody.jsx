@@ -19,6 +19,7 @@ export function CommentBody({
   currentUser,
   setHasResponsed,
   setResponsed,
+  postId,
 }) {
   const [like, setLike] = useState(false);
   const [commentLikes, setCommentLikes] = useState(response.likes);
@@ -49,7 +50,7 @@ export function CommentBody({
   }, 300);
 
   const likeComent = () => {
-    GeneralService.likeComments(response._id, currentUser.email)
+    GeneralService.likeComments(response._id, postId, currentUser.email)
       .then((data) => {
         setCommentLikes((prevLikes) => prevLikes + 1);
         setLike(true);

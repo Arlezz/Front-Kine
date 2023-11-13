@@ -1,10 +1,29 @@
 /* AlumnosAdm.module.scss */
-
-h2 {
+.tableHeader {
     font-size: 2.5rem;
     font-weight: 600;
     color: var(--primary-color);
-    margin: 0;
+    margin-bottom: 2rem;
+  }
+
+.sortContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+
+    
+    .inputSort {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        padding: .5rem 1rem;
+        margin-top: .5rem;
+        border: solid 0.1rem var(--primary-color);
+        border-radius: .5rem;
+    }
 }
 
 .actions {

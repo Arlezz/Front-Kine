@@ -1,51 +1,27 @@
 import { useEffect, useState, useMemo } from "react";
 
-import styles from "./CapsulasAdm.module.scss";
+import styles from "./ComentariosAdm.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { confirm } from "react-bootstrap-confirmation";
 import GeneralService from "../../../../services/General.service";
 import { TableDatas } from "../../../TableDatas";
-import { CapsulasAddModal } from "./CapsulasAddModal";
 import AuthService from "../../../../services/Auth.service";
 
-export function CapsulasAdm({
-  updateCapsula,
-  onUpdateCapsula
-}) {
+export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  //const [updateCapsula, setUpdateCapsula] = useState(false);
-  const [addCapsula, setAddCapsula] = useState(false);
-  const [showNuevaCapsulaModal, setShowNuevoCapsulaModal] = useState(false);
-  const [hoveredRow, setHoveredRow] = useState(null);
-  const [nombre , setNombre] = useState("");
-  const [dueño , setDueño] = useState("");
+  const [comentario, setComentario] = useState("");
+  const [dueño, setDueño] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
 
-
-  const handleAddCapsulalModal = () => {
-    setShowNuevoCapsulaModal(!showNuevaCapsulaModal);
-  };
-
-  const handleCellClick = (row) => {
-    window.open(row.url, "_blank");
-  };
-
-
-  const onAddCapsula = () => {
-    setAddCapsula(!addCapsula);
-    onUpdateCapsula()
-  };
-
-
   useEffect(() => {
-    GeneralService.getCapsules()
+    GeneralService.getComements()
       .then((res) => {
-        console.log(res);
-        setData(res);
+        console.log("comentarios ", res);
         setDataSaver(res);
+        setData(res);
       })
       .catch((err) => {
         console.log(err);
@@ -53,15 +29,14 @@ export function CapsulasAdm({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [updateCapsula, addCapsula]);
+  }, [updateCommetario]);
 
-  const deleteCapsule = (capsuleId) => {
+  const deletePost = (tutorialId) => {
     const user = AuthService.getCurrentUser();
-
-    GeneralService.deleteCapsule(capsuleId, user.email)
+    GeneralService.delComment(tutorialId, user.email)
       .then((res) => {
-        console.log("TAMARE ",res);
-        onUpdateCapsula();
+        console.log(res);
+        onUpdateComentario();
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +44,7 @@ export function CapsulasAdm({
   };
 
   const AlertButton = async (row) => {
-    const result = await confirm("Está seguro de eliminar la Capsula?", {
+    const result = await confirm("Está seguro de eliminar el Comentario?", {
       title: "Confirmación",
       okButtonStyle: "danger",
       cancelButtonStyle: "primary",
@@ -78,19 +53,17 @@ export function CapsulasAdm({
     });
 
     if (result) {
-      deleteCapsule(row._id);
+      deletePost(row._id);
       return;
     }
     return;
   };
 
-
   const onChange = async (e) => {
-    setNombre(e.target.value);
-    console.log(e);
+    setComentario(e.target.value);
     var searchData = dataSaver.filter((item) => {
       if (
-        item.title
+        item.content
           .toString()
           .toLowerCase()
           .includes(e.target.value.toLowerCase())
@@ -130,45 +103,34 @@ export function CapsulasAdm({
     {
       name: (
         <div className={styles.sortContainer}>
-          Nombre
+          Comentario
           <input
             type="text"
             placeholder="Buscar"
-            value={nombre}
             className={styles.inputSort}
-
+            value={comentario}
             onChange={(e) => onChange(e)}
-            style={{ width: "100%", marginTop: ".5rem"}}
+            style={{ width: "100%" }}
           />
         </div>
       ),
-      selector: (row) => row.title,
-      sortable: false,
-      wrap: true,
-  },
-    {
-      name: <div className={styles.sortContainer}>Descripción</div>,
-      selector: (row) => row.description,
+      selector: (row) => row.content,
       sortable: true,
-      maxWidth: "500px",
     },
     {
-      name: <div className={styles.sortContainer}>Url</div>,
-      selector: (row) => (
-        <div
-          onClick={() => handleCellClick(row)}
-          onMouseEnter={() => setHoveredRow(row._id)}
-          onMouseLeave={() => setHoveredRow(null)}
-          style={{
-            color: hoveredRow === row._id ? "#2e81e4" : "#000",
-          }}
-        >
-          {row.url}
-        </div>
-      ),
+      name: <div className={styles.sortContainer}>Publicado</div>,
+      selector: (row) => row.date,
       sortable: true,
       wrap: true,
+      maxWidth: "200px",
     },
+    {
+      name: <div className={styles.sortContainer}>Likes</div>,
+      selector: (row) => row.likes,
+      sortable: true,
+      maxWidth: "30px",
+    },
+
     {
       name: (
         <div className={styles.sortContainer}>
@@ -177,20 +139,30 @@ export function CapsulasAdm({
             type="text"
             placeholder="Buscar"
             className={styles.inputSort}
-
             value={dueño}
             onChange={(e) => onChange2(e)}
-            style={{ width: "100%", marginTop: ".5rem"}}
+            style={{ width: "100%" }}
           />
         </div>
       ),
       selector: (row) => row.user.name,
-      sortable: false,
-      wrap: true,
-  },
+      sortable: true,
+    },
     {
       name: <div className={styles.sortContainer}>Rol</div>,
       selector: (row) => row.user.role,
+      sortable: true,
+      wrap: true,
+    },
+    {
+      name: <div className={styles.sortContainer}>Post</div>,
+      selector: (row) => row.post.title,
+      sortable: true,
+      wrap: true,
+    },
+    {
+      name: <div className={styles.sortContainer}>Dueño del Post</div>,
+      selector: (row) => row.post.name,
       sortable: true,
       wrap: true,
     },
@@ -213,30 +185,19 @@ export function CapsulasAdm({
     },
   ];
 
-  const addAlumno = useMemo(() => {
-    return (
-      <button className={styles.add} onClick={handleAddCapsulalModal}>
-        <span>Agregar Capsula</span>
-      </button>
-    );
-  }, []);
-
   const title = useMemo(() => {
-    return <h2 className={styles.tableHeader}>Mis Capsulas</h2>;
+    return <h2 className={styles.tableHeader}>Comentarios</h2>;
   }, []);
 
   return (
     <>
-      
       <TableDatas
-      title={title}
+        title={title}
         data={data}
         isLoading={isLoading}
         columns={columns}
-        actions={addAlumno}
+        defaultSortField={2}
       />
-
-      <CapsulasAddModal show={showNuevaCapsulaModal} handleShow={handleAddCapsulalModal} onAddCapsula={onAddCapsula} />
     </>
   );
 }

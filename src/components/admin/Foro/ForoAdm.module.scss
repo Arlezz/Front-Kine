@@ -1,0 +1,133 @@
+.foroContent {
+  //padding: 3rem 10rem;
+  max-height: 100%;
+  overflow-y: auto;
+
+  .tittle {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.5rem;
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    border-bottom: .1rem solid #000000;
+    margin-bottom: 2rem;
+    color: #000;
+    width: fit-content;
+    
+    li {
+        border : 0;
+        padding-right: 2rem;
+       
+
+        button { 
+            background-color: transparent !important;
+            border: 0 !important;
+            padding: .5rem 0;
+            color: #000;
+        }
+    }    
+  }
+}
+
+
+@media screen and (max-width: 1024px) {
+
+  .foroContent {
+    ul {
+      li {
+        padding-right: 3rem;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .foroContent {
+    //padding: 2rem 2rem;
+    ul {
+      li {
+        padding-right: 2rem;
+
+        button { 
+          border: solid 0.1rem var(--primary-color) !important;
+          padding: .8rem;
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+  }
+}.foroContent {
+  //padding: 3rem 10rem;
+  max-height: 100%;
+  overflow-y: auto;
+
+  .tittle {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.5rem;
+
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  ul {
+    border-bottom: .1rem solid #000000;
+    margin-bottom: 2rem;
+    color: #000;
+    width: fit-content;
+    
+    li {
+        border : 0;
+        padding-right: 2rem;
+       
+
+        button { 
+            background-color: transparent !important;
+            border: 0 !important;
+            padding: .5rem 0;
+            color: #000;
+        }
+    }    
+  }
+}
+
+
+@media screen and (max-width: 1024px) {
+
+  .foroContent {
+    ul {
+      li {
+        padding-right: 3rem;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .foroContent {
+    //padding: 2rem 2rem;
+    ul {
+      li {
+        padding-right: 2rem;
+
+        button { 
+          border: solid 0.1rem var(--primary-color) !important;
+          padding: .8rem;
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+  }
+}

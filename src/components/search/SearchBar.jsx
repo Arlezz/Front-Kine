@@ -49,9 +49,6 @@ export function SearchBar({setOnBlur, onBlur, setResults, handleShowModalResults
     searchItem(input);
   };
 
-  const handleBlur = () => {
-    setOnBlur(!onBlur);
-  };
 
   return (
     <>

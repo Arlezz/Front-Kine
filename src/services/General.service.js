@@ -38,8 +38,25 @@ const deleteGame = (id,email) => {
 }
 
 
-const getPosts = (type,order,pageNumber,batch) => {
-    return get(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}`);
+const getPosts = (type,order,pageNumber,batch,email) => {
+    console.log(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}&email=${email}`);
+    return get(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}&email=${email}`);
+}
+
+const getAllPosts = () => {
+    return get(`posts`);
+}
+
+const delPost = (id,email) => {
+    return del(`posts/${id}/${email}`);
+}
+
+const getComements = () => {
+    return get("comments");
+}
+
+const delComment = (id,email) => {
+    return del(`comments/${id}/${email}`);
 }
 
 const getPostsComments = (idPost) => {
@@ -89,9 +106,10 @@ const likePosts = (postId,email) => {
     });
 }
 
-const likeComments = (commentId,email) => {
+const likeComments = (commentId, postId,email) => {
     return post("comments/like", {
         commentId,
+        postId,
         email
     }).then((response) => {
         return response;
@@ -184,27 +202,31 @@ const GeneralService = {
     uploadTutorials,
     uploadCapsules,
     uploadGames,
+    uploadPost,
+    uploadComment,
+
     getTutorials,
     getCapsules,
     getGames,
     getAlumnos,
     getProfesores,
     getPosts,
+    getAllPosts,
+    getComements,
     getPostsComments,
     getHistorial,
 
     deleteTutorial,
     deleteCapsule,
     deleteGame,
+    delComment,
+    delPost,
 
-    uploadPost,
-    uploadComment,
     responseComment,
     likePosts,
     likeComments,
     dislikePosts,
     dislikeComments,
-    
     hasLikedPost,
     hasLikedComments,
     

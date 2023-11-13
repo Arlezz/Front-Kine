@@ -16,10 +16,12 @@ import {
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
-export function NavBar({ toggleForoVisibility, foroVisible }) {
+export function NavBar({
+  toggleForoVisibility,
+  foroVisible,
+  toggleSearchVisibility,
+}) {
   const [currentUser, setCurrentUser] = useState({});
-
- 
 
   const closeForo = () => {
     if (foroVisible) {
@@ -87,18 +89,30 @@ export function NavBar({ toggleForoVisibility, foroVisible }) {
               <h2 className={styles.textNav}>Juegos</h2>
             </Link>
           </div>
-          {currentUser &&
-            currentUser.role &&
-            currentUser.role.includes("admin") && (
-              <div>
+          {currentUser && currentUser.role && (
+            <div>
+              {currentUser.role.includes("admin") && (
                 <Link className={styles.linkContent} to="/admin">
                   <h2 className={styles.textNav}>Administrador</h2>
                 </Link>
-              </div>
-            )}
+              )}
+
+              {currentUser.role.includes("profesor") && (
+                <Link className={styles.linkContent} to="/admin">
+                <h2 className={styles.textNav}>Avanzado</h2>
+              </Link>
+              )}
+            </div>
+          )}
         </div>
-        <div className={styles.rigthMQ}>
-          <Search className={styles.buscador} />
+        <div
+          className={styles.rigthMQ}
+          style={{ justifyContent: !toggleSearchVisibility ? "end" : "" }}
+        >
+          {toggleSearchVisibility ? (
+            <Search className={styles.buscador} />
+          ) : null}
+
           <div className={styles.right}>
             <Dropdown as={ButtonGroup}>
               <div className={styles.dropdownButon}>
@@ -144,7 +158,7 @@ export function NavBar({ toggleForoVisibility, foroVisible }) {
                   </Dropdown.Item>
                   <Dropdown.Divider />
                 </div>
-                
+
                 {currentUser &&
                   currentUser.role &&
                   currentUser.role.includes("admin") && (

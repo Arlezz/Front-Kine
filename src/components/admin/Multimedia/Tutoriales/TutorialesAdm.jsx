@@ -21,6 +21,9 @@ export function TutorialesAdm({
   const [addTutorial, setAddTutorial] = useState(false);
   const [showNuevoTutorialModal, setShowNuevoTutorialModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
+  const [nombre , setNombre] = useState("");
+  const [dueño , setDueño] = useState("");
+  const [dataSaver, setDataSaver] = useState([]);
 
   const handleAddTutorialModal = () => {
     setShowNuevoTutorialModal(!showNuevoTutorialModal);
@@ -41,6 +44,7 @@ export function TutorialesAdm({
     GeneralService.getTutorials()
       .then((res) => {
         setData(res);
+        setDataSaver(res);
       })
       .catch((err) => {
         console.log(err);
@@ -80,21 +84,75 @@ export function TutorialesAdm({
     return;
   };
 
+  const onChange = async (e) => {
+    setNombre(e.target.value);
+    console.log(e);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.title
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
+  const onChange2 = async (e) => {
+    setDueño(e.target.value);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.user.name
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
   const columns = [
     {
-      name: "Nombre",
+      name: (
+        <div className={styles.sortContainer}>
+          Nombre
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={nombre}
+            onChange={(e) => onChange(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
       selector: (row) => row.title,
-      sortable: true,
+      sortable: false,
       wrap: true,
-    },
+  },
     {
-      name: "Descripcion",
+      name: <div className={styles.sortContainer}>Descripción</div>,
       selector: (row) => row.description,
       sortable: true,
       maxWidth: "500px",
     },
     {
-      name: "Url",
+      name: <div className={styles.sortContainer}>Url</div>,
       selector: (row) => (
         <div
           onClick={() => handleCellClick(row)}
@@ -111,21 +169,32 @@ export function TutorialesAdm({
       wrap: true,
     },
     {
-      name: "Dueño",
+      name: (
+        <div className={styles.sortContainer}>
+          Dueño
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={dueño}
+            onChange={(e) => onChange2(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
       selector: (row) => row.user.name,
-      sortable: true,
-      //maxWidth: "500px",
-      wrap: true,
-    },
+      sortable: false,
+  },
     {
-      name: "Rol",
+      name: <div className={styles.sortContainer}>Rol</div>,
       selector: (row) => row.user.role,
       sortable: true,
       //maxWidth: "500px",
       wrap: true,
     },
     {
-      name: "Acciones",
+      name: <div className={styles.sortContainer}>Acciones</div>,
       selector: (row) => row._id,
       center: true,
       cell: (row) => (
@@ -151,10 +220,14 @@ export function TutorialesAdm({
     );
   }, []);
 
+  const title = useMemo(() => {
+    return <h2 className={styles.tableHeader}>Mis Tutoriales</h2>;
+  }, []);
+
   return (
     <>
-      <h2>Mis Tutoriales</h2>
       <TableDatas
+      title={title}
         data={data}
         isLoading={isLoading}
         columns={columns}

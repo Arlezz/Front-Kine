@@ -8,17 +8,20 @@ import { TableDatas } from "../../TableDatas";
 import { Modal, Button } from "react-bootstrap";
 import GeneralService from "../../../services/General.service";
 
-export function Historial({updateTutorial, updateCapsula, updateJuego}) {
+export function Historial({updateTutorial, updateCapsula, updateJuego, updatePost, updateCommetario}) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedReference, setSelectedReference] = useState(null);
+  const [email , setEmail] = useState("");
+  const [dataSaver, setDataSaver] = useState([]);
 
   useEffect(() => {
     GeneralService.getHistorial()
       .then((res) => {
         console.log(res);
         setData(res);
+        setDataSaver(res);
       })
       .catch((err) => {
         console.log(err);
@@ -26,22 +29,8 @@ export function Historial({updateTutorial, updateCapsula, updateJuego}) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [updateTutorial, updateCapsula, updateJuego]);
+  }, [updateTutorial, updateCapsula, updateJuego,updatePost, updateCommetario]);
 
-  /*const AlertButton = async (row) => {
-    const result = await confirm("¿Está seguro de eliminar este registro?", {
-      title: "Confirmación",
-      okButtonStyle: "danger",
-      cancelButtonStyle: "primary",
-      okText: "Eliminar",
-      cancelText: "Cancelar",
-    });
-
-    if (result) {
-      // Implementa la lógica para eliminar el registro.
-      console.log("Eliminar registro:", row);
-    }
-  };*/
 
   const handleViewReference = (row) => {
     setSelectedReference(row);
@@ -53,34 +42,69 @@ export function Historial({updateTutorial, updateCapsula, updateJuego}) {
     setSelectedReference(null);
   };
 
+  const onChange = async (e) => {
+    setEmail(e.target.value);
+    console.log(e);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.email
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
+
   const columns = [
     {
-      name: "Email",
+      name: (
+        <div className={styles.sortContainer}>
+          Email
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={email}
+            onChange={(e) => onChange(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
       selector: (row) => row.email,
       sortable: true,
       wrap: true,
       label: "Correo Electrónico",
     },
     {
-      name: "Fecha",
+      name: <div className={styles.sortContainer}>Fecha</div>,
       selector: (row) => row.date,
       sortable: true,
       label: "Fecha",
     },
     {
-      name: "Acción",
+      name: <div className={styles.sortContainer}>Acción</div>,
       selector: (row) => row.action,
       sortable: true,
       label: "Acción",
     },
     {
-      name: "Tipo",
+      name: <div className={styles.sortContainer}>Tipo</div>,
       selector: (row) => row.type,
       sortable: true,
       label: "Tipo",
     },
     {
-      name: "Acciones",
+      name: <div className={styles.sortContainer}>Acciones</div>,
       selector: (row) => row._id,
       center: true,
       cell: (row) => (
@@ -106,7 +130,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego}) {
 
   return (
     <>
-      <h2>Historial</h2>
+      <h2 className={styles.tablaTitle}>Historial</h2>
       <TableDatas data={data} isLoading={isLoading} columns={columns} defaultSortField={2} />
 
       {/* Modal para mostrar la información de la referencia */}
@@ -218,6 +242,36 @@ export function Historial({updateTutorial, updateCapsula, updateJuego}) {
                         disabled
                       />
                     </div>
+                  </>
+                ) :  selectedReference.type === "Comment" ? (
+                  // Renderizado específico para comentarios
+                  <>
+                  <div>
+                      <label>Nombre del Autor del Comentario:</label>
+                      <input
+                        type="text"
+                        value={selectedReference.object.user.name}
+                        disabled
+                      />
+                    </div>
+                    <div>
+                      <label>Email del Autor del Comentario:</label>
+                      <input
+                        type="text"
+                        value={selectedReference.object.user.email}
+                        disabled
+                      />
+                    </div>
+                    <div>
+                      <label>Contenido del Comentario:</label>
+                      <textarea
+                        value={selectedReference.object.content}
+                        rows="4"
+                        disabled
+                      />
+                    </div>
+                    
+                    
                   </>
                 ) : null}
               </div>

@@ -1,53 +1,69 @@
 /* TutorialesAdm.module.scss */
 
-h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin: 0;
-  }
-  
-  .actions {
-    display: flex;
-  
-  
-    .delete {
-      background-color: #ff391b;
-      color: #000;
-      font-size: 2.2rem;
-      border: 0;
-      border-radius: 0.5rem;
-      cursor: pointer;
-  
-      &:hover {
-        background-color: #ff8370;
-        color: #000;
-      }
-    }
-  }
-  
-  .add {
+.tableHeader {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.sortContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  .inputSort {
     display: flex;
     align-items: center;
-    height: 4rem;
-    color: #fff;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background: var(--primary-color);
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: solid 0.1rem var(--primary-color);
     border-radius: 0.5rem;
-    border: none;
-    outline: none;
+  }
+}
+
+.actions {
+  display: flex;
+
+  .delete {
+    background-color: #ff391b;
+    color: #000;
+    font-size: 2.2rem;
+    border: 0;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-  
+
     &:hover {
-      background: var(--secondary-color);
-    }
-  
-    span {
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: white;
+      background-color: #ff8370;
+      color: #000;
     }
   }
-  
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  color: #fff;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: var(--primary-color);
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--secondary-color);
+  }
+
+  span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+  }
+}

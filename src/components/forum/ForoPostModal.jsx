@@ -9,7 +9,7 @@ import { foroPost } from "../../utils/data";
 import GeneralService from '../../services/General.service';
 
 
-export function ForoPostModal({show, handleShow, currentUser, fetchData, setPage,setNewPost}){
+export function ForoPostModal({show, handleShow, currentUser, setPage,setNewPost}){
 
     const handlePost = (values) => {
         if(currentUser){

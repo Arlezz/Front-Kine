@@ -5,7 +5,7 @@ import { ForoBody } from '../forum/ForoBody';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faCalendar, faThumbsUp, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faCalendar, faThumbsUp, faComment, faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 import { ForoResponseButton } from '../forum/ForoResponseButton';
 import { ForoPostModal } from '../forum/ForoPostModal';
@@ -35,11 +35,12 @@ export function Foro({ toggleForoVisibility }) {
     const [activeIndex, setActiveIndex] = useState(null);
     const [newPost, setNewPost] = useState(null);	
     const [noResponses, setNoResponses] = useState(false); // Si no hay respuestas, se muestra un mensaje
+    const [email, setEmail] = useState(""); // Si no hay respuestas, se muestra un mensaje
 
-    const items = ["Reciente", "Antiguo", "Más Likes", "Menos Likes", "Más Comentarios", "Menos Comentarios"];
-    const icons = [faCalendar, faCalendar, faThumbsUp, faThumbsUp, faComment, faComment];
-    const filters = ["date", "date", "likes", "likes", "comments", "comments"];
-    const orders = ["desc", "asc", "desc", "asc", "desc", "asc"];
+    const items = ["Mio","Reciente", "Antiguo", "Más Likes", "Menos Likes", "Más Comentarios", "Menos Comentarios"];
+    const icons = [faCircleUser, faCalendar, faCalendar, faThumbsUp, faThumbsUp, faComment, faComment];
+    const filters = ["mine","date", "date", "likes", "likes", "comments", "comments"];
+    const orders = ["","desc", "asc", "desc", "asc", "desc", "asc"];
 
     const ref = useRef([]);
 
@@ -47,9 +48,9 @@ export function Foro({ toggleForoVisibility }) {
         setShow(!show);
     };
 
-    const fetchData = (type, order, page) => {
+    const fetchData = (type, order, page, email) => {
         setIsLoading(true);
-        GeneralService.getPosts(type, order, page, 6)
+        GeneralService.getPosts(type, order, page, 6, email)
             .then((data) => {
                 if (data.posts.length === 0) {
                     setNoResponses(true);
@@ -68,12 +69,12 @@ export function Foro({ toggleForoVisibility }) {
     };
 
     const loadInitialData = () => {
-        fetchData(selectedFilter, selectedOrder, page);
+        fetchData(selectedFilter, selectedOrder, page, email);
     };
 
     useEffect(() => {
         loadInitialData();        
-    }, [page, selectedFilter, selectedOrder]);
+    }, [page, selectedFilter, selectedOrder, email]);
 
 
     useEffect(() => {
@@ -90,22 +91,38 @@ export function Foro({ toggleForoVisibility }) {
     }, [newPost]);
 
     const handleFilterChange = (filter, order) => {
-        console.log("filter ",filter);
+        // Si el filtro es "mine" y no es el filtro actual
+        if (filter === "mine" && filter !== selectedFilter) {
+            setEmail(currentUser.email);
+            setSelectedFilter("date");
+            setSelectedOrder("desc");
+        } else {
+            // En cualquier otro caso
+            setEmail("");
+        }
+    
+        // Si la selección es la misma que la actual
         if (filter === selectedFilter && order === selectedOrder) {
-            if(selectedFilter !== "date" || selectedOrder !== "desc"){
+            // Si no es la configuración predeterminada
+            if (selectedFilter !== "date" || selectedOrder !== "desc") {
                 setSelectedFilter("date");
                 setSelectedOrder("desc");
-                setPosts([]);
-                return;        
-            }else{
+            } else {
+                console.log("No se hace nada");
                 return;
             }
+        } else {
+            // Si la selección es diferente
+            setSelectedFilter(filter);
+            setSelectedOrder(order);
         }
-        setSelectedFilter(filter);
-        setSelectedOrder(order);
+    
+        // Limpiar y actualizar posts y página
         setPosts([]);
         setPage(1);
     };
+    
+    
 
     const handleActive = (idx) => {
         if (idx === activeIndex) {
@@ -156,24 +173,24 @@ export function Foro({ toggleForoVisibility }) {
                 <h3 className={styles.sideSubtitle}>Escribe cualquier duda o consulta que tengas</h3>
             </div>
             <div id='foroBox' className={styles.sideForoBox}>
-                {noResponses ? (
-                <Empty /> // Render the "empty" component when there are no responses
-                ) : (
-                    <InfiniteScroll
-                        dataLength={posts.length}
-                        next={() => setPage((prevPage) => prevPage + 1)}
-                        hasMore={hasMore}
-                        height="calc(100vh - 25rem)"
-                        loader={<Spinner />}
-                        endMessage={
-                            <p className={styles.textHelper}>- Ya haz visto todo -</p>
-                        }
-                    >
-                        {posts.map((post, index) => (
-                            <ForoBody key={index} post={post} index={index} currentUser={currentUser} />
-                        ))}
-                    </InfiniteScroll>
-                )}
+            {noResponses ? (
+              <Empty /> // Render the "empty" component when there are no responses
+            ) : (
+                <InfiniteScroll
+                    dataLength={posts.length}
+                    next={() => setPage((prevPage) => prevPage + 1)}
+                    hasMore={hasMore}
+                    height="calc(100vh - 25rem)"
+                    loader={<Spinner />}
+                    endMessage={
+                        <p className={styles.textHelper}>- Ya haz visto todo -</p>
+                    }
+                >
+                    {posts.map((post, index) => (
+                        <ForoBody key={index} post={post} index={index} currentUser={currentUser} />
+                    ))}
+                </InfiniteScroll>
+            )}
             </div>
             <ForoResponseButton handleShow={handleShow} />
             <ForoPostModal setNewPost={setNewPost} show={show} handleShow={handleShow} fetchData={fetchData} currentUser={currentUser} />

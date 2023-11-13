@@ -1,8 +1,13 @@
-/* HistorialAdm.module.scss */
 
-/* ... Otros estilos ... */
+.tablaTitle {
+  display: flex;
+  flex-direction: row;
 
-/* Estilos para el contenido del modal */
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
 
 .modalContainer {
     display: flex;
@@ -96,6 +101,22 @@
 }
 
 /* ... Otros estilos ... */
+
+.sortContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  .inputSort {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: solid 0.1rem var(--primary-color);
+    border-radius: 0.5rem;
+  }
+}
 
 /* Estilos adicionales para botones de acción en la tabla, si es necesario */
 .actions {

@@ -20,18 +20,15 @@ export function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isProfesor, setIsProfesor] = useState(false);
   const [foroVisible, setForoVisible] = useState(false);
+  const [toggleSearchVisibility , setToggleSearchVisibility] = useState(true);
 
   const toggleForoVisibility = () => {
     setForoVisible(!foroVisible);
   };
 
 
-  /*useEffect(() => {
-    if(foroVisible) {
-      setForoVisible(false)
-    }
-  }, []);*/
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -40,6 +37,8 @@ export function App() {
       setIsLoading(false);
       if (user.role.includes("admin")) {
         setIsAdmin(true);
+      } else if( user.role.includes("profesor")){
+        setIsProfesor(true);
       }
     } else {
       setIsLoading(false);
@@ -60,14 +59,14 @@ export function App() {
 
   return (
     <Router>
-      {isLoggedIn && <NavBar toggleForoVisibility={toggleForoVisibility} foroVisible={foroVisible}/>}
+      {isLoggedIn && <NavBar toggleSearchVisibility={toggleSearchVisibility} toggleForoVisibility={toggleForoVisibility} foroVisible={foroVisible}/>}
       <div className={isLoggedIn ? styles.appContainer : null}>
         <Routes>
           <Route
             path="/"
             element={
               isLoggedIn ? (
-                <LandingPage setForoVisible={setForoVisible} foroVisible={foroVisible} toggleForoVisibility={toggleForoVisibility}/>
+                <LandingPage toggleSearchVisibility={toggleSearchVisibility} setToggleSearchVisibility={setToggleSearchVisibility} setForoVisible={setForoVisible} foroVisible={foroVisible} toggleForoVisibility={toggleForoVisibility}/>
               ) : (
                 <Credentials handleLogin={handleLogin} />
               )
@@ -76,14 +75,13 @@ export function App() {
           <Route
             path="/admin"
             element={
-              isLoggedIn && isAdmin ? (
-                <Administrador setForoVisible={setForoVisible}/>
+              isLoggedIn && (isAdmin || isProfesor) ? (
+                <Administrador setToggleSearchVisibility={setToggleSearchVisibility} setForoVisible={setForoVisible} />
               ) : (
                 <Navigate to="/" replace />
               )
             }
-          />
-
+          />s
           <Route path="/profile" element={<ProfileSetting setForoVisible={setForoVisible}/>} />
         </Routes>
       </div>

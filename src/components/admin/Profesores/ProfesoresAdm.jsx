@@ -17,6 +17,9 @@ export function ProfesoresAdm() {
   const [updateUser, setUpdateUser] = useState(false);
   const [addUser, setAddUser] = useState(false);
   const [showNuevoProfesorModal, setShowNuevoProfesorModal] = useState(false);
+  const [dataSaver, setDataSaver] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleAddProfesorModal = () => {
     setShowNuevoProfesorModal(!showNuevoProfesorModal);
@@ -49,13 +52,13 @@ export function ProfesoresAdm() {
 
   const deleteProfesor = (profesorEmail) => {
     UserService.deleteUser(profesorEmail)
-    .then((res) => {
+      .then((res) => {
         console.log(res);
         onUpdateUser();
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
-    });
+      });
   };
 
   const AlertButton = async (row) => {
@@ -74,24 +77,88 @@ export function ProfesoresAdm() {
     return;
   };
 
+  const onChange = async (e) => {
+    setName(e.target.value);
+    console.log(e);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.name
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
+  const onChange2 = async (e) => {
+    setEmail(e.target.value);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.email
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
   const columns = [
     {
-      name: "Nombre",
+      name: (
+        <div className={styles.sortContainer}>
+          Nombre
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+            value={name}
+            onChange={(e) => onChange(e)}
+            style={{ width: "100%" }}
+          />
+        </div>
+      ),
       selector: (row) => row.name,
-      sortable: true,
+      sortable: false,
     },
     {
-      name: "Correo",
+      name: (
+        <div className={styles.sortContainer}>
+          Correo
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+            value={email}
+            onChange={(e) => onChange2(e)}
+            style={{ width: "100%" }}
+          />
+        </div>
+      ),
       selector: (row) => row.email,
-      sortable: true,
+      sortable: false,
     },
     {
-      name: "Rol",
+      name: <div className={styles.sortContainer}>Rol</div>,
       selector: (row) => row.role,
-      sortable: true,
     },
     {
-      name: "Acciones",
+      name: <div className={styles.sortContainer}>Acciones</div>,
       selector: (row) => row._id,
       cell: (row) => (
         <div className={styles.actions}>
@@ -125,10 +192,14 @@ export function ProfesoresAdm() {
     );
   }, []);
 
+  const title = useMemo(() => {
+    return <h2 className={styles.tableHeader}>Profesores</h2>;
+  }, []);
+
   return (
     <>
-      <h2>Profesores</h2>
       <TableDatas
+        title={title}
         data={data}
         isLoading={isLoading}
         columns={columns}

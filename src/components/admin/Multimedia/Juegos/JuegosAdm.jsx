@@ -20,6 +20,9 @@ export function JuegosAdm({
   const [addJuego, setAddJuego] = useState(false);
   const [showNuevoJuegoModal, setShowNuevoJuegoModal] = useState(false);
   const [hoveredRow, setHoveredRow] = useState(null);
+  const [nombre , setNombre] = useState("");
+  const [dueño , setDueño] = useState("");
+  const [dataSaver, setDataSaver] = useState([]);
 
   const handleAddJuegoModal = () => {
     setShowNuevoJuegoModal(!showNuevoJuegoModal);
@@ -40,6 +43,7 @@ export function JuegosAdm({
     GeneralService.getGames()
       .then((res) => {
         setData(res);
+        setDataSaver(res);
       })
       .catch((err) => {
         console.log(err);
@@ -78,21 +82,75 @@ export function JuegosAdm({
     return;
   };
 
+  const onChange = async (e) => {
+    setNombre(e.target.value);
+    console.log(e);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.title
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
+  const onChange2 = async (e) => {
+    setDueño(e.target.value);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.user.name
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
   const columns = [
     {
-      name: "Nombre",
+      name: (
+        <div className={styles.sortContainer}>
+          Nombre
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={nombre}
+            onChange={(e) => onChange(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
       selector: (row) => row.title,
-      sortable: true,
+      sortable: false,
       wrap: true,
-    },
+  },
     {
-      name: "Descripción",
+      name: <div className={styles.sortContainer}>Descripción</div>,
       selector: (row) => row.description,
       sortable: true,
       maxWidth: "500px",
     },
     {
-      name: "URL",
+      name: <div className={styles.sortContainer}>Url</div>,
       selector: (row) => (
         <div
           onClick={() => handleCellClick(row)}
@@ -109,19 +167,32 @@ export function JuegosAdm({
       wrap: true,
     },
     {
-      name: "Dueño",
+      name: (
+        <div className={styles.sortContainer}>
+          Dueño
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={dueño}
+            onChange={(e) => onChange2(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
       selector: (row) => row.user.name,
-      sortable: true,
+      sortable: false,
       wrap: true,
-    },
+  },
     {
-      name: "Rol",
+      name: <div className={styles.sortContainer}>Rol</div>,
       selector: (row) => row.user.role,
       sortable: true,
       wrap: true,
     },
     {
-      name: "Acciones",
+      name: <div className={styles.sortContainer}>Acciones</div>,
       selector: (row) => row.id,
       center: true,
       cell: (row) => (
@@ -147,10 +218,14 @@ export function JuegosAdm({
     );
   }, []);
 
+  const title = useMemo(() => {
+    return <h2 className={styles.tableHeader}>Mis Juegos</h2>;
+  }, []);
+
   return (
     <>
-      <h2>Mis Juegos</h2>
       <TableDatas
+        title={title}
         data={data}
         isLoading={isLoading}
         columns={columns}

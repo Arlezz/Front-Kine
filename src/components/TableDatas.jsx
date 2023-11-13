@@ -4,12 +4,13 @@ import styles from './TableDatas.module.scss';
 import { Spinner } from '../components/Spinner';
 
 
-export function TableDatas({ columns, data, isLoading, actions, defaultSortField }) {
+export function TableDatas({ columns, data, isLoading, actions, defaultSortField, title}) {
     
     
 
     return (
         <DataTable
+            title={title}   
             columns={columns}
             data={data}
             highlightOnHover
