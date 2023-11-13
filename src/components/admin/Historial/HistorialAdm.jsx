@@ -15,6 +15,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
   const [selectedReference, setSelectedReference] = useState(null);
   const [email , setEmail] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
+  const [fecha, setFecha] = useState("");
 
   useEffect(() => {
     GeneralService.getHistorial()
@@ -63,6 +64,27 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
     }
   };
 
+  const onChange2 = async (e) => {
+    setFecha(e.target.value);
+    console.log(e);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.date
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
 
   const columns = [
     {
@@ -86,10 +108,24 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
       label: "Correo Electrónico",
     },
     {
-      name: <div className={styles.sortContainer}>Fecha</div>,
+      name: (
+        <div className={styles.sortContainer}>
+          Fecha
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={fecha}
+            onChange={(e) => onChange2(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
       selector: (row) => row.date,
       sortable: true,
-      label: "Fecha",
+      wrap: true,
+      label: "Correo Electrónico",
     },
     {
       name: <div className={styles.sortContainer}>Acción</div>,

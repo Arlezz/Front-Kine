@@ -39,7 +39,6 @@ const deleteGame = (id,email) => {
 
 
 const getPosts = (type,order,pageNumber,batch,email) => {
-    console.log(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}&email=${email}`);
     return get(`posts?sortType=${type}&sortDirection=${order}&pageNumber=${pageNumber}&pageSize=${batch}&email=${email}`);
 }
 
@@ -53,6 +52,10 @@ const delPost = (id,email) => {
 
 const getComements = () => {
     return get("comments");
+}
+
+const getAllMyComments = (email) => {
+    return get(`comments?email=${email}`);
 }
 
 const delComment = (id,email) => {
@@ -225,6 +228,7 @@ const GeneralService = {
     getProfesores,
     getPosts,
     getAllPosts,
+    getAllMyComments,
     getComements,
     getPostsComments,
     getHistorial,

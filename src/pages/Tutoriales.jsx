@@ -22,9 +22,9 @@ export function Tutoriales() {
     const [descriptionHeight, setDescriptionHeight] = useState(null);
 
     const handleThumbnailClick = (video) => {
-        setSelectedVideo(video);
-        setDescriptionExpanded(false);
-        setDescriptionHeight(null);
+            setSelectedVideo(video);
+            setDescriptionExpanded(false);
+            setDescriptionHeight(null);
     };
 
     useEffect(() => {
@@ -37,6 +37,10 @@ export function Tutoriales() {
                 setHasMore(false);
             }
         })
+        .catch((error) => {
+            console.error(error);
+        });
+
     }, []);
 
     const fetchMoreData = () => {
@@ -92,7 +96,7 @@ export function Tutoriales() {
                     <div className={styles.scrollHorizontal}>
                         {videosToDisplay.map((video, index) => (
                             <div id={video._id}  className={styles.thumbailContainer} key={index}>
-                                <Thumbnails  video={video} handleThumbnailClick={handleThumbnailClick} index={index}/>
+                                <Thumbnails video={video} handleThumbnailClick={handleThumbnailClick} index={index}/>
                                 <hr />
                             </div>
                         ))}

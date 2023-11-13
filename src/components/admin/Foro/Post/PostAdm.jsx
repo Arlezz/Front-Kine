@@ -15,21 +15,46 @@ export function PostAdm({ updatePost, onUpdatePost }) {
   const [post, setPost] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
   const [dueño, setDueño] = useState("");
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
-    GeneralService.getAllPosts()
-      .then((res) => {
-        console.log("Los posts ", res.posts);
-        setDataSaver(res.posts);
-        setData(res.posts);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [updatePost]);
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Verificar si el usuario tiene el rol de "profesor"
+      if (currentUser && currentUser.role === "profesor") {
+        try {
+          const res = await GeneralService.getPosts("date","desc",1,6,currentUser.email);
+          setData(res.posts);
+          setDataSaver(res.posts);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        // Si el usuario no es profesor, realiza la lógica para obtener todos los tutoriales
+        try {
+          const res = await GeneralService.getAllPosts();
+          setData(res.posts);
+          setDataSaver(res.posts);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+  
+    // Llamar a la función fetchData
+    fetchData();
+  
+  }, [updatePost, currentUser]);
 
   const deletePost = (tutorialId) => {
     const user = AuthService.getCurrentUser();

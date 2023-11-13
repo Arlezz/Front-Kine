@@ -15,8 +15,49 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
   const [comentario, setComentario] = useState("");
   const [dueño, setDueño] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Verificar si el usuario tiene el rol de "profesor"
+      if (currentUser && currentUser.role === "profesor") {
+        try {
+          const res = await GeneralService.getAllMyComments(currentUser.email);
+          setData(res);
+          setDataSaver(res);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        // Si el usuario no es profesor, realiza la lógica para obtener todos los tutoriales
+        try {
+          const res = await GeneralService.getComements();
+          setData(res);
+          setDataSaver(res);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+  
+    // Llamar a la función fetchData
+    fetchData();
+  
+  }, [updateCommetario, currentUser]);
+
+
+  /*useEffect(() => {
     GeneralService.getComements()
       .then((res) => {
         console.log("comentarios ", res);
@@ -29,7 +70,7 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [updateCommetario]);
+  }, [updateCommetario]);*/
 
   const deletePost = (tutorialId) => {
     const user = AuthService.getCurrentUser();

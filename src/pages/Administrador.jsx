@@ -18,9 +18,6 @@ export function Administrador({ setForoVisible, setToggleSearchVisibility }) {
   const [updateCommetario, setUpdateComentario] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
 
-  useEffect(() => {
-    
-  }, []);
 
   const onUpdateTutorial = () => {
     setUpdateTutorial(!updateTutorial);
@@ -88,7 +85,6 @@ export function Administrador({ setForoVisible, setToggleSearchVisibility }) {
         {currentUser && currentUser.role && (currentUser.role.includes("profesor") || currentUser.role.includes("admin")) && (
           <Tab eventKey="multimedia" title="Administrar Multimedia">
             <MultimediaAdm
-              currentUser={currentUser}
               updateTutorial={updateTutorial}
               onUpdateTutorial={onUpdateTutorial}
               updateJuego={updateJuego}
