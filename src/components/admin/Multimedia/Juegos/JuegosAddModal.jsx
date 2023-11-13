@@ -49,7 +49,7 @@ export function JuegosAddModal({ show, handleShow, onAddJuego }) {
               errors.url = "La URL no puede tener más de 500 caracteres";
             } else if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(values.url)) {
               errors.url = "La URL no es válida";
-          }
+            }
           
 
             if (!values.titulo) {
