@@ -1,4 +1,4 @@
-import { get, post, del, put } from '../utils/httpClient';
+import { del, put } from '../utils/httpClient';
 
 
 const updateUserName = (email,name) => {

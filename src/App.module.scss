@@ -9,6 +9,17 @@
   height: 100vh;
   width: 100vw;
   padding-top: var(--navbar-height);
+  
+}
+
+.login {
+  background-image: linear-gradient(to right top, #001d50, #253765, #435479, #62718d, #848fa1);
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 600px) {

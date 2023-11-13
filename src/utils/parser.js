@@ -1,4 +1,3 @@
-// linkUtils.js
 
 export function convertURLsToLinks(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;

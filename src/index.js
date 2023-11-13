@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 import {App} from "./App";
-//require("dotenv").config()
 
 
 const rootElement = document.getElementById('root');

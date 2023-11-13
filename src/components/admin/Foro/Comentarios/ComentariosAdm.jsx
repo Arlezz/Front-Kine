@@ -57,20 +57,6 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
   }, [updateCommetario, currentUser]);
 
 
-  /*useEffect(() => {
-    GeneralService.getComements()
-      .then((res) => {
-        console.log("comentarios ", res);
-        setDataSaver(res);
-        setData(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [updateCommetario]);*/
 
   const deletePost = (tutorialId) => {
     const user = AuthService.getCurrentUser();

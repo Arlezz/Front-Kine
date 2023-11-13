@@ -1,9 +1,5 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 
-import styles from "./ForgotPassword.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { SendMail } from "../components/SendMail";
 import { ChangePassword } from "../components/ChangePassword";
 

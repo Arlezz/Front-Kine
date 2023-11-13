@@ -60,7 +60,7 @@ export function App() {
   return (
     <Router>
       {isLoggedIn && <NavBar toggleSearchVisibility={toggleSearchVisibility} toggleForoVisibility={toggleForoVisibility} foroVisible={foroVisible}/>}
-      <div className={isLoggedIn ? styles.appContainer : null}>
+      <div className={isLoggedIn ? styles.appContainer : styles.login}>
         <Routes>
           <Route
             path="/"

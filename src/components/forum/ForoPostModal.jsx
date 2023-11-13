@@ -5,7 +5,6 @@ import styles from './ForoPostModal.module.scss';
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ForoResponseButton } from '../forum/ForoResponseButton';
-import { foroPost } from "../../utils/data"; 
 import GeneralService from '../../services/General.service';
 
 

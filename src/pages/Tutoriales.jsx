@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from './Tutoriales.module.scss';
-import { tutorials } from "../utils/data";
 import { MainVideoCard } from "../components/media/MainVideoCard";
 
 

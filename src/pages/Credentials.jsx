@@ -12,15 +12,11 @@ export function Credentials({handleLogin}) {
         setForgotPass(!forgotPass);
     }
 
-
-
-
     return (
         <div className={styles.credentials}>
             {
                 forgotPass?  <ForgotPassword handleForgotPass={handleForgotPass}/> : <Login  handleLogin={handleLogin} handleForgotPass={handleForgotPass}/> 
             }
-            
         </div>
     );
 }

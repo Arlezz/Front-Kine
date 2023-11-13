@@ -249,7 +249,6 @@ const GeneralService = {
     dislikeComments,
     hasLikedPost,
     hasLikedComments,
-    
 };
 
 export default GeneralService;

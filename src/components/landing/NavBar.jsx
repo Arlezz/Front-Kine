@@ -14,6 +14,10 @@ import {
   faGears,
   faAddressCard,
   faRightFromBracket,
+  faHouse,
+  faChildReaching,
+  faChalkboardUser,
+  faGamepad,
 } from "@fortawesome/free-solid-svg-icons";
 
 export function NavBar({
@@ -27,11 +31,38 @@ export function NavBar({
     if (foroVisible) {
       toggleForoVisibility();
     }
+    scrollToSection("tutoriales");
+  };
+
+  const toTutorials = () => {
+    if (foroVisible) {
+      toggleForoVisibility();
+    }
+    setTimeout(() => {
+      scrollToSection("tutoriales");
+    }, 50);
+  };
+
+  const toGames = () => {
+    if (foroVisible) {
+      toggleForoVisibility();
+    }
+    setTimeout(() => {
+      scrollToSection("juegos");
+    }, 50);
+  };
+
+  const toCapsules = () => {
+    if (foroVisible) {
+      toggleForoVisibility();
+    }
+    setTimeout(() => {
+      scrollToSection("capsulas");
+    }, 50);
   };
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
-    console.log("EL USUARIO ES ", user);
 
     if (user) {
       setCurrentUser(user);
@@ -66,7 +97,7 @@ export function NavBar({
             <Link
               className={styles.linkContent}
               to="/"
-              onClick={() => scrollToSection("tutoriales")}
+              onClick={() => toTutorials()}
             >
               <h2 className={styles.textNav}>Tutoriales</h2>
             </Link>
@@ -75,7 +106,7 @@ export function NavBar({
             <Link
               className={styles.linkContent}
               to="/"
-              onClick={() => scrollToSection("capsulas")}
+              onClick={() => toCapsules()}
             >
               <h2 className={styles.textNav}>Capsulas</h2>
             </Link>
@@ -84,7 +115,7 @@ export function NavBar({
             <Link
               className={styles.linkContent}
               to="/"
-              onClick={() => scrollToSection("juegos")}
+              onClick={() => toGames()}
             >
               <h2 className={styles.textNav}>Juegos</h2>
             </Link>
@@ -99,8 +130,8 @@ export function NavBar({
 
               {currentUser.role.includes("profesor") && (
                 <Link className={styles.linkContent} to="/admin">
-                <h2 className={styles.textNav}>Avanzado</h2>
-              </Link>
+                  <h2 className={styles.textNav}>Avanzado</h2>
+                </Link>
               )}
             </div>
           )}
@@ -129,19 +160,20 @@ export function NavBar({
               <Dropdown.Menu className={styles.dropdownOptions}>
                 <Dropdown.Item
                   as={Link}
-                  to="/profile"
+                  to="/"
                   className={styles.dropdownLink}
+                  onClick={() => toTutorials()}
                 >
                   <div className={styles.dropdownItem}>
                     <FontAwesomeIcon
-                      icon={faAddressCard}
+                      icon={faHouse}
                       className={styles.dropdownOptionIcon}
                     />
-                    <span>Perfil</span>
+                    <span>Inicio</span>
                   </div>
                 </Dropdown.Item>
-                <Dropdown.Divider />
                 <div className={styles.foroLink}>
+                <Dropdown.Divider />
                   <Dropdown.Item
                     as={Link}
                     className={styles.dropdownLink}
@@ -156,8 +188,68 @@ export function NavBar({
                       <span>Foro</span>
                     </div>
                   </Dropdown.Item>
-                  <Dropdown.Divider />
                 </div>
+                <div className={styles.foroLink}>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    as={Link}
+                    className={styles.dropdownLink}
+                    onClick={() => toTutorials()}
+                    to="/"
+                  >
+                    <div className={styles.dropdownItem}>
+                      <FontAwesomeIcon
+                        icon={faChildReaching}
+                        className={styles.dropdownOptionIcon}
+                      />
+                      <span>Tutoriales</span>
+                    </div>
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={Link}
+                    className={styles.dropdownLink}
+                    onClick={() => toCapsules()}
+                    to="/"
+                  >
+                    <div className={styles.dropdownItem}>
+                      <FontAwesomeIcon
+                        icon={faChalkboardUser}
+                        className={styles.dropdownOptionIcon}
+                      />
+                      <span>Capsulas</span>
+                    </div>
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as={Link}
+                    className={styles.dropdownLink}
+                    onClick={() => toGames()}
+                    to="/"
+                  >
+                    <div className={styles.dropdownItem}>
+                      <FontAwesomeIcon
+                        icon={faGamepad}
+                        className={styles.dropdownOptionIcon}
+                      />
+                      <span>Juegos</span>
+                    </div>
+                  </Dropdown.Item>
+                </div>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  as={Link}
+                  to="/profile"
+                  className={styles.dropdownLink}
+                >
+                  <div className={styles.dropdownItem}>
+                    <FontAwesomeIcon
+                      icon={faAddressCard}
+                      className={styles.dropdownOptionIcon}
+                    />
+                    <span>Perfil</span>
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Divider />
+
 
                 {currentUser &&
                   currentUser.role &&

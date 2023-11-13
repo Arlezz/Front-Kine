@@ -11,6 +11,9 @@
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
+
+
+  
   .titeContainer {
     display: flex;
     flex-direction: column;
@@ -106,7 +109,6 @@
     .forgotContainer {
       display: flex;
       justify-content: center;
-      gap: 0.5rem;
 
       .forgotPassword {
         font-size: 1.3rem;
@@ -116,6 +118,8 @@
         cursor: pointer;
         transition: 0.3s;
         color: var(--primary-color);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
 
         &:hover {
           color: var(--secondary-color);
@@ -139,4 +143,26 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 900px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+
+}
+
+@media screen and (max-width: 630px) {
+
+}
+
+@media screen and (max-width: 520px) {
+
+}
+
+@media screen and (max-width: 480px) {
+
+
 }

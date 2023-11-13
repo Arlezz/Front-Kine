@@ -6,6 +6,12 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 
 export function SendMail({handleForgotPass, handleSendMail}) {
+
+  const sendMailToVerify = (values) => {
+    console.log(values);
+    handleSendMail();
+  }
+
   return (
     <div className={styles.sendMailContent}>
       <div className={styles.backButtonContainer}>
@@ -47,7 +53,7 @@ export function SendMail({handleForgotPass, handleSendMail}) {
           return errors;
         }}
         onSubmit={(values) => {
-          //handleSession(values);
+          sendMailToVerify(values);
         }}
       >
         <Form className={styles.sendMailForm}>
@@ -67,7 +73,7 @@ export function SendMail({handleForgotPass, handleSendMail}) {
             />
           </div>
 
-          <button className={styles.sendMailButton} onClick={handleSendMail}>Enviar</button>
+          <button type="submit" className={styles.sendMailButton}>Enviar</button>
         </Form>
       </Formik>
     </div>
