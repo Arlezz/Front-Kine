@@ -47,9 +47,10 @@ export function JuegosAddModal({ show, handleShow, onAddJuego }) {
               errors.url = "Ingrese una URL";
             } else if (values.url.length > 600) {
               errors.url = "La URL no puede tener más de 500 caracteres";
-            } else if (!/^(https:\/\/www\.youtube\.com\/watch\?v=).+$/.test(values.url)) {
+            } else if (!/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(values.url)) {
               errors.url = "La URL no es válida";
-            }
+          }
+          
 
             if (!values.titulo) {
               errors.titulo = "Ingrese un título";
@@ -108,7 +109,7 @@ export function JuegosAddModal({ show, handleShow, onAddJuego }) {
                 />
               </div>
               <div>
-                <span className={styles.formLabel}>Descripción del Juego (YouTube)</span>
+                <span className={styles.formLabel}>Descripción del Juego</span>
                 <Field
                   className={`${styles.formInput} ${styles.textArea}`}
                   id="descripcion"

@@ -24,6 +24,7 @@ export function TutorialesAdm({
   const [nombre , setNombre] = useState("");
   const [dueño , setDueño] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   const handleAddTutorialModal = () => {
     setShowNuevoTutorialModal(!showNuevoTutorialModal);
@@ -39,20 +40,46 @@ export function TutorialesAdm({
     onUpdateTutorial()
   };
 
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+
 
   useEffect(() => {
-    GeneralService.getTutorials()
-      .then((res) => {
-        setData(res);
-        setDataSaver(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [updateTutorial, addTutorial]);
+    const fetchData = async () => {
+      // Verificar si el usuario tiene el rol de "profesor"
+      if (currentUser && currentUser.role === "profesor") {
+        try {
+          const res = await GeneralService.getMiTutorials(currentUser.email);
+          setData(res);
+          setDataSaver(res);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        // Si el usuario no es profesor, realiza la lógica para obtener todos los tutoriales
+        try {
+          const res = await GeneralService.getTutorials();
+          setData(res);
+          setDataSaver(res);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+  
+    // Llamar a la función fetchData
+    fetchData();
+  
+  }, [updateTutorial, addTutorial, currentUser]);
 
   const deleteTutorial = (tutorialId) => {
 
@@ -183,12 +210,12 @@ export function TutorialesAdm({
           />
         </div>
       ),
-      selector: (row) => row.user.name,
+      selector: (row) => currentUser.role==="profesor"? currentUser.name : row.user.name,
       sortable: false,
   },
     {
       name: <div className={styles.sortContainer}>Rol</div>,
-      selector: (row) => row.user.role,
+      selector: (row) => currentUser.role==="profesor"? currentUser.role : row.user.role,
       sortable: true,
       //maxWidth: "500px",
       wrap: true,

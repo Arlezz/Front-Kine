@@ -54,7 +54,6 @@ export function Administrador({ setForoVisible, setToggleSearchVisibility }) {
     setForoVisible(false);
   }, []);
 
-  const isProfesor = currentUser && currentUser.role && currentUser.role.includes("profesor");
 
   return (
     <div className={styles.administradorContent}>
@@ -89,6 +88,7 @@ export function Administrador({ setForoVisible, setToggleSearchVisibility }) {
         {currentUser && currentUser.role && (currentUser.role.includes("profesor") || currentUser.role.includes("admin")) && (
           <Tab eventKey="multimedia" title="Administrar Multimedia">
             <MultimediaAdm
+              currentUser={currentUser}
               updateTutorial={updateTutorial}
               onUpdateTutorial={onUpdateTutorial}
               updateJuego={updateJuego}

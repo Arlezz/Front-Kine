@@ -9,7 +9,7 @@ import { CapsulasAdm } from "./Capsulas/CapsulasAdm";
 import { JuegosAdm } from "./Juegos/JuegosAdm";
 
 
-export function MultimediaAdm({updateTutorial, onUpdateTutorial, updateJuego, onUpdateJuego, updateCapsula, onUpdateCapsula}) {
+export function MultimediaAdm({currentUser, updateTutorial, onUpdateTutorial, updateJuego, onUpdateJuego, updateCapsula, onUpdateCapsula}) {
     const [key, setKey] = useState("tutoriales");
 
     return (
@@ -24,17 +24,17 @@ export function MultimediaAdm({updateTutorial, onUpdateTutorial, updateJuego, on
         >
           <Tab eventKey="tutoriales" title="Administrar Tutoriales">
             <div>
-              <TutorialesAdm updateTutorial={updateTutorial} onUpdateTutorial={onUpdateTutorial}/>
+              <TutorialesAdm currentUser={currentUser} updateTutorial={updateTutorial} onUpdateTutorial={onUpdateTutorial}/>
             </div>
           </Tab>
           <Tab eventKey="capsulas" title="Administrar Capsulas">
             <div>
-              <CapsulasAdm updateCapsula={updateCapsula} onUpdateCapsula={onUpdateCapsula}/>
+              <CapsulasAdm currentUser={currentUser} updateCapsula={updateCapsula} onUpdateCapsula={onUpdateCapsula}/>
             </div>
           </Tab>
           <Tab eventKey="juegos" title="Administrar juegos">
             <div>
-              <JuegosAdm updateJuego={updateJuego} onUpdateJuego={onUpdateJuego}/>
+              <JuegosAdm currentUser={currentUser} updateJuego={updateJuego} onUpdateJuego={onUpdateJuego}/>
             </div>
           </Tab>
         </Tabs>

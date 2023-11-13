@@ -23,6 +23,8 @@ export function JuegosAdm({
   const [nombre , setNombre] = useState("");
   const [dueño , setDueño] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
 
   const handleAddJuegoModal = () => {
     setShowNuevoJuegoModal(!showNuevoJuegoModal);
@@ -40,6 +42,13 @@ export function JuegosAdm({
 
 
   useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  /*useEffect(() => {
     GeneralService.getGames()
       .then((res) => {
         setData(res);
@@ -51,7 +60,39 @@ export function JuegosAdm({
       .finally(() => {
         setIsLoading(false);
       });
-  }, [updateJuego, addJuego]);
+  }, [updateJuego, addJuego]);*/
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Verificar si el usuario tiene el rol de "profesor"
+      if (currentUser && currentUser.role === "profesor") {
+        try {
+          const res = await GeneralService.getMiGames(currentUser.email);
+          setData(res);
+          setDataSaver(res);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        // Si el usuario no es profesor, realiza la lógica para obtener todos los juegos
+        try {
+          const res = await GeneralService.getGames();
+          setData(res);
+          setDataSaver(res);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+  
+    // Llamar a la función fetchData
+    fetchData();
+  
+  }, [updateJuego, addJuego, currentUser]);
 
   const deleteGame = (juegoId) => {
     const user = AuthService.getCurrentUser();
@@ -181,13 +222,13 @@ export function JuegosAdm({
           />
         </div>
       ),
-      selector: (row) => row.user.name,
+      selector: (row) => currentUser.role==="profesor"? currentUser.name : row.user.name,
       sortable: false,
       wrap: true,
   },
     {
       name: <div className={styles.sortContainer}>Rol</div>,
-      selector: (row) => row.user.role,
+      selector: (row) => currentUser.role==="profesor"? currentUser.role : row.user.role,
       sortable: true,
       wrap: true,
     },

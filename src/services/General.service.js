@@ -192,6 +192,19 @@ const searchContent = (contentName) => {
     return get(`browse?q=${contentName}`);
 }
 
+const getMiTutorials = (email) => {
+    return get(`tutorials/${email}`);
+}
+
+const getMiCapsules = (email) => {
+    return get(`capsules/${email}`);
+}
+
+const getMiGames = (email) => {
+    return get(`games/${email}`);
+}
+
+
 
 const GeneralService = {
     searchTutorial,
@@ -215,6 +228,9 @@ const GeneralService = {
     getComements,
     getPostsComments,
     getHistorial,
+    getMiTutorials,
+    getMiCapsules,
+    getMiGames,
 
     deleteTutorial,
     deleteCapsule,
