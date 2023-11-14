@@ -79,7 +79,7 @@ export function SearchBar({setOnBlur, onBlur, setResults, handleShowModalResults
             style={{width: width}}  
             autoFocus={autoFocus}
             onChange={(e) => handleChange(e.target.value)}
-            onClick={handleShowModalResults}s
+            onClick={handleShowModalResults}
           />
           <button className={styles.searchButton} onClick={handleShowModalResults}>
             <FaSearch className={styles.icon} />
