@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./AlumnosEditModal.module.scss";
 import UserService from "../../../services/User.service";
 
-export function AlumnosEditModal({ show, handleShow, userData,onUpdateUser }) {
-
+export function AlumnosEditModal({ show, handleShow, userData, onUpdateUser }) {
   const handleSave = (values) => {
     UserService.updateUserName(userData.email, values.name)
       .then((response) => {
@@ -17,9 +18,7 @@ export function AlumnosEditModal({ show, handleShow, userData,onUpdateUser }) {
       .catch((error) => {
         console.log(error.response.data.message);
       });
-    
   };
-
 
   const initialValues = {
     name: userData && userData.name ? userData.name : "",
@@ -30,6 +29,11 @@ export function AlumnosEditModal({ show, handleShow, userData,onUpdateUser }) {
   return (
     <Modal show={show} onHide={handleShow}>
       <div className={styles.modalContainer}>
+        <div className={styles.closeButtonContainer}>
+          <div className={styles.closeButton} onClick={handleShow}>
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
+        </div>
         <h2 className={styles.modalEditTitle}>Editar Alumno</h2>
         <Formik
           initialValues={initialValues}
@@ -41,7 +45,7 @@ export function AlumnosEditModal({ show, handleShow, userData,onUpdateUser }) {
             handleSave(values);
           }}
         >
-          {({ }) => (
+          {({}) => (
             <Form className={styles.inputsFields}>
               <div>
                 <span className={styles.formLabel}>Nombre</span>

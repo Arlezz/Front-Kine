@@ -3,6 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button } from "react-bootstrap";
 import styles from "./ProfesoresEditModal.module.scss"; // Asegúrate de tener el nombre correcto del archivo de estilos
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import UserService from "../../../services/User.service";
 
@@ -28,6 +30,11 @@ export function ProfesoresEditModal({ show, handleShow, userData, onUpdateUser }
   return (
     <Modal show={show} onHide={handleShow}>
       <div className={styles.modalContainer}>
+      <div className={styles.closeButtonContainer}>
+          <div className={styles.closeButton} onClick={handleShow}>
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
+        </div>
         <h2 className={styles.modalEditTitle}>Editar Profesor</h2>
         <Formik
           initialValues={initialValues}

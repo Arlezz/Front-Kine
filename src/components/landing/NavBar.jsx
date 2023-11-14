@@ -147,10 +147,11 @@ export function NavBar({
           <div className={styles.right}>
             <Dropdown as={ButtonGroup}>
               <div className={styles.dropdownButon}>
-                <span>
+                
+                <Dropdown.Toggle>
+                <span className={styles.dropDownText}>
                   {currentUser ? currentUser.name : <span>usuario</span>}
                 </span>
-                <Dropdown.Toggle>
                   <FontAwesomeIcon
                     icon={faBars}
                     className={styles.dropdownIcon}

@@ -6,6 +6,35 @@
   padding: 3rem;
 }
 
+.closeButtonContainer {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  //display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  .closeButton {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: 1rem;
+      border: solid 1px #cf2e15;
+      border-radius: .5rem;
+      padding: .1rem;
+
+      svg {
+          width: 2.5rem;
+          height: 2.5rem;
+          color: #cf2e15;
+
+          &:hover {
+              cursor: pointer;
+          }
+      }
+  }
+}
+
 .modalEditTitle {
   font-size: 2.5rem;
   font-weight: 600;

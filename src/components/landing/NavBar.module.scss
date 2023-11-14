@@ -82,11 +82,6 @@
       gap: 3rem;
 
       .dropdownButon {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: #fff;
-
         button {
           margin: 0;
           padding: 0;
@@ -94,6 +89,7 @@
           background: transparent !important;
           display: flex;
           align-items: center;
+          gap: 1rem;    
         }
 
         span {
