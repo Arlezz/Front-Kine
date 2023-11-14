@@ -123,6 +123,11 @@
         &:hover {
           background: var(--secondary-color);
         }
+
+        &:disabled {
+          background: #ccc;
+          cursor: not-allowed;
+        }
       }
     }
   }

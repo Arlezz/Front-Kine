@@ -87,7 +87,6 @@ export function TutorialesAdm({
 
     GeneralService.deleteTutorial(tutorialId, user.email)
       .then((res) => {
-        console.log(res);
         onUpdateTutorial();
       })
       .catch((err) => {
@@ -113,7 +112,6 @@ export function TutorialesAdm({
 
   const onChange = async (e) => {
     setNombre(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.title

@@ -25,13 +25,6 @@ const register = (email, name, role) => {
         });
 };
 
-
-const recovery = (email) => {
-    return post(API_URL + "recover", {
-            email
-    });
-}
-
 const logout = () => {
     localStorage.removeItem("user");
 };
@@ -40,11 +33,30 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
 };
 
+const recoverPassword = (email) => {
+    return post(`passwordRecovery?email=${email}`)
+        .then((response) => {
+            return response;
+        });
+};
+
+const changePasswordWithCode = (email, passwordRecoveryCode, newPassword) => {
+    return post(`updatePasswordWithCode`, {
+            email,
+            passwordRecoveryCode,
+            newPassword
+        })
+        .then((response) => {
+            return response;
+        });
+}
+
 const AuthService = {
     register,
     login,
-    recovery,
     logout,
+    recoverPassword,
+    changePasswordWithCode,
     getCurrentUser,
 };
 

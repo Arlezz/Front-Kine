@@ -60,7 +60,6 @@ export function PostAdm({ updatePost, onUpdatePost }) {
     const user = AuthService.getCurrentUser();
     GeneralService.delPost(tutorialId, user.email)
       .then((res) => {
-        console.log(res);
         onUpdatePost();
       })
       .catch((err) => {
@@ -86,7 +85,6 @@ export function PostAdm({ updatePost, onUpdatePost }) {
 
   const onChange = async (e) => {
     setPost(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.title

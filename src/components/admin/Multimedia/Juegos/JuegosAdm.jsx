@@ -48,19 +48,7 @@ export function JuegosAdm({
     }
   }, []);
 
-  /*useEffect(() => {
-    GeneralService.getGames()
-      .then((res) => {
-        setData(res);
-        setDataSaver(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [updateJuego, addJuego]);*/
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,7 +87,6 @@ export function JuegosAdm({
 
     GeneralService.deleteGame (juegoId,user.email)
       .then((res) => {
-        console.log(res);
         onUpdateJuego();
       })
       .catch((err) => {
@@ -125,7 +112,6 @@ export function JuegosAdm({
 
   const onChange = async (e) => {
     setNombre(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.title

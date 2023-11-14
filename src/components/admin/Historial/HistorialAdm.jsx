@@ -20,7 +20,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
   useEffect(() => {
     GeneralService.getHistorial()
       .then((res) => {
-        console.log(res);
         setData(res);
         setDataSaver(res);
       })
@@ -45,7 +44,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
 
   const onChange = async (e) => {
     setEmail(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.email

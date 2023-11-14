@@ -57,7 +57,6 @@ export function Capsulas() {
     const fetchMoreData = () => {
         const visibleVideos = videosToDisplay.length;
         const newVideosToDisplay = capsules.slice(visibleVideos, visibleVideos + 2);
-        console.log(newVideosToDisplay);
         
         if (newVideosToDisplay.length === 0) {
             setHasMore(false);

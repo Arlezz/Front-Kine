@@ -21,7 +21,6 @@ export function TutorialesAddModal({ show, handleShow, onAddTutorial }) {
     const user = AuthService.getCurrentUser();
     GeneralService.uploadTutorials(user.email,values.url)
     .then((response) => {
-      console.log(response);
       onAddTutorial();
       handleShow();
     })

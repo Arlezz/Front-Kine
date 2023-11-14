@@ -149,7 +149,6 @@ export function CommentBody({
             <div
               className={styles.commentIcon}
               onClick={() => {
-                //console.log("Respondiendo a ", response.user.name);
                 setHasResponsed(true);
                 setResponsed(response);
               }}

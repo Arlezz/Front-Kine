@@ -84,7 +84,6 @@ export function ForoResponseModal({
   };
 
   const handleResponse = (values, resetForm) => {
-    console.log(values);
 
     if(!hasResponsed){
       GeneralService.uploadComment(post._id, currentUser.email, values.response)
@@ -96,7 +95,6 @@ export function ForoResponseModal({
         setResponsed({});
         setPostComments((prevComments) => prevComments + 1);
         resetForm();
-        console.log("RESPUESTA ENVIADA al post ", post._id);
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -110,9 +108,7 @@ export function ForoResponseModal({
       setHasMore(true);
       setResponseToDisplay([]);
       setResponsed({});
-      //setPostComments((prevComments) => prevComments + 1);
       resetForm();
-      console.log("RESPUESTA ENVIADA al comentario ", responsed._id);
     }
     );
   };

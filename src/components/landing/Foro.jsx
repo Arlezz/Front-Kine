@@ -108,7 +108,6 @@ export function Foro({ toggleForoVisibility }) {
                 setSelectedFilter("date");
                 setSelectedOrder("desc");
             } else {
-                console.log("No se hace nada");
                 return;
             }
         } else {

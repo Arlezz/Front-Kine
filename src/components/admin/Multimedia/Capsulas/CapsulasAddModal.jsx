@@ -18,7 +18,6 @@ export function CapsulasAddModal({ show, handleShow, onAddCapsula }) {
     const user = AuthService.getCurrentUser();
     GeneralService.uploadCapsules(user.email, values.url)
       .then((response) => {
-        console.log(response);
         onAddCapsula();
         handleShow();
       })

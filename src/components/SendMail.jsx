@@ -3,14 +3,15 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./SendMail.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import AuthService from "../services/Auth.service";
 
-
-export function SendMail({handleForgotPass, handleSendMail}) {
-
+export function SendMail({ handleForgotPass, handleSendMail, setMail }) {
   const sendMailToVerify = (values) => {
-    console.log(values);
-    handleSendMail();
-  }
+    AuthService.recoverPassword(values.email).then((response) => {
+      setMail(values.email);
+      handleSendMail();
+    });
+  };
 
   return (
     <div className={styles.sendMailContent}>
@@ -56,25 +57,31 @@ export function SendMail({handleForgotPass, handleSendMail}) {
           sendMailToVerify(values);
         }}
       >
-        <Form className={styles.sendMailForm}>
-          <div className={styles.sendMailInputContainer}>
-            <span className={styles.formLabel}>Usuario</span>
-            <Field
-              className={styles.sendMailInput}
-              type="text"
-              placeholder="Correo Insttitucional"
-              name="email"
-              id="email"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className={styles.errorText}
-            />
-          </div>
+        {({
+          isSubmitting,
+        }) => (
+          <Form className={styles.sendMailForm}>
+            <div className={styles.sendMailInputContainer}>
+              <span className={styles.formLabel}>Usuario</span>
+              <Field
+                className={styles.sendMailInput}
+                type="text"
+                placeholder="Correo Insttitucional"
+                name="email"
+                id="email"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className={styles.errorText}
+              />
+            </div>
 
-          <button type="submit" className={styles.sendMailButton}>Enviar</button>
-        </Form>
+            <button type="submit" disabled={isSubmitting} className={styles.sendMailButton}>
+              Enviar
+            </button>
+          </Form>
+        )}
       </Formik>
     </div>
   );

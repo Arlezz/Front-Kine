@@ -54,7 +54,6 @@ export function AlumnosAdm() {
   const deleteAlumno = (alumnoEmail) => {
     UserService.deleteUser(alumnoEmail)
       .then((res) => {
-        console.log(res);
         onUpdateUser();
       })
       .catch((err) => {
@@ -80,7 +79,6 @@ export function AlumnosAdm() {
 
   const onChange = async (e) => {
     setName(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.name

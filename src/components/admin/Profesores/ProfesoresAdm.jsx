@@ -53,7 +53,6 @@ export function ProfesoresAdm() {
   const deleteProfesor = (profesorEmail) => {
     UserService.deleteUser(profesorEmail)
       .then((res) => {
-        console.log(res);
         onUpdateUser();
       })
       .catch((err) => {
@@ -79,7 +78,6 @@ export function ProfesoresAdm() {
 
   const onChange = async (e) => {
     setName(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.name

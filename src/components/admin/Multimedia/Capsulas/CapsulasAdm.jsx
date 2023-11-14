@@ -49,20 +49,7 @@ export function CapsulasAdm({
   }, []);
 
 
-  /*useEffect(() => {
-    GeneralService.getCapsules()
-      .then((res) => {
-        console.log(res);
-        setData(res);
-        setDataSaver(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [updateCapsula, addCapsula]);*/
+
 
 
   useEffect(() => {
@@ -103,7 +90,6 @@ export function CapsulasAdm({
 
     GeneralService.deleteCapsule(capsuleId, user.email)
       .then((res) => {
-        console.log("TAMARE ",res);
         onUpdateCapsula();
       })
       .catch((err) => {
@@ -130,7 +116,6 @@ export function CapsulasAdm({
 
   const onChange = async (e) => {
     setNombre(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.title

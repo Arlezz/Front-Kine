@@ -62,7 +62,6 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
     const user = AuthService.getCurrentUser();
     GeneralService.delComment(tutorialId, user.email)
       .then((res) => {
-        console.log(res);
         onUpdateComentario();
       })
       .catch((err) => {

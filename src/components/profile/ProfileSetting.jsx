@@ -18,7 +18,6 @@ export function ProfileSetting({setForoVisible}) {
     const currentUser = AuthService.getCurrentUser();
     if (currentUser) {
       setUser(currentUser);
-      console.log(currentUser);
       setIsLoggedIn(true);
       setIsLoading(false);
     } else {
@@ -31,22 +30,15 @@ export function ProfileSetting({setForoVisible}) {
   };
 
   const handleChangePassword = (values) => {
-    console.log(values);
     if (values.newPassword === values.repeatPassword) {
 
         UserService.updateUserPassword(user.email, values.oldPassword, values.newPassword)
         .then((res) => {
-            console.log(res);
-            console.log("Contraseña cambiada");
-            console.log(values);
             setShowPasswordForm(false);
         })
         .catch((err) => {
             console.log(err);
         });
-
-
-     
     } else {
       console.log("Las contraseñas no coinciden");
     }
