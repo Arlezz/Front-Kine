@@ -145,13 +145,18 @@ export function NavBar({
           ) : null}
 
           <div className={styles.right}>
-            <Dropdown as={ButtonGroup}>
+            <Dropdown as={ButtonGroup} align="end">
               <div className={styles.dropdownButon}>
-                
                 <Dropdown.Toggle>
-                <span className={styles.dropDownText}>
-                  {currentUser ? currentUser.name : <span>usuario</span>}
-                </span>
+                  <span className={styles.dropDownText}>
+                    {currentUser &&
+                    currentUser.name &&
+                    currentUser.name.split(" ").length > 1 ? (
+                      currentUser.name.split(" ").slice(0, 1).join(" ")
+                    ) : (
+                      <span>Usuario</span>
+                    )}
+                  </span>
                   <FontAwesomeIcon
                     icon={faBars}
                     className={styles.dropdownIcon}
@@ -174,7 +179,7 @@ export function NavBar({
                   </div>
                 </Dropdown.Item>
                 <div className={styles.foroLink}>
-                <Dropdown.Divider />
+                  <Dropdown.Divider />
                   <Dropdown.Item
                     as={Link}
                     className={styles.dropdownLink}
@@ -250,7 +255,6 @@ export function NavBar({
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Divider />
-
 
                 {currentUser &&
                   currentUser.role &&

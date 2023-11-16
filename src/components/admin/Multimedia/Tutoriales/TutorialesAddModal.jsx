@@ -19,6 +19,8 @@ export function TutorialesAddModal({ show, handleShow, onAddTutorial }) {
     // Lógica para agregar el nuevo tutorial, puedes realizar una llamada a la API aquí
     // Luego, cierra el modal y notifica al componente padre sobre la adición del tutorial
     const user = AuthService.getCurrentUser();
+    console.log(user.email);
+    console.log(values.url);
     GeneralService.uploadTutorials(user.email,values.url)
     .then((response) => {
       onAddTutorial();

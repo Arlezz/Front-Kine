@@ -30,10 +30,13 @@ export function Capsulas() {
         .then((data) => {            
             setCapsules(data);
             setSelectedVideo(data[0]);
-            setVideosToDisplay(data.slice(0, 10));
+            setVideosToDisplay(data.slice(0, 8));
             if (data.length < 10) {
                 setHasMore(false);
             }
+        })
+        .catch((error) => {
+            console.error(error);
         })
     }, []);
 

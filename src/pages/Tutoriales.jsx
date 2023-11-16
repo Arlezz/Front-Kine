@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from './Tutoriales.module.scss';
 import { MainVideoCard } from "../components/media/MainVideoCard";
+import { Spinner } from "../components/Spinner";
 
 
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -15,7 +16,7 @@ export function Tutoriales() {
 
     const [tutorials, setTutorials] = useState([]); // [{}
     const [selectedVideo, setSelectedVideo] = useState(tutorials[0]);
-    const [videosToDisplay, setVideosToDisplay] = useState(tutorials.slice(0, 10));
+    const [videosToDisplay, setVideosToDisplay] = useState(tutorials.slice(0, 20));
     const [hasMore, setHasMore] = useState(true);
     const [isDescriptionExpanded, setDescriptionExpanded] = useState(false);
     const [descriptionHeight, setDescriptionHeight] = useState(null);
@@ -27,38 +28,40 @@ export function Tutoriales() {
     };
 
     useEffect(() => {
-        GeneralService.getTutorials().
-        then((data) => {
-            setTutorials(data);
-            setSelectedVideo(data[0]);
-            setVideosToDisplay(data.slice(0, 10));
-            if (data.length < 10) {
-                setHasMore(false);
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-
+        GeneralService.getTutorials()
+            .then((data) => {
+                setTutorials(data);
+                setSelectedVideo(data[0]);
+                setVideosToDisplay(data.slice(0, 10));
+                if (data.length < 10) {
+                    setHasMore(false);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     }, []);
-
+    
     const fetchMoreData = () => {
         const visibleVideos = videosToDisplay.length;
         const newVideosToDisplay = tutorials.slice(visibleVideos, visibleVideos + 1);
 
         if (newVideosToDisplay.length === 0) {
-        setHasMore(false);
+            setHasMore(false);
         } else {
-        setVideosToDisplay(videosToDisplay.concat(newVideosToDisplay));
+            setVideosToDisplay(videosToDisplay.concat(newVideosToDisplay));
         }
     };
 
-    const toggleDescription = () => {
+
+
+    const toggleDescription = () => {        
         setDescriptionExpanded(!isDescriptionExpanded);
-    
         if (!isDescriptionExpanded) {
             setTimeout(() => {
-                const descriptionElement = document.querySelector(`.${styles.tutorialVideoMain}`);    
+                
+                const descriptionElement = document.querySelector(`.${styles.tutorialVideoMain}`);   
+                console.log("DESCRIPTION ",descriptionElement); 
                 if (descriptionElement) {
                     const totalHeight = descriptionElement.scrollHeight;
                     setDescriptionHeight(totalHeight);
@@ -77,12 +80,12 @@ export function Tutoriales() {
             <div className={styles.tutorialBody}>
                 <div id="videoLeft" className={styles.tutorialVideosLeft}>
                 <InfiniteScroll
+                    id="scrollTutorial"
                     dataLength={videosToDisplay.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
-                    inverse
-                    height={descriptionHeight || 700} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
-                    loader={<h4>Loading...</h4>}
+                    height={descriptionHeight || 700 } 
+                    loader={<Spinner/>}
                     endMessage={
                         <div className={styles.noMoreTextContainer}>
                             <p style={{ textAlign: 'center' }}>

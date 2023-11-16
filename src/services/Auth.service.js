@@ -1,4 +1,4 @@
-import { post } from '../utils/httpClient';
+import { post, put } from '../utils/httpClient';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -40,10 +40,10 @@ const recoverPassword = (email) => {
         });
 };
 
-const changePasswordWithCode = (email, passwordRecoveryCode, newPassword) => {
-    return post(`updatePasswordWithCode`, {
+const changePasswordWithCode = (email, code, newPassword) => {
+    return put(`updateWithNewPassword`, {
             email,
-            passwordRecoveryCode,
+            code,
             newPassword
         })
         .then((response) => {

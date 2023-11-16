@@ -125,9 +125,9 @@ export function Foro({ toggleForoVisibility }) {
 
     const handleActive = (idx) => {
         if (idx === activeIndex) {
-          setActiveIndex(null); // Si ya está activo, desactívalo
+          setActiveIndex(null);
         } else {
-          setActiveIndex(idx); // Si no está activo, actívalo
+          setActiveIndex(idx); 
         }
       };
     return (
@@ -173,7 +173,7 @@ export function Foro({ toggleForoVisibility }) {
             </div>
             <div id='foroBox' className={styles.sideForoBox}>
             {noResponses ? (
-              <Empty /> // Render the "empty" component when there are no responses
+              <Empty text={"No tienes publicaciones"} height={"calc(100vh - 29rem)"}/> 
             ) : (
                 <InfiniteScroll
                     dataLength={posts.length}

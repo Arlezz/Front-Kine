@@ -145,7 +145,7 @@ export function ForoResponseModal({
             <h3>Respuestas</h3>
             {noResponses ? (
               <div id="emptyCont" className={styles.EmptyContainer}>
-                <Empty />
+                <Empty text={"Todavía no hay comentarios"} height={"calc(100vh - 55rem)"}/>
               </div>
             ) : (
               <div id="responsePost" className={styles.scrollContainer}>

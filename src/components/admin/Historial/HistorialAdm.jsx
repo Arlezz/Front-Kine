@@ -16,6 +16,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
   const [email , setEmail] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
   const [fecha, setFecha] = useState("");
+  const [tipo, setTipo] = useState("");
 
   useEffect(() => {
     GeneralService.getHistorial()
@@ -83,6 +84,27 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
     }
   };
 
+  const onChange3 = async (e) => {
+    setTipo(e.target.value);
+    console.log(e);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.type
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
 
   const columns = [
     {
@@ -132,10 +154,24 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
       label: "Acción",
     },
     {
-      name: <div className={styles.sortContainer}>Tipo</div>,
-      selector: (row) => row.type,
+      name: (
+        <div className={styles.sortContainer}>
+          Tipo
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={tipo}
+            onChange={(e) => onChange3(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
+      selector: (row) => row.type ,
       sortable: true,
-      label: "Tipo",
+      wrap: true,
+      label: "Correo Electrónico",
     },
     {
       name: <div className={styles.sortContainer}>Acciones</div>,
@@ -185,6 +221,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                 selectedReference.type === "Capsule" ||
                 selectedReference.type === "Game" ? (
                   <>
+                    {console.log("LA REFERNCIA: ",selectedReference)}
                     <div>
                       <label>Título:</label>
                       <input
@@ -218,16 +255,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                       <input
                         type="text"
                         value={selectedReference.object.user.email}
-                        disabled
-                      />
-                    </div>
-                    <div>
-                      <label>Nombre del Dueño:</label>
-                      <input
-                        type="text"
-                        value={
-                          selectedReference.object.user.name || "Undefined"
-                        }
                         disabled
                       />
                     </div>
@@ -279,6 +306,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                   </>
                 ) :  selectedReference.type === "Comment" ? (
                   // Renderizado específico para comentarios
+                 
                   <>
                   <div>
                       <label>Nombre del Autor del Comentario:</label>

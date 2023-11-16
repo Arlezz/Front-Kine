@@ -28,9 +28,9 @@ export function Juegos(){
         const newgamesToDisplay = games.slice(visiblegames, visiblegames + 4);
 
         if (newgamesToDisplay.length === 0) {
-        setHasMore(false);
+            setHasMore(false);
         } else {
-        setgamesToDisplay(gamesToDisplay.concat(newgamesToDisplay));
+            setgamesToDisplay(gamesToDisplay.concat(newgamesToDisplay));
         }
     };
 
@@ -46,7 +46,7 @@ export function Juegos(){
                     dataLength={gamesToDisplay.length}
                     next={fetchMoreData}
                     hasMore={hasMore}
-                    height={400} // Usa descriptionHeight si está definido, de lo contrario, usa 700 como altura predeterminada
+                    height={500}
                     loader={<h4>Loading...</h4>}
                     endMessage={
                         <div className={styles.noMoreTextContainer}>

@@ -71,11 +71,41 @@ a {
     
 }
 
+@media screen and (max-width: 1680px){
+
+    #videoLeft{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                height: calc(100vh - 19rem) ;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1366px){
+
+    #videoLeft{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                height: calc(100vh - 30rem) ;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 1024px){
     #foroBox {
         .infinite-scroll-component__outerdiv{
             .infinite-scroll-component {
                 height: calc(100vh - 29rem) !important;
+            }
+        }
+    }
+
+    #videoLeft{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                height: calc(100vh - 32rem) ;
             }
         }
     }

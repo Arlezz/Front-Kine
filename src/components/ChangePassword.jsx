@@ -62,6 +62,8 @@ export function ChangePassword({ handleSendMail, mail }) {
 
           if (!values.newPassword) {
             errors.newPassword = "Ingrese una contraseña";
+          } else if (values.newPassword.length < 6) {
+            errors.newPassword = "La contraseña debe tener al menos 6 caracteres";
           } else if (values.newPassword.length > 50) {
             errors.newPassword =
               "La contraseña no puede tener mas de 50 caracteres";
@@ -71,6 +73,8 @@ export function ChangePassword({ handleSendMail, mail }) {
 
           if (!values.repeatPassword) {
             errors.repeatPassword = "Ingrese una contraseña";
+          } else if (values.repeatPassword.length < 6) {
+            errors.repeatPassword = "La contraseña debe tener al menos 6 caracteres";
           } else if (values.repeatPassword.length > 50) {
             errors.repeatPassword =
               "La contraseña no puede tener mas de 50 caracteres";

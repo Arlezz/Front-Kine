@@ -22,7 +22,7 @@
         display: grid;
         border-left: .1rem solid #E5E5E5;
         overflow-y: auto;
-        width: 40%;
+       // width: 40%;
 
         .noMoreCapsules {
           text-align: center;
@@ -81,7 +81,7 @@
         
         iframe {
           width: 100%;
-          height: 50rem;
+          height: 100%;
           border-radius: 1rem;
         }
         
@@ -135,21 +135,19 @@
   
         .capsulaVideosRight {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           width: 100%;
           
 
           .thumbnailGrid{
             display: flex;
             flex-direction: row;
-            justify-content: center;
           }      
         }
   
         .capsulaVideoMain {
           width: 100%;
-          min-height: 65rem; /* Set a minimum height for the container */
-          border-bottom: solid 0.1rem #e5e5e5;
+            border-bottom: solid 0.1rem #e5e5e5;
         }
       }
     }
@@ -163,7 +161,6 @@
 
       .capsulaVideoMain {
         width: 100%;
-        min-height: 57rem;
       }
     }
   }
@@ -173,12 +170,6 @@
   .capsulaContainer {
     .capsulaBody {
       flex-direction: column;
-
-      .capsulaVideoMain {
-        iframe {
-          height: 25rem;
-        }
-      }
     }
   }
 }
@@ -195,9 +186,6 @@
         width: 100%;
         min-height: 52rem;
 
-        iframe {
-          height: 20rem;
-        }
       }
     }
   }

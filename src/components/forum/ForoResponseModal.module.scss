@@ -12,7 +12,10 @@
         flex-direction: column;
 
         .closeButtonContainer {
+            position: absolute;
             display: flex;
+            right: 1.5rem;
+            top: 1.5rem;
             flex-direction: row;
             justify-content: flex-end;
 
@@ -26,8 +29,8 @@
                 padding: .1rem;
     
                 svg {
-                    width: 2rem;
-                    height: 2rem;
+                    width: 2.5rem;
+                    height: 2.5rem;
                     color: #f4177d;
     
                     &:hover {
