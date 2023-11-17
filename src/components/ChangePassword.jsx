@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useState } from "react";
 
 import styles from "../components/ChangePassword.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,8 +7,14 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import AuthService from "../services/Auth.service";
 
 export function ChangePassword({ handleSendMail, mail }) {
+
+  const [textPasswordError, setTextPasswordError] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [submit, setSubmit] = useState(false);
+
   const handleChangePassword = (values) => {
     if (values.newPassword === values.repeatPassword) {
+      setSubmit(true);
       AuthService.changePasswordWithCode(
         mail,
         values.codigo,
@@ -17,10 +24,12 @@ export function ChangePassword({ handleSendMail, mail }) {
           window.location.href = "/";
         })
         .catch((error) => {
+          setSubmit(false);
           console.log(error);
         });
     } else {
-      console.log("Las contraseñas no coinciden");
+      setTextPasswordError("Las contraseñas no coinciden");
+      setPasswordError(true);
     }
   };
 
@@ -88,9 +97,7 @@ export function ChangePassword({ handleSendMail, mail }) {
           handleChangePassword(values);
         }}
       >
-        {({
-          isSubmitting,
-        }) => (
+        {({}) => (
           <Form className={styles.changePasswordForm}>
             <div className={styles.changePasswordInputContainer}>
               <span className={styles.formLabel}>Codigo Secreto</span>
@@ -139,7 +146,13 @@ export function ChangePassword({ handleSendMail, mail }) {
               />
             </div>
 
-            <button disabled={isSubmitting} className={styles.changePasswordButton} type="submit">
+            {passwordError && (
+              <div className={styles.errorSession}>
+                {textPasswordError}
+              </div>
+            )}
+
+            <button disabled={submit} className={styles.changePasswordButton} type="submit">
               Cambiar
             </button>
           </Form>

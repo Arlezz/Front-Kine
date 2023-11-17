@@ -1,6 +1,5 @@
-import { post, put } from '../utils/httpClient';
+import { post } from '../utils/httpClient';
 
-const API_URL = process.env.REACT_APP_API_URL;
 
 
 const login = (email, password) => {
@@ -41,7 +40,7 @@ const recoverPassword = (email) => {
 };
 
 const changePasswordWithCode = (email, code, newPassword) => {
-    return put(`updateWithNewPassword`, {
+    return post(`updatePasswordWithCode`, {
             email,
             code,
             newPassword
