@@ -67,11 +67,11 @@ export function Login({ handleLogin, handleForgotPass }) {
       >
         <Form className={styles.loginForm}>
           <div className={styles.loginInputContainer}>
-            <span className={styles.formLabel}>Usuario</span>
+            <span className={styles.formLabel}>Correo</span>
             <Field
               className={styles.loginInput}
               type="text"
-              placeholder="Correo Insttitucional"
+              placeholder="Correo Institucional"
               name="email"
               id="email"
             />
