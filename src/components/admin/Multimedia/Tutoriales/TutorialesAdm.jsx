@@ -41,37 +41,33 @@ export function TutorialesAdm({
   };
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-
-
-  useEffect(() => {
     const fetchData = async () => {
-      // Verificar si el usuario tiene el rol de "profesor"
-      if (currentUser && currentUser.role === "profesor") {
-        try {
-          const res = await GeneralService.getMiTutorials(currentUser.email);
-          setData(res);
-          setDataSaver(res);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        // Si el usuario no es profesor, realiza la lógica para obtener todos los tutoriales
-        try {
-          const res = await GeneralService.getTutorials();
-          setData(res);
-          setDataSaver(res);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        setCurrentUser(user);
+  
+        // Verificar si el usuario tiene el rol de "profesor"
+        if (user.role === "profesor") {
+          try {
+            const res = await GeneralService.getMiTutorials(user.email);
+            setData(res);
+            setDataSaver(res);
+          } catch (error) {
+            console.error(error);
+          } finally {
+            setIsLoading(false);
+          }
+        } else {
+          // Si el usuario no es profesor, realiza la lógica para obtener todos los tutoriales
+          try {
+            const res = await GeneralService.getTutorials();
+            setData(res);
+            setDataSaver(res);
+          } catch (error) {
+            console.error(error);
+          } finally {
+            setIsLoading(false);
+          }
         }
       }
     };
@@ -79,7 +75,8 @@ export function TutorialesAdm({
     // Llamar a la función fetchData
     fetchData();
   
-  }, [updateTutorial, addTutorial, currentUser]);
+  }, [updateTutorial, addTutorial]);
+  
 
   const deleteTutorial = (tutorialId) => {
 

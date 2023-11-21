@@ -42,33 +42,22 @@ export function JuegosAdm({
 
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-
-
-  useEffect(() => {
     const fetchData = async () => {
-      // Verificar si el usuario tiene el rol de "profesor"
-      if (currentUser && currentUser.role === "profesor") {
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        setCurrentUser(user);
+  
+        // Verificar el rol del usuario
         try {
-          const res = await GeneralService.getMiGames(currentUser.email);
-          setData(res);
-          setDataSaver(res);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        // Si el usuario no es profesor, realiza la lógica para obtener todos los juegos
-        try {
-          const res = await GeneralService.getGames();
-          setData(res);
-          setDataSaver(res);
+          if (user.role === "profesor") {
+            const res = await GeneralService.getMiGames(user.email);
+            setData(res);
+            setDataSaver(res);
+          } else if (user.role === "admin") {
+            const res = await GeneralService.getGames();
+            setData(res);
+            setDataSaver(res);
+          }
         } catch (error) {
           console.error(error);
         } finally {
@@ -80,7 +69,8 @@ export function JuegosAdm({
     // Llamar a la función fetchData
     fetchData();
   
-  }, [updateJuego, addJuego, currentUser]);
+  }, [updateJuego, addJuego]);
+  
 
   const deleteGame = (juegoId) => {
     const user = AuthService.getCurrentUser();
@@ -181,10 +171,10 @@ export function JuegosAdm({
       selector: (row) => (
         <div
           onClick={() => handleCellClick(row)}
-          onMouseEnter={() => setHoveredRow(row.id)}
+          onMouseEnter={() => setHoveredRow(row._id)}
           onMouseLeave={() => setHoveredRow(null)}
           style={{
-            color: hoveredRow === row.id ? "#2e81e4" : "#000",
+            color: hoveredRow === row._id ? "#2e81e4" : "#000",
           }}
         >
           {row.url}

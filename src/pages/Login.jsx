@@ -13,7 +13,6 @@ export function Login({ handleLogin, handleForgotPass }) {
     AuthService.login(values.email, values.password)
       .then(() => {
         handleLogin();
-        
       })
       .catch((error) => {
         setSessionError(true);

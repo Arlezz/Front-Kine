@@ -151,7 +151,7 @@ export function NavBar({
                   <span className={styles.dropDownText}>
                     {currentUser &&
                     currentUser.name &&
-                    currentUser.name.split(" ").length > 1 ? (
+                    currentUser.name.split(" ").length >= 1 ? (
                       currentUser.name.split(" ").slice(0, 1).join(" ")
                     ) : (
                       <span>Usuario</span>

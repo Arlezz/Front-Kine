@@ -8,6 +8,7 @@ import { Spinner } from "../components/Spinner";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Thumbnails } from "../components/media/Thumbnails";
 import GeneralService from "../services/General.service";
+import AuthService from "../services/Auth.service";
 
 
 export function Tutoriales() {
@@ -28,6 +29,9 @@ export function Tutoriales() {
     };
 
     useEffect(() => {
+
+        const user = AuthService.getCurrentUser();
+
         GeneralService.getTutorials()
             .then((data) => {
                 setTutorials(data);
@@ -59,9 +63,7 @@ export function Tutoriales() {
         setDescriptionExpanded(!isDescriptionExpanded);
         if (!isDescriptionExpanded) {
             setTimeout(() => {
-                
                 const descriptionElement = document.querySelector(`.${styles.tutorialVideoMain}`);   
-                console.log("DESCRIPTION ",descriptionElement); 
                 if (descriptionElement) {
                     const totalHeight = descriptionElement.scrollHeight;
                     setDescriptionHeight(totalHeight);

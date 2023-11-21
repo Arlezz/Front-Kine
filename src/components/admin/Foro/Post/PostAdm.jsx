@@ -18,33 +18,32 @@ export function PostAdm({ updatePost, onUpdatePost }) {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
-      // Verificar si el usuario tiene el rol de "profesor"
-      if (currentUser && currentUser.role === "profesor") {
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        setCurrentUser(user);
+      }
+  
+      // Verificar si el usuario es un "profesor"
+      if (user && user.role === "profesor") {
         try {
-          const res = await GeneralService.getPosts("date","desc",1,6,currentUser.email);
+          // Obtener mensajes para "profesor"
+          const res = await GeneralService.getPosts("date", "desc", 1, 6, user.email);
           setData(res.posts);
           setDataSaver(res.posts);
         } catch (error) {
-          console.error(error);
+          console.error("Error al obtener mensajes para profesor:", error);
         } finally {
           setIsLoading(false);
         }
       } else {
-        // Si el usuario no es profesor, realiza la lógica para obtener todos los tutoriales
+        // Obtener todos los mensajes para otros roles
         try {
           const res = await GeneralService.getAllPosts();
           setData(res.posts);
           setDataSaver(res.posts);
         } catch (error) {
-          console.error(error);
+          console.error("Error al obtener todos los mensajes:", error);
         } finally {
           setIsLoading(false);
         }
@@ -54,11 +53,12 @@ export function PostAdm({ updatePost, onUpdatePost }) {
     // Llamar a la función fetchData
     fetchData();
   
-  }, [updatePost, currentUser]);
+  }, [updatePost]);
+  
+  
 
-  const deletePost = (tutorialId) => {
-    const user = AuthService.getCurrentUser();
-    GeneralService.delPost(tutorialId, user.email)
+  const deletePost = (postId) => {
+    GeneralService.delPost(postId)
       .then((res) => {
         onUpdatePost();
       })

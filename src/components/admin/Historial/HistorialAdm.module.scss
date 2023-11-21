@@ -14,34 +14,36 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 0.5rem;
-    padding: 2rem 3rem 3rem 3rem;
+    padding: 3rem;
   }
 
-.closeButtonContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-
-  .closeButton {
-    display: flex;
+  .closeButtonContainer {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 1rem;
-    border: solid 1px #f4177d;
-    border-radius: 0.5rem;
-    padding: 0.1rem;
-
-    svg {
-      width: 2rem;
-      height: 2rem;
-      color: #f4177d;
-
-      &:hover {
-        cursor: pointer;
-      }
+  
+    .closeButton {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+        border: solid 1px #cf2e15;
+        border-radius: .5rem;
+        padding: .1rem;
+  
+        svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: #cf2e15;
+  
+            &:hover {
+                cursor: pointer;
+            }
+        }
     }
   }
-}
 
 .modal-body {
   font-size: 1.6rem; /* Ajusta el tamaño de la fuente según sea necesario */

@@ -42,35 +42,22 @@ export function CapsulasAdm({
   };
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-
-
-
-
-  useEffect(() => {
     const fetchData = async () => {
-      // Verificar si el usuario tiene el rol de "profesor"
-      if (currentUser && currentUser.role === "profesor") {
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        setCurrentUser(user);
+  
+        // Verificar el rol del usuario
         try {
-          const res = await GeneralService.getMiCapsules(currentUser.email);
-          setData(res);
-          setDataSaver(res);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        // Si el usuario no es profesor, realiza la lógica para obtener todos los juegos
-        try {
-          const res = await GeneralService.getCapsules();
-          setData(res);
-          setDataSaver(res);
+          if (user.role === "profesor") {
+            const res = await GeneralService.getMiCapsules(user.email);
+            setData(res);
+            setDataSaver(res);
+          } else if (user.role === "admin") {
+            const res = await GeneralService.getCapsules();
+            setData(res);
+            setDataSaver(res);
+          }
         } catch (error) {
           console.error(error);
         } finally {
@@ -82,7 +69,8 @@ export function CapsulasAdm({
     // Llamar a la función fetchData
     fetchData();
   
-  }, [updateCapsula, addCapsula, currentUser]);
+  }, [updateCapsula, addCapsula]);
+  
 
 
   const deleteCapsule = (capsuleId) => {

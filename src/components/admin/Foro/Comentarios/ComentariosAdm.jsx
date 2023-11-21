@@ -18,18 +18,16 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
+      const user = AuthService.getCurrentUser();
+      if (user) {
+        setCurrentUser(user);
+      }
+  
       // Verificar si el usuario tiene el rol de "profesor"
-      if (currentUser && currentUser.role === "profesor") {
+      if (user && user.role === "profesor") {
         try {
-          const res = await GeneralService.getAllMyComments(currentUser.email);
+          const res = await GeneralService.getAllMyComments(user.email);
           setData(res);
           setDataSaver(res);
         } catch (error) {
@@ -54,13 +52,13 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
     // Llamar a la función fetchData
     fetchData();
   
-  }, [updateCommetario, currentUser]);
+  }, [updateCommetario]);
+  
 
 
 
   const deletePost = (tutorialId) => {
-    const user = AuthService.getCurrentUser();
-    GeneralService.delComment(tutorialId, user.email)
+    GeneralService.delComment(tutorialId)
       .then((res) => {
         onUpdateComentario();
       })

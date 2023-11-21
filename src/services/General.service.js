@@ -46,8 +46,8 @@ const getAllPosts = () => {
     return get(`posts`);
 }
 
-const delPost = (id,email) => {
-    return del(`posts/${id}/${email}`);
+const delPost = (id) => {
+    return del(`posts/${id}`);
 }
 
 const getComements = () => {
@@ -58,8 +58,8 @@ const getAllMyComments = (email) => {
     return get(`comments?email=${email}`);
 }
 
-const delComment = (id,email) => {
-    return del(`comments/${id}/${email}`);
+const delComment = (id) => {
+    return del(`comments/${id}`);
 }
 
 const getPostsComments = (idPost) => {

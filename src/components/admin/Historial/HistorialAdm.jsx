@@ -65,7 +65,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
 
   const onChange2 = async (e) => {
     setFecha(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.date
@@ -86,7 +85,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
 
   const onChange3 = async (e) => {
     setTipo(e.target.value);
-    console.log(e);
     var searchData = dataSaver.filter((item) => {
       if (
         item.type
@@ -207,12 +205,11 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
 
       <Modal show={showModal} onHide={closeModal}>
         <div className={styles.modalContainer}>
-          <div className={styles.closeButtonContainer}>
-            <div className={styles.closeButton} onClick={closeModal}>
-              <FontAwesomeIcon icon={faXmark} />
-            </div>
+        <div className={styles.closeButtonContainer}>
+          <div className={styles.closeButton} onClick={closeModal}>
+            <FontAwesomeIcon icon={faXmark} />
           </div>
-          <Modal.Body>
+        </div>
             {/* Renderiza la información de la referencia aquí */}
             {selectedReference && (
               <div className={styles.referenceDetails}>
@@ -221,7 +218,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                 selectedReference.type === "Capsule" ||
                 selectedReference.type === "Game" ? (
                   <>
-                    {console.log("LA REFERNCIA: ",selectedReference)}
                     <div>
                       <label>Título:</label>
                       <input
@@ -338,7 +334,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                 ) : null}
               </div>
             )}
-          </Modal.Body>
         </div>
       </Modal>
     </>

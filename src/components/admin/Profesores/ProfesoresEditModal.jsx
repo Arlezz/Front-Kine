@@ -30,7 +30,7 @@ export function ProfesoresEditModal({ show, handleShow, userData, onUpdateUser }
   return (
     <Modal show={show} onHide={handleShow}>
       <div className={styles.modalContainer}>
-      <div className={styles.closeButtonContainer}>
+        <div className={styles.closeButtonContainer}>
           <div className={styles.closeButton} onClick={handleShow}>
             <FontAwesomeIcon icon={faXmark} />
           </div>

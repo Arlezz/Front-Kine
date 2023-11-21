@@ -39,9 +39,7 @@ export function ProfileSetting({setForoVisible}) {
         .catch((err) => {
             console.log(err);
         });
-    } else {
-      console.log("Las contraseñas no coinciden");
-    }
+    } 
   };
 
   if (isLoading) {
