@@ -132,7 +132,7 @@ export function AlumnosAdm() {
           />
         </div>
       ),
-      selector: (row) => row.name,
+      selector: (row) => row.name? row.name : "usuario",
       sortable: true,
     },
     {
@@ -149,12 +149,12 @@ export function AlumnosAdm() {
           />
         </div>
       ),
-      selector: (row) => row.email,
+      selector: (row) => row.email? row.email : "email",
       sortable: true,
     },
     {
       name: <div className={styles.sortContainer}>Rol</div>,
-      selector: (row) => row.role,
+      selector: (row) => row.role? row.role : "rol",
       sortable: true,
     },
     {

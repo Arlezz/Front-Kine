@@ -158,13 +158,13 @@ export function CapsulasAdm({
           />
         </div>
       ),
-      selector: (row) => row.title,
+      selector: (row) => row.title? row.title : "titulo",
       sortable: false,
       wrap: true,
   },
     {
       name: <div className={styles.sortContainer}>Descripción</div>,
-      selector: (row) => row.description,
+      selector: (row) => row.description? row.description : "descripcion",
       sortable: true,
       maxWidth: "500px",
     },
@@ -200,13 +200,13 @@ export function CapsulasAdm({
           />
         </div>
       ),
-      selector: (row) => currentUser.role==="profesor"? currentUser.name : row.user.name,
+      selector: (row) => currentUser.role==="profesor"? "." : "..",
       sortable: false,
       wrap: true,
   },
     {
       name: <div className={styles.sortContainer}>Rol</div>,
-      selector: (row) => currentUser.role==="profesor"? currentUser.role : row.user.role,
+      selector: (row) => currentUser.role==="profesor"? "currentUser.role ": "row.user.role",
       sortable: true,
       wrap: true,
     },
