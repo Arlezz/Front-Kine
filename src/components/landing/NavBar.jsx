@@ -270,7 +270,7 @@ export function NavBar({
                             icon={faGears}
                             className={styles.dropdownOptionIcon}
                           />
-                          <span>Adminmistrador</span>
+                          <span>Administrador</span>
                         </div>
                       </Dropdown.Item>
                       <Dropdown.Divider />
