@@ -75,7 +75,7 @@ export function JuegosAdm({
   const deleteGame = (juegoId) => {
     const user = AuthService.getCurrentUser();
 
-    GeneralService.deleteGame (juegoId,user.email)
+    GeneralService.deleteGame (juegoId)
       .then((res) => {
         onUpdateJuego();
       })

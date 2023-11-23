@@ -80,9 +80,9 @@ export function TutorialesAdm({
 
   const deleteTutorial = (tutorialId) => {
 
-    const user = AuthService.getCurrentUser();
+    //const user = AuthService.getCurrentUser();
 
-    GeneralService.deleteTutorial(tutorialId, user.email)
+    GeneralService.deleteTutorial(tutorialId)
       .then((res) => {
         onUpdateTutorial();
       })

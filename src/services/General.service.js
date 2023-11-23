@@ -17,24 +17,24 @@ const getTutorials = () => {
     return get("tutorials");
 }
 
-const deleteTutorial = (id,email) => {
-    return del(`tutorials/${id}/${email}`);
+const deleteTutorial = (id) => {
+    return del(`tutorials/${id}`);
 }
 
 const getCapsules = () => {
     return get("capsules");
 }
 
-const deleteCapsule = (id,email) => {
-    return del(`capsules/${id}/${email}`);
+const deleteCapsule = (id) => {
+    return del(`capsules/${id}`);
 }
 
 const getGames = () => {
     return get("games");
 }
 
-const deleteGame = (id,email) => {
-    return del(`games/${id}/${email}`);
+const deleteGame = (id) => {
+    return del(`games/${id}`);
 }
 
 

@@ -74,9 +74,9 @@ export function CapsulasAdm({
 
 
   const deleteCapsule = (capsuleId) => {
-    const user = AuthService.getCurrentUser();
+    //const user = AuthService.getCurrentUser();
 
-    GeneralService.deleteCapsule(capsuleId, user.email)
+    GeneralService.deleteCapsule(capsuleId)
       .then((res) => {
         onUpdateCapsula();
       })
