@@ -80,6 +80,14 @@ a {
             }
         }
     }
+
+    #responsePost{
+        .infinite-scroll-component__outerdiv{
+            .infinite-scroll-component {
+                height: calc(100vh - 45rem) !important;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1366px){
@@ -91,6 +99,8 @@ a {
             }
         }
     }
+
+    
 }
 
 @media screen and (max-width: 1024px){

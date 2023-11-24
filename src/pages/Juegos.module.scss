@@ -3,7 +3,6 @@
     flex-direction: column;
     gap: 2rem;
     padding: 3rem 2rem 2rem 5rem;
-    // background: #f3f5ff;
 
     .tittle h2 {
       font-size: 3rem;
@@ -13,15 +12,16 @@
     .juegosBody {
       max-width: 100%;
       border-radius: 1rem;
+      overflow-y: auto;
+
         
       .juegosCardGrid {
-        width: 100%;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(1, 1fr);
         gap: 2rem;
-        margin: 0; /* Establece el margen en 0 */
-        padding: 1rem; /* Establece el relleno en 0 */
+        margin: 0;
+        padding: 1rem;
       }
 
       .noMoreTextContainer {
@@ -40,7 +40,6 @@
   .juegosContainer {
     padding: 2rem;
     .juegosBody{
-      overflow-y: auto;
       .juegosCardGrid{
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(1, 1fr);
@@ -58,7 +57,7 @@
   .juegosContainer {
     .juegosBody{
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
 
 
       .juegosCardGrid{

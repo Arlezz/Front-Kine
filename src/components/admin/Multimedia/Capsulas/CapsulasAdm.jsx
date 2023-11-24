@@ -158,7 +158,7 @@ export function CapsulasAdm({
           />
         </div>
       ),
-      selector: (row) => row.title? row.title : "titulo",
+      selector: (row) => row.title? row.title : "título",
       sortable: false,
       wrap: true,
   },
@@ -200,13 +200,13 @@ export function CapsulasAdm({
           />
         </div>
       ),
-      selector: (row) => currentUser.role==="profesor"? "." : "..",
+      selector: (row) => currentUser.role==="profesor"? currentUser.name : row.user.name,
       sortable: false,
       wrap: true,
   },
     {
       name: <div className={styles.sortContainer}>Rol</div>,
-      selector: (row) => currentUser.role==="profesor"? "currentUser.role ": "row.user.role",
+      selector: (row) => currentUser.role==="profesor"? currentUser.role : row.user.role,
       sortable: true,
       wrap: true,
     },

@@ -33,7 +33,7 @@ export function ForoBody({ post, index, currentUser}) {
 
   const debouncedClick = useDebounce((e) => {
     handleLike(e);
-  }, 300);
+  },  10);
 
   const handleLike = () => {
     if (!like) {

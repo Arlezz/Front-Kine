@@ -6,6 +6,8 @@ import styles from './ForoPostModal.module.scss';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ForoResponseButton } from '../forum/ForoResponseButton';
 import GeneralService from '../../services/General.service';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 export function ForoPostModal({show, handleShow, currentUser, setPage,setNewPost}){
@@ -25,6 +27,11 @@ return (
     <>
       <Modal show={show}  onHide={handleShow} >
         <div className={styles.modalContainer}>
+        <div className={styles.closeButtonContainer}>
+              <div className={styles.closeButton} onClick={handleShow}>
+                <FontAwesomeIcon icon={faXmark} />
+              </div>
+            </div>
             <Formik
             initialValues={{ 
                 title: "", 
@@ -34,11 +41,9 @@ return (
                 const errors = {};
 
                 if (!values.title) {
-                    errors.title = "Ingrese un titulo";
+                    errors.title = "Ingrese un título";
                 } else if (values.title.length > 50) {
                     errors.title = "El titulo no puede tener mas de 50 caracteres";
-                } else if (!/^[a-zA-Z0-9\s]+$/.test(values.title)) {
-                    errors.title = "El titulo solo puede contener letras y numeros";
                 }
                 
                 
@@ -58,10 +63,9 @@ return (
                 isSubmitting,
             }) => (
                 <Form className={styles.inputsFields}>
-                    {/*<FormObserver />*/}
    
                     <div>
-                        <span className={styles.formLabel}> Titulo del Post </span>
+                        <span className={styles.formLabel}> Título del Post </span>
                         <Field 
                             className={styles.formInput} 
                             id="title"

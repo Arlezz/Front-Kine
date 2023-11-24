@@ -57,17 +57,13 @@ export function JuegosAddModal({ show, handleShow, onAddJuego }) {
             } else if (values.titulo.length > 100) {
               errors.titulo = "El título no puede tener más de 100 caracteres";
           
-            } else if (!/^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ!@#$%^&*()_+{}|:"<>?`[\]\-\\;',./]+$/.test(values.titulo)) {
-              errors.titulo = "El título solo puede contener letras, números y algunos caracteres especiales";
-            }
+            } 
             
 
             if (!values.descripcion) {
               errors.descripcion = "Ingrese una descripción";
             } else if (values.descripcion.length > 500) {
               errors.descripcion = "La descripción no puede tener más de 500 caracteres";
-            } else if (!/^[a-zA-Z0-9\s]+$/.test(values.descripcion)) {
-              errors.descripcion = "La descripción solo puede contener letras y números";
             } 
 
             return errors;
@@ -94,7 +90,7 @@ export function JuegosAddModal({ show, handleShow, onAddJuego }) {
                 />
               </div>
               <div>
-                <span className={styles.formLabel}>URL del Video del Juego (YouTube)</span>
+                <span className={styles.formLabel}>URL del Juego</span>
                 <Field
                   className={styles.formInput}
                   id="url"

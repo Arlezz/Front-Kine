@@ -47,7 +47,7 @@ export function CommentBody({
 
   const debouncedClick = useDebounce(() => {
     handleLike();
-  }, 300);
+  }, 10);
 
   const likeComent = () => {
     GeneralService.likeComments(response._id, postId, currentUser.email)
@@ -82,7 +82,7 @@ export function CommentBody({
                 {response.user.role === "admin" && (
                   <FontAwesomeIcon
                     style={{
-                      color: "#f4177d",
+             
                       width: "1.6rem",
                       height: "1.6rem",
                     }}
@@ -93,7 +93,7 @@ export function CommentBody({
                 {response.user.role === "estudiante" && (
                   <FontAwesomeIcon
                     style={{
-                      color: "#1f86c9",
+             
                       width: "1.2rem",
                       height: "1.2rem",
                     }}
@@ -104,7 +104,7 @@ export function CommentBody({
                 {response.user.role === "profesor" && (
                   <FontAwesomeIcon
                     style={{
-                      color: "#ecb500",
+            
                       width: "1.4rem",
                       height: "1.4rem",
                     }}
@@ -120,7 +120,6 @@ export function CommentBody({
               <div className={styles.iconContainer}>
                 <FontAwesomeIcon
                   style={{
-                    color: "#777777",
                     width: "1.4rem",
                     height: "1.4rem",
                   }}

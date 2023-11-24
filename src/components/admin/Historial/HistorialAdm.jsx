@@ -105,26 +105,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
 
 
   const columns = [
-    {
-      name: (
-        <div className={styles.sortContainer}>
-          Email
-          <input
-            type="text"
-            placeholder="Buscar"
-            className={styles.inputSort}
-
-            value={email}
-            onChange={(e) => onChange(e)}
-            style={{ width: "100%", marginTop: ".5rem"}}
-          />
-        </div>
-      ),
-      selector: (row) => row.email,
-      sortable: true,
-      wrap: true,
-      label: "Correo Electrónico",
-    },
+    
     {
       name: (
         <div className={styles.sortContainer}>
@@ -141,6 +122,26 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
         </div>
       ),
       selector: (row) => row.date,
+      sortable: true,
+      wrap: true,
+      label: "Correo Electrónico",
+    },
+    {
+      name: (
+        <div className={styles.sortContainer}>
+          Correo
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+
+            value={email}
+            onChange={(e) => onChange(e)}
+            style={{ width: "100%", marginTop: ".5rem"}}
+          />
+        </div>
+      ),
+      selector: (row) => row.email,
       sortable: true,
       wrap: true,
       label: "Correo Electrónico",
@@ -183,14 +184,6 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
           >
             <FontAwesomeIcon icon={faEye} />
           </button>
-          {/*<button
-            className={styles.delete}
-            onClick={() => {
-              AlertButton(row);
-            }}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} />
-        </button>*/}
         </div>
       ),
     },
@@ -247,7 +240,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                       )}
                     </div>
                     <div>
-                      <label>Email del Dueño:</label>
+                      <label>Correo del Dueño:</label>
                       <input
                         type="text"
                         value={selectedReference.object.user.email}
@@ -284,7 +277,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                       />
                     </div>
                     <div>
-                      <label>Email del Autor:</label>
+                      <label>Correo del Autor:</label>
                       <input
                         type="text"
                         value={selectedReference.object.user.email}
@@ -300,9 +293,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                       />
                     </div>
                   </>
-                ) :  selectedReference.type === "Comment" ? (
-                  // Renderizado específico para comentarios
-                 
+                ) :  selectedReference.type === "Comment" ? (                 
                   <>
                   <div>
                       <label>Nombre del Autor del Comentario:</label>
@@ -313,7 +304,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                       />
                     </div>
                     <div>
-                      <label>Email del Autor del Comentario:</label>
+                      <label>Correo del Autor del Comentario:</label>
                       <input
                         type="text"
                         value={selectedReference.object.user.email}
@@ -327,9 +318,7 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
                         rows="4"
                         disabled
                       />
-                    </div>
-                    
-                    
+                    </div>                    
                   </>
                 ) : null}
               </div>

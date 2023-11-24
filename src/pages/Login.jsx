@@ -2,23 +2,29 @@ import AuthService from "../services/Auth.service";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./Login.module.scss";
 import { useState } from "react";
+import { Spinner } from "../components/Spinner"
 
 export function Login({ handleLogin, handleForgotPass }) {
 
   const [sessionError, setSessionError] = useState(false);
   const [textSesionError, setTextSesionError] = useState("");
+  const [loading, setLoading] = useState(false);
 
 
   const handleSession = (values) => {
+    setLoading(true);
     AuthService.login(values.email, values.password)
       .then(() => {
         handleLogin();
       })
       .catch((error) => {
+        setLoading(false);
         setSessionError(true);
         setTextSesionError(error.response.data.message);
       });
   };
+  
+
 
   return (
     <div className={styles.loginContent}>
@@ -27,7 +33,13 @@ export function Login({ handleLogin, handleForgotPass }) {
         <span className={styles.pageSlogan}>Red de aprendizaje digital Kinesiología ULS</span>
       </div>
       
-      
+      {
+        loading && (
+          <div className={styles.isLoading}>
+            <Spinner/>
+          </div>
+        )
+      }
 
       <Formik
         initialValues={{
@@ -51,6 +63,7 @@ export function Login({ handleLogin, handleForgotPass }) {
 
           if (!values.password) {
             errors.password = "Ingrese una contraseña";
+            setSessionError(false);
           } else if (values.password.length > 500) {
             errors.password =
               "La contraseña no puede tener mas de 500 caracteres";

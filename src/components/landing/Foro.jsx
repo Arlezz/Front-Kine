@@ -50,7 +50,7 @@ export function Foro({ toggleForoVisibility }) {
 
     const fetchData = (type, order, page, email) => {
         setIsLoading(true);
-        GeneralService.getPosts(type, order, page, 6, email)
+        GeneralService.getPosts(type, order, page, 15, email)
             .then((data) => {
                 if (data.posts.length === 0) {
                     setNoResponses(true);
@@ -80,7 +80,6 @@ export function Foro({ toggleForoVisibility }) {
     useEffect(() => {
         if (newPost){
             if (newPost && page !== 1) {
-                
                 setPosts([]);
                 setPage(1);
             }else {
@@ -139,7 +138,6 @@ export function Foro({ toggleForoVisibility }) {
                     </button>
                 </div>
                 <div className={styles.foroHeader}>
-                    
                     <h2 className={styles.tiitle}>Foro</h2>
                     <Dropdown 
                     autoClose="outside" 

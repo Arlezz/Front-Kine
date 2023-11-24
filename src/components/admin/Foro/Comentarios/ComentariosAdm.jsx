@@ -16,6 +16,8 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
   const [dueño, setDueño] = useState("");
   const [dataSaver, setDataSaver] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [fecha, setFecha] = useState("");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,6 +125,26 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
     }
   };
 
+  const onChange3 = async (e) => {
+    setFecha(e.target.value);
+    var searchData = dataSaver.filter((item) => {
+      if (
+        item.date
+          .toString()
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return item;
+      }
+    });
+
+    if (searchData.length === 0) {
+      setData(data);
+    } else {
+      setData(searchData);
+    }
+  };
+
   const columns = [
     {
       name: (
@@ -142,14 +164,24 @@ export function ComentariosAdm({ updateCommetario, onUpdateComentario }) {
       sortable: true,
     },
     {
-      name: <div className={styles.sortContainer}>Publicado</div>,
+      name: (
+        <div className={styles.sortContainer}>
+          Publicado
+          <input
+            type="text"
+            placeholder="Buscar"
+            className={styles.inputSort}
+            value={fecha}
+            onChange={(e) => onChange3(e)}
+            style={{ width: "100%", marginTop: ".5rem" }}
+          />
+        </div>
+      ),
       selector: (row) => row.date,
       sortable: true,
-      wrap: true,
-      maxWidth: "200px",
     },
     {
-      name: <div className={styles.sortContainer}>Likes</div>,
+      name: <div className={styles.sortContainer}>Me gustas</div>,
       selector: (row) => row.likes,
       sortable: true,
       maxWidth: "30px",

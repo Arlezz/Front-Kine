@@ -25,7 +25,6 @@ import { Empty } from "../Empty";
 import { convertURLsToLinks } from "../../utils/parser";
 import { CommentBody } from "./CommentBody";
 
-
 export function ForoResponseModal({
   show,
   handleShow,
@@ -44,10 +43,8 @@ export function ForoResponseModal({
   const [changes, setChanges] = useState(false);
   const [like, setLike] = useState(false);
 
-
   useEffect(() => {
     if (show) {
-      // Define una función para realizar la carga de datos
       fetchData();
     }
   }, [show, post._id, changes]);
@@ -72,9 +69,8 @@ export function ForoResponseModal({
     GeneralService.getPostsComments(post._id)
       .then((response) => {
         setResponses(response);
-        setResponseToDisplay(response.slice(0, 4))
-      }
-      )
+        setResponseToDisplay(response.slice(0, 15));
+      })
       .catch((error) => {
         console.log(error.response.data.message);
       })
@@ -84,33 +80,35 @@ export function ForoResponseModal({
   };
 
   const handleResponse = (values, resetForm) => {
-
-    if(!hasResponsed){
+    if (!hasResponsed) {
       GeneralService.uploadComment(post._id, currentUser.email, values.response)
-      .then((data) => {
-        setChanges(!changes);
-        setHasResponsed(false);
-        setHasMore(true);
-        setResponseToDisplay([]);
-        setResponsed({});
-        setPostComments((prevComments) => prevComments + 1);
-        resetForm();
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
+        .then((data) => {
+          setChanges(!changes);
+          setHasResponsed(false);
+          setHasMore(true);
+          setResponseToDisplay([]);
+          setResponsed({});
+          setPostComments((prevComments) => prevComments + 1);
+          resetForm();
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
       return;
     }
-    GeneralService.responseComment(post._id, currentUser.email, values.response, responsed._id)
-    .then((data) => {
+    GeneralService.responseComment(
+      post._id,
+      currentUser.email,
+      values.response,
+      responsed._id
+    ).then((data) => {
       setChanges(!changes);
       setHasResponsed(false);
       setHasMore(true);
       setResponseToDisplay([]);
       setResponsed({});
       resetForm();
-    }
-    );
+    });
   };
 
   const handleClose = () => {
@@ -133,7 +131,43 @@ export function ForoResponseModal({
             <h2 className={styles.tiitle}>{post.title}</h2>
             <div className={styles.infoPost}>
               <h5>{post.user ? post.user.name : null}</h5>
-              <FontAwesomeIcon icon={faUser} />
+              {post.user && (
+                <div className={styles.icon}>
+                  {post.user.role === "admin" && (
+                    <FontAwesomeIcon
+                      style={{
+                        color: "#f4177d",
+                        width: "1.6rem",
+                        height: "1.6rem",
+                      }}
+                      className={styles.adminIcon}
+                      icon={faUserGear}
+                    />
+                  )}
+                  {post.user.role === "estudiante" && (
+                    <FontAwesomeIcon
+                      style={{
+                        color: "#1f86c9",
+                        width: "1.2rem",
+                        height: "1.2rem",
+                      }}
+                      className={styles.estudianteIcon}
+                      icon={faUser}
+                    />
+                  )}
+                  {post.user.role === "profesor" && (
+                    <FontAwesomeIcon
+                      style={{
+                        color: "#ecb500",
+                        width: "1.4rem",
+                        height: "1.4rem",
+                      }}
+                      className={styles.professorIcon}
+                      icon={faUserTie}
+                    />
+                  )}
+                </div>
+              )}
               <span> ·</span>
               <h6>Publicado el {post.date} </h6>
             </div>
@@ -145,7 +179,10 @@ export function ForoResponseModal({
             <h3>Respuestas</h3>
             {noResponses ? (
               <div id="emptyCont" className={styles.EmptyContainer}>
-                <Empty text={"Todavía no hay comentarios"} height={"calc(100vh - 55rem)"}/>
+                <Empty
+                  text={"Todavía no hay comentarios"}
+                  height={"calc(100vh - 65rem)"}
+                />
               </div>
             ) : (
               <div id="responsePost" className={styles.scrollContainer}>
@@ -161,7 +198,13 @@ export function ForoResponseModal({
                 >
                   {ResponseToDisplay.map((response, index) => (
                     <div key={index}>
-                      <CommentBody post={post._id} response={response} currentUser={currentUser} setHasResponsed={setHasResponsed} setResponsed={setResponsed}/>
+                      <CommentBody
+                        post={post._id}
+                        response={response}
+                        currentUser={currentUser}
+                        setHasResponsed={setHasResponsed}
+                        setResponsed={setResponsed}
+                      />
                       <hr className={styles.separator} />
                     </div>
                   ))}
