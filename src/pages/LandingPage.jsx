@@ -5,6 +5,7 @@ import { Tutoriales } from "./Tutoriales";
 import { Capsulas } from "./Capsulas";
 import { Juegos } from "./Juegos";
 
+
 import { useEffect } from "react";
 
 export function LandingPage({toggleSearchVisibility, setToggleSearchVisibility, foroVisible, toggleForoVisibility }) {

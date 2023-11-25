@@ -89,7 +89,7 @@ export function NavBar({
             <div className={styles.logoBox}>
               <h1 className={styles.index}>KINEVERSO</h1>
               <span className={styles.slogan}>
-                Red de aprendizaje digital kinesiologia ULS
+                Red de aprendizaje digital kinesiología ULS
               </span>
             </div>
           </Link>

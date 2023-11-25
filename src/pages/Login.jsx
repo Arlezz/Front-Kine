@@ -4,6 +4,7 @@ import styles from "./Login.module.scss";
 import { useState } from "react";
 import { Spinner } from "../components/Spinner"
 
+
 export function Login({ handleLogin, handleForgotPass }) {
 
   const [sessionError, setSessionError] = useState(false);
@@ -77,6 +78,7 @@ export function Login({ handleLogin, handleForgotPass }) {
         
 
       >
+        {({ handleSubmit }) => (
         <Form className={styles.loginForm}>
           <div className={styles.loginInputContainer}>
             <span className={styles.formLabel}>Correo</span>
@@ -86,6 +88,11 @@ export function Login({ handleLogin, handleForgotPass }) {
               placeholder="Correo Institucional"
               name="email"
               id="email"
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
             />
             <ErrorMessage
               name="email"
@@ -102,6 +109,11 @@ export function Login({ handleLogin, handleForgotPass }) {
               placeholder="Contraseña"
               name="password"
               id="password"
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
             />
             <ErrorMessage
               name="password"
@@ -126,6 +138,7 @@ export function Login({ handleLogin, handleForgotPass }) {
             Iniciar sesión
           </button>
         </Form>
+        )}
       </Formik>
     </div>
   );

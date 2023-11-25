@@ -16,7 +16,10 @@ import AuthService from '../../services/Auth.service';
 import { Empty } from '../Empty';
 
 
+
 export function Foro({ toggleForoVisibility }) {
+
+
     const [currentUser, setCurrentUser] = useState({});
     useEffect(() => {
         const user = AuthService.getCurrentUser();
@@ -41,6 +44,8 @@ export function Foro({ toggleForoVisibility }) {
     const icons = [faCircleUser, faCalendar, faCalendar, faThumbsUp, faThumbsUp, faComment, faComment];
     const filters = ["mine","date", "date", "likes", "likes", "comments", "comments"];
     const orders = ["","desc", "asc", "desc", "asc", "desc", "asc"];
+
+
 
     const ref = useRef([]);
 
@@ -194,3 +199,5 @@ export function Foro({ toggleForoVisibility }) {
         </aside>
     );
 }
+
+

@@ -11,7 +11,6 @@
 
     .juegosBody {
       max-width: 100%;
-      border-radius: 1rem;
       overflow-y: auto;
 
         
@@ -38,7 +37,7 @@
 @media screen and (max-width: 768px) {
 
   .juegosContainer {
-    padding: 2rem;
+    padding: 1rem;
     .juegosBody{
       .juegosCardGrid{
         grid-template-columns: repeat(3, 1fr);
