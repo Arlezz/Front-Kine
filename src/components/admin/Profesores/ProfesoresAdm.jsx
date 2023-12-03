@@ -202,6 +202,7 @@ export function ProfesoresAdm() {
         isLoading={isLoading}
         columns={columns}
         actions={addProfesor}
+        noDataComponent={"No hay profesores registrados"}
       />
 
       <ProfesoresEditModal

@@ -205,6 +205,7 @@ export function AlumnosAdm() {
         isLoading={isLoading}
         columns={columns}
         actions={addAlumno}
+        noDataComponent={"No hay alumnos registrados"}
       />
 
       <AlumnosEditModal

@@ -4,7 +4,7 @@ import styles from './TableDatas.module.scss';
 import { Spinner } from '../components/Spinner';
 
 
-export function TableDatas({ columns, data, isLoading, actions, defaultSortField, title}) {
+export function TableDatas({ columns, data, isLoading, actions, defaultSortField, title, noDataComponent}) {
     
     
 
@@ -22,6 +22,7 @@ export function TableDatas({ columns, data, isLoading, actions, defaultSortField
             defaultSortFieldId={defaultSortField? defaultSortField : 1  } 
             defaultSortAsc={false}
             actions={actions} 
+            noDataComponent={noDataComponent}
         />
     )
 }

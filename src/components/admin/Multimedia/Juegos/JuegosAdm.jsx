@@ -247,6 +247,7 @@ export function JuegosAdm({
         isLoading={isLoading}
         columns={columns}
         actions={addJuegoButton}
+        noDataComponent={"No hay juegos para mostrar"}
       />
 
       <JuegosAddModal

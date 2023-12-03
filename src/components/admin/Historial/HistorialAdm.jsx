@@ -192,7 +192,13 @@ export function Historial({updateTutorial, updateCapsula, updateJuego, updatePos
   return (
     <>
       <h2 className={styles.tablaTitle}>Historial</h2>
-      <TableDatas data={data} isLoading={isLoading} columns={columns} defaultSortField={2} />
+      <TableDatas 
+        data={data} 
+        isLoading={isLoading} 
+        columns={columns}
+        defaultSortField={2} 
+        noDataComponent={"No hay datos para mostrar"}
+      />
 
       {/* Modal para mostrar la información de la referencia */}
 

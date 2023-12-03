@@ -250,6 +250,7 @@ export function CapsulasAdm({
         isLoading={isLoading}
         columns={columns}
         actions={addAlumno}
+        noDataComponent={"No hay capsulas para mostrar"}
       />
 
       <CapsulasAddModal show={showNuevaCapsulaModal} handleShow={handleAddCapsulalModal} onAddCapsula={onAddCapsula} />

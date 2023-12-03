@@ -254,6 +254,7 @@ export function TutorialesAdm({
         isLoading={isLoading}
         columns={columns}
         actions={addAlumno}
+        noDataComponent={"No hay tutoriales para mostrar"}
       />
 
       <TutorialesAddModal show={showNuevoTutorialModal} handleShow={handleAddTutorialModal} onAddTutorial={onAddTutorial} />
