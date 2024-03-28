@@ -1,3 +1,14 @@
+# Proyecto: KineHub 🏥
+
+Este proyecto es un encargo freelance para la Universidad de La Serena, donde el departamento de Kinesiología requiere la creación de un repositorio de videos de procedimientos kinesiológicos.
+
+## Descripción
+
+KineHub es un proyecto enfocado en la recopilación y organización de videos de procedimientos kinesiológicos para su uso educativo y de referencia por parte de estudiantes y profesionales de la kinesiología.
+
+El proyecto se construye utilizando la tecnología [React](https://react.dev/) y se centra exclusivamente en el desarrollo frontend. Su objetivo principal es proporcionar una plataforma intuitiva y fácil de usar para acceder a una amplia variedad de videos relacionados con la práctica de la kinesiología.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
