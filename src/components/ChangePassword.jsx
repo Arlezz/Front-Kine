@@ -97,7 +97,7 @@ export function ChangePassword({ handleSendMail, mail }) {
           handleChangePassword(values);
         }}
       >
-        {({}) => (
+        {() => (
           <Form className={styles.changePasswordForm}>
             <div className={styles.changePasswordInputContainer}>
               <span className={styles.formLabel}>Codigo Secreto</span>
