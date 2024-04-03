@@ -30,7 +30,7 @@ export function Tutoriales() {
 
     useEffect(() => {
 
-        const user = AuthService.getCurrentUser();
+        //const user = AuthService.getCurrentUser();
 
         GeneralService.getTutorials()
             .then((data) => {
