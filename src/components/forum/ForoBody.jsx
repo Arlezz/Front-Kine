@@ -24,6 +24,7 @@ export function ForoBody({ post, index, currentUser}) {
   useEffect(() => {
     GeneralService.hasLikedPost(post._id,currentUser.email)
     .then((data) => {
+      console.log(data);
       setLike(data.hasLiked);
     })
     .catch((error) => {
